@@ -39,6 +39,8 @@ getComponents(): Here you return an array of itemstacks (can be any size, even e
 
 getMessage(): If the block was not allowed this is the message printed out to the chat of that player
 
+example: [Buildcraft Additions Kinetic Duster](https://github.com/AEnterprise/Buildcraft-Additions/blob/master/src/main/java/buildcraftAdditions/blocks/BlockKineticDuster.java) (also has additional check when the block is placed down)
+
 Items
 ====
 The same as for a block, only this time you implement [IEurekaItem](https://github.com/AEnterprise/Eureka/blob/master/src/main/java/eureka/interfaces/IEurekaItem.java) instead of IEurekaBlock. The item will be checked every time the player clicks with the item in his head (both left and right will be checked)
@@ -47,8 +49,6 @@ Manual checks
 ====
 Sometimes the default block checks might not be enough. If you have a fully automatable block for example then players could bypass the regular checks. They could place all the pipes, hoppers and powerlines prior to placing the block, preventing an eureka check. If you want it to check additionally you can just call the EurekaBlockEvent in the eurekaKnowledge class. This will perform the check for you and do the destorying, dropping and chatting.
 
-Examples
-====
-For examples of implementations:
-[Buildcraft Additions Kinetic Duster](https://github.com/AEnterprise/Buildcraft-Additions/blob/master/src/main/java/buildcraftAdditions/blocks/BlockKineticDuster.java) (also has additional check when the block is placed down)
-[Buildcraft Additions Kinetic Multi-Tool](https://github.com/AEnterprise/Buildcraft-Additions/blob/master/src/main/java/buildcraftAdditions/items/Tools/ItemKineticTool.java) (example of how to implement it on an item)
+Example: [Buildcraft Additions Kinetic Multi-Tool](https://github.com/AEnterprise/Buildcraft-Additions/blob/master/src/main/java/buildcraftAdditions/items/Tools/ItemKineticTool.java)
+
+
