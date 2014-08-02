@@ -98,7 +98,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 				line++;
 				writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player, key) + " / " + EurekaRegistry.getMaxValue(key), 0xFFFF00);
 				line++;
-				if (!EurekaKnowledge.isUnlocked(player, key)) {
+				if (!EurekaKnowledge.isFinished(player, key)) {
 					writeText(Utils.localize("engineeringDiary." + key + ".howToMakeProgress"), 0xFF6600);
 				} else {
 					writeText(Utils.localize("engineeringDiary.unlocked"), 0xFF6600);
@@ -141,7 +141,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 		super.mouseMovedOrUp(mouseX, mouseY, status);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
-		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (screen == -1 || EurekaKnowledge.isUnlocked(player, EurekaRegistry.getKeys().get(screen))))
+		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (screen == -1 || EurekaKnowledge.isFinished(player, EurekaRegistry.getKeys().get(screen))))
 			page++;
 		if (hasPrevPage && mouseX > 34 + x && mouseX < 59 + x && mouseY > 13 + y && mouseY < 28 + y)
 			page--;
@@ -160,11 +160,11 @@ public class GuiEngineeringDiary extends GuiContainer {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 30, 0, xSize, ySize);
-		if (hasNextPage && (screen == -1 || EurekaKnowledge.isUnlocked(player, EurekaRegistry.getKeys().get(screen))))
+		if (hasNextPage && (screen == -1 || EurekaKnowledge.isFinished(player, EurekaRegistry.getKeys().get(screen))))
 			drawTexturedModalRect(x + 143, y + 149, 82, 196, 16, 16);
 		if (hasPrevPage)
 			drawTexturedModalRect(x + 44, y + 13, 66, 196, 16, 16);
-		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (screen == -1 || EurekaKnowledge.isUnlocked(player, EurekaRegistry.getKeys().get(screen))))
+		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (screen == -1 || EurekaKnowledge.isFinished(player, EurekaRegistry.getKeys().get(screen))))
 			drawTexturedModalRect(x + 143, y + 149, 82, 180, 16, 16);
 		if (hasPrevPage && mouseX > 44 + x && mouseX < 60 + x && mouseY > 13 + y && mouseY < 28 + y)
 			drawTexturedModalRect(x + 44, y + 13, 66, 180, 16, 16);

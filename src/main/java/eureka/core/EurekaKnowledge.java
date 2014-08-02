@@ -39,7 +39,7 @@ public class EurekaKnowledge {
         return getTag(player).getInteger(key + "Progress");
     }
 
-    public static boolean isUnlocked(EntityPlayer player, String key){
+    public static boolean isFinished(EntityPlayer player, String key){
         initKey(getTag(player), key);
         return getTag(player).getBoolean(key + "Finished");
     }
@@ -54,7 +54,7 @@ public class EurekaKnowledge {
             setKey(tag, key + "Progress", progress);
         }
         if (progress >= EurekaRegistry.getMaxValue(key)){
-            if (!isUnlocked(player, key)) {
+            if (!isFinished(player, key)) {
                 setKey(tag, key + "Finished", true);
                 String message = Utils.localize("eureka." + key + "Finished");
                 player.addChatMessage(new ChatComponentText(Utils.localize("Eureka")));
