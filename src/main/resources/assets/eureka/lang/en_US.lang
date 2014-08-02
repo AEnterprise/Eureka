@@ -1,0 +1,20 @@
+item.engineeringDiary.name=Engineering Diary
+
+itemGroup.Eureka=Eureka
+
+Eureka=EUREKA!
+eureka.dusterTier0Finished=You start planning all your feature builds but realize you'll need a ton of resouces. You also start thinking of a way to make that easier.
+eureka.dusterTier1Finished=While processing your ores, you suddenly realize there are more efficient ways to process them.
+eureka.dusterTier2-1Finished=After being able to output to inventories you decide to try to see if you can automate the processing itself instead.
+eureka.dusterTier2-2Finished=You like that you don't have to jump on the machine, but also want the auto-input/output. You decide to combine your knowledge intro a new machine. Maybe something with lasers?
+eureka.kineticToolFinished=While making yet another tool to replace your old one you think of a way to make a tool that won't break
+eureka.missingKnowledge=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
+eureka.missingKnowledgeKineticTool=You have no idea how this tool works (yet). You try to use it, but due to your incompetence, it falls apart.
+
+engineeringDiary.mainScreen.title=Engineering Diary
+engineeringDiary.mainScreen.description=This book is a Diary of your progress with discovering items and blocks through the Eureka system. As an Engineer, testing and experimentation is required before creating a machine,
+engineeringDiary.mainScreen.page1=and you’ll need to make and use simple machines in order to have the Eureka moment that leads to new creations. Have fun!
+
+engineeringDiary.requiredResearch=Required research:
+engineeringDiary.progress=Progress:
+engineeringDiary.unlocked=UNLOCKED
