@@ -15,10 +15,10 @@ import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftadditions.wordpress.com/
+ * http://buildcraftAdditions.wordpress.com/
  * Eureka is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 
 @Mod(modid = "eureka", name = "Eureka", version = "@VERSION@", acceptedMinecraftVersions = "1.7.10")

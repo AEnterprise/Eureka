@@ -5,11 +5,8 @@
   "description": "Knowledge system based on 'learning as you go'",
   "version": "$version",
   "mcversion": "1.7.10",
-  "url": "",
   "updateUrl": "",
   "authorList": ["AEnterprise"],
-  "credits": "Coded by AEnterprise, textures by Plenituz",
-  "logoFile": "",
-  "screenshots": [],
+  "credits": "Coded by AEnterprise, textures by Plenituz"
 }
 ]
