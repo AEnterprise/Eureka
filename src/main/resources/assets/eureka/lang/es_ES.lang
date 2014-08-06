@@ -1,18 +1,18 @@
 item.engineeringDiary.name=Diario de Ingeniería
 
-itemGroup.Eureka=Eureka
+itemGroup.Eureka=Eureka API
 
 Eureka=EUREKA!
-eureka.dusterTier0Finished=Empiezas a planear todas tus próximas invenciones pero te das cuenta de que vas a necesitas un montón de recursos. También empiezas a pensar en una forma de hacer eso mas fácil.
-eureka.dusterTier1Finished=Mientras procesas tus minerales, de repente te das cuenta de que hay formas mas eficientes de procesarlos.
+eureka.dusterTier0Finished=Empiezas a planear todos tus nuevos inventos, pero te das cuenta de que vas a necesitas muchos recursos. También empiezas a pensar en una forma de hacer eso mas fácil.
+eureka.dusterTier1Finished=Mientras procesas tus minerales, de repente te das cuenta de que hay formas mas eficientes de hacer esto.
 eureka.dusterTier2-1Finished=Después de poder interactuar con inventarios, decides intentar automatizar el procesamiento en sí.
-eureka.dusterTier2-2Finished=Te gusta no tener que saltar encima de la maquina, pero también quieres la habilidad de interactuar con los inventarios. Decides combinar tu sabiduría en una nueva máquina. Seguramente algo con láseres?
-eureka.kineticToolFinished=Mientras creas una nueva herramienta para sustituir la antigua, empiezas a pensar en una herramienta que no se romperá.
-eureka.missingKnowledge=No entiendes como funciona esta maquina (aún) . Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
-eureka.missingKnowledgeKineticTool=No entiendes como funciona esta maquina (aún) . Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
+eureka.dusterTier2-2Finished=Te gusta no tener que saltar encima de la maquina, pero también quieres la habilidad del manejo con los inventarios. Decides combinar lo que sabes en una nueva máquina. Seguramente algo con láseres?
+eureka.kineticToolFinished=Mientras creas una nueva herramienta para sustituir la antigua, empiezas a pensar en una herramienta que no se rompa.
+eureka.missingKnowledge=No entiendes como funciona esta maquina (aún). Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
+eureka.missingKnowledgeKineticTool=No entiendes como funciona esta herramienta (aún). Intentas usarla, pero debido a tu incompetencia, se rompe en pedazos.
 engineeringDiary.mainScreen.title=Diario de Ingeniería
-engineeringDiary.mainScreen.description=Este libro es un Diario de tu progreso descubriendo objetos y bloques a través del sistema Eureka. Como un Ingeniero, la experimentación y el testeo es requerido antes de crear una máquina,
-engineeringDiary.mainScreen.page1=y necesitaras crear y usar maquinas simples para tener un momento Eureka, que te llevara a nuevas creaciones. Diviértete!
+engineeringDiary.mainScreen.description=Este libro es un Diario de tu progreso descubriendo objetos y bloques a través del sistema Eureka. Como un Ingeniero, la experimentación es requerida antes de crear una nueva máquina,
+engineeringDiary.mainScreen.page1=necesitaras crear y usar maquinas más simples para tener un "momento Eureka", que te llevara a nuevas ideas y creaciones. Diviértete!
 
 engineeringDiary.requiredResearch=Investigaciones necesarias:
 engineeringDiary.progress=Progreso:
