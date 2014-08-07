@@ -3,6 +3,7 @@ package eureka.core;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -12,27 +13,26 @@ import java.util.ArrayList;
  * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 public class EurekaRegistry {
-    private static ArrayList<String> keys = new ArrayList<String>(10);
-    private static ArrayList<String> maxValues = new ArrayList<String>(10);
-    private static ArrayList<String> increments = new ArrayList<String>(10);
-	private static ArrayList<ItemStack> displayStack = new ArrayList<ItemStack>(10);
+    private static HashMap<String, EurekaEntry> entries = new HashMap<String, EurekaEntry>(50);
+	private static ArrayList<String> keys = new ArrayList<String>(50);
 
     /**
      * Register your keys here for the EUREKA system
-     * @param key the key you want to regigistry
-     * @param max the value the progress should reach before finishing
-     * @param increment the steps in wich the progress should increase
-     * @return true if successful, false if key is already occupied
      */
-    public static boolean registerKey(String key, int max, int increment, ItemStack stack){
-        if (!keys.contains(key)){
-            keys.add(key);
-            maxValues.add(Integer.toString(max));
-            increments.add(Integer.toString(increment));
-	        displayStack.add(stack);
-            return true;
-        }
-        return false;
+    public static void registerKey(Class<? extends EurekaInformation> information){
+	    try {
+		    String category = information.newInstance().getCategory();
+		    String key = information.newInstance().getKey();
+		    int increment = information.newInstance().getIncrement();
+		    int maxValue = information.newInstance().getMaxValue();
+		    ItemStack stack = information.newInstance().getDisplayStack();
+		    entries.put(key, new EurekaEntry(category, increment, maxValue, stack));
+		    keys.add(key);
+	    } catch (Throwable e){
+		    Logger.error("Error trying to register" + information.toString());
+		    e.printStackTrace();
+	    }
+
     }
 
     /**
@@ -45,18 +45,31 @@ public class EurekaRegistry {
     public static int getMaxValue(String key){
         if (!keys.contains(key))
             return 0;
-        return Integer.parseInt(maxValues.get(keys.indexOf(key)));
+        return entries.get(key).maxValue;
     }
 
     public static int getIncrement(String key){
         if (!keys.contains(key))
             return 0;
-        return Integer.parseInt(increments.get(keys.indexOf(key)));
+        return entries.get(key).increment;
     }
 
 	public static ItemStack getDisplayStack(String key){
 		if (!keys.contains(key))
 			return null;
-		return displayStack.get(keys.indexOf(key));
+		return entries.get(key).stack;
+	}
+
+	public static class EurekaEntry{
+		public String category;
+		public int increment, maxValue;
+		public ItemStack stack;
+
+		public EurekaEntry(String category, int increment, int maxValue, ItemStack stack){
+			this.category = category;
+			this.increment = increment;
+			this.maxValue = maxValue;
+			this.stack = stack;
+		}
 	}
 }
