@@ -1,5 +1,6 @@
 package eureka.core;
 
+import eureka.client.gui.EurekaChapter;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -20,4 +21,6 @@ public abstract class EurekaInformation {
 	public abstract ItemStack getDisplayStack();
 
 	public abstract String getCategory();
+
+	public abstract Class<? extends EurekaChapter> getGuiClass();
 }

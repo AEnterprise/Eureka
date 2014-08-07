@@ -1,8 +1,6 @@
 package eureka.client.gui;
 
-import eureka.core.EurekaKnowledge;
 import eureka.core.EurekaRegistry;
-import eureka.core.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -10,18 +8,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
+
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Eureka is distributed under the terms of the Minecraft Mod Public
+ * http://buildcraftadditions.wordpress.com/
+ * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class GuiEngineeringDiary extends GuiContainer {
 	public static ResourceLocation texture = new ResourceLocation("eureka", "textures/gui/EngineeringDiary.png");
 	public EntityPlayer player;
-	public int screen, startX[], lineLimit[], page, line;
-	public boolean hasNextPage, hasPrevPage;
+	public int screen, startX[], lineLimit[], page, line, chapter;
+
 
 	public GuiEngineeringDiary(EntityPlayer player) {
 		super(new ContainerEngineeringDiary(player));
@@ -30,6 +30,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 		startX = new int[20];
 		lineLimit = new int[20];
 		page = 0;
+		chapter = -1;
 
 		startX[0] = 85;
 		startX[1] = 85;
@@ -72,83 +73,11 @@ public class GuiEngineeringDiary extends GuiContainer {
 		lineLimit[17] = 14;
 		lineLimit[18] = 13;
 		lineLimit[19] = 12;
-
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		String key;
-		line = 0;
-		if (screen == -1){
-			key = "mainScreen";
-		} else {
-			key = EurekaRegistry.getKeys().get(screen);
-		}
-		String title = Utils.localize("engineeringDiary." + key + ".title");
-		writeText(title, 0xF8DF17);
-		line = 5;
-		String description;
-		if (page == 0){
-			description = Utils.localize("engineeringDiary." + key + ".description");
-			if (screen != -1) {
-				writeText(Utils.localize("engineeringDiary.requiredResearch"), 0xFF0000);
-
-				writeText(Utils.localize("engineeringDiary." + key + ".requiredResearch"), 0x0000FF);
-				line++;
-				writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player, key) + " / " + EurekaRegistry.getMaxValue(key), 0xFFFF00);
-				line++;
-				if (!EurekaKnowledge.isFinished(player, key)) {
-					writeText(Utils.localize("engineeringDiary." + key + ".howToMakeProgress"), 0xFF6600);
-				} else {
-					writeText(Utils.localize("engineeringDiary.unlocked"), 0xFF6600);
-				}
-
-				line++;
-			}
-		} else {
-			description = Utils.localize("engineeringDiary." + key + ".page" + page);
-		}
-		hasNextPage = !(Utils.localize("engineeringDiary." + key + ".page" + (page + 1)).equals("engineeringDiary." + key.toString() + ".page" + Integer.toString(page + 1)));
-		hasPrevPage = page > 0;
-		writeText(description, 0xFFFFFF);
-	}
-
-	public void drawTextAtLine(String text, int line, int color){
-		fontRendererObj.drawString(text, startX[line], line*8 + 6, color);
-	}
-
-	public void writeText(String text, int color){
-		String[] words = text.split(" ", 0);
-		String output = "";
-		for (String word: words){
-			if (line == 20)
-				return;
-			if (output.length() + word.length() > lineLimit[line]){
-				drawTextAtLine(output, line, color);
-				output = "";
-				line++;
-			}
-			output = output + word + " ";
-		}
-		drawTextAtLine(output, line, color);
-		line++;
-	}
-
-
-	@Override
-	protected void mouseMovedOrUp(int mouseX, int mouseY, int status) {
-		super.mouseMovedOrUp(mouseX, mouseY, status);
-		int x = (width - xSize) / 2;
-		int y = (height - ySize) / 2;
-		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (screen == -1 || EurekaKnowledge.isFinished(player, EurekaRegistry.getKeys().get(screen))))
-			page++;
-		if (hasPrevPage && mouseX > 34 + x && mouseX < 59 + x && mouseY > 13 + y && mouseY < 28 + y)
-			page--;
-		if (mouseX > x + 7 && mouseX < x +  31 &&  (mouseY - y) / 25 < EurekaRegistry.getKeys().size()) {
-			screen = (mouseY - y) / 25;
-			page = 0;
-		}
 	}
 
 	@Override
@@ -160,34 +89,27 @@ public class GuiEngineeringDiary extends GuiContainer {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 30, 0, xSize, ySize);
-		if (hasNextPage && (screen == -1 || EurekaKnowledge.isFinished(player, EurekaRegistry.getKeys().get(screen))))
-			drawTexturedModalRect(x + 143, y + 149, 82, 196, 16, 16);
-		if (hasPrevPage)
-			drawTexturedModalRect(x + 44, y + 13, 66, 196, 16, 16);
-		if (hasNextPage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (screen == -1 || EurekaKnowledge.isFinished(player, EurekaRegistry.getKeys().get(screen))))
-			drawTexturedModalRect(x + 143, y + 149, 82, 180, 16, 16);
-		if (hasPrevPage && mouseX > 44 + x && mouseX < 60 + x && mouseY > 13 + y && mouseY < 28 + y)
-			drawTexturedModalRect(x + 44, y + 13, 66, 180, 16, 16);
-		RenderItem item = new RenderItem();
-		int teller = 0;
-		for (String key: EurekaRegistry.getKeys()) {
-			if (teller == screen){
+		ArrayList<String> categoryList = EurekaRegistry.getCategoriesList();
+		ArrayList<String> keys = EurekaRegistry.getKeys();
+		for (int teller = 0; teller < categoryList.size(); teller++){
+			if (teller == chapter){
 				drawTexturedModalRect(x + 7, y + (24 * teller + 5), 124, 180, 24, 24);
 			} else {
 				drawTexturedModalRect(x + 7, y + (24 * teller + 5), 98, 180, 24, 24);
 			}
-			teller++;
+			RenderItem item = new RenderItem();
+			item.renderItemIntoGUI(fontRendererObj, mc.getTextureManager(), EurekaRegistry.getCategoryDisplayStack(categoryList.get(teller)), x + 12, y + 24 * teller + 9);
 		}
-		if (screen != -1) {
-			drawTexturedModalRect(x + 95, y + 38, 148, 180, 60, 7);
-			String key = EurekaRegistry.getKeys().get(screen);
-			drawTexturedModalRect(x + 96, y + 39, 148, 187, EurekaKnowledge.getProgress(player, key) * 58 / EurekaRegistry.getMaxValue(key), 7);
-		}
-		teller=0;
-		for (String key: EurekaRegistry.getKeys()){
-			item.renderItemIntoGUI(fontRendererObj, mc.getTextureManager(), EurekaRegistry.getDisplayStack(key), x + 12, y + 24 * teller + 9);
-			teller++;
-		}
+	}
 
+	@Override
+	protected void mouseMovedOrUp(int mouseX, int mouseY, int status) {
+		super.mouseMovedOrUp(mouseX, mouseY, status);
+		int x = (width - xSize) / 2;
+		int y = (height - ySize) / 2;
+		if (mouseX > x + 7 && mouseX < x +  31 &&  (mouseY - y) / 25 < EurekaRegistry.getCategoriesList().size()) {
+			chapter = (mouseY - y) / 25;
+			page = 0;
+		}
 	}
 }
