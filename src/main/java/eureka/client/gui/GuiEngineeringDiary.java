@@ -26,7 +26,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 	public boolean hasPrevPage;
 	public ArrayList<String> categoryList = EurekaRegistry.getCategoriesList();
 	public ArrayList<String> keys = EurekaRegistry.getKeys();
-	public ArrayList<Class<? extends EurekaChapter>> chaptersToDisplay = new ArrayList<Class<? extends EurekaChapter>>(20);
+	public ArrayList<EurekaChapter> chaptersToDisplay = new ArrayList<EurekaChapter>(20);
 	public ArrayList<String> chapterList = new ArrayList<String>(20);
 
 
@@ -87,10 +87,8 @@ public class GuiEngineeringDiary extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		drawText();
-		try {
-			if (chapter != -1)
-				chaptersToDisplay.get(chapter).newInstance().drawCustomStuff(page);
-		} catch (Throwable e){}
+		if (chapter != -1)
+			chaptersToDisplay.get(chapter).drawCustomStuff(page);
 	}
 
 	@Override
@@ -148,9 +146,8 @@ public class GuiEngineeringDiary extends GuiContainer {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		boolean hasNextpage = false;
-		try {
-			hasNextpage = chaptersToDisplay.get(chapter).newInstance().hasNextPage(page);
-		}catch (Throwable e){}
+		if (!chaptersToDisplay.isEmpty() && chapter != -1)
+			hasNextpage = chaptersToDisplay.get(chapter).hasNextPage(page);
 		if (chapter == -1)
 			hasNextpage = !(Utils.localize("engineeringDiary." + categoryList.get(category) + ".page" + (page + 1)).equals("engineeringDiary." + categoryList.get(category) + ".page" + Integer.toString(page + 1)));
 		if (hasNextpage && (chapter == -1 || EurekaKnowledge.isFinished(player, chapterList.get(chapter))))
@@ -201,24 +198,22 @@ public class GuiEngineeringDiary extends GuiContainer {
 			writeText(Utils.localize("engineeringDiary." + categoryName + ".title"), 0, 0xFFCC00);
 			writeText(Utils.localize("engineeringDiary." + categoryName + ".page" + page), 4, 0xFFFFFF);
 		} else {
-			try {
-				String chapterName = chapterList.get(chapter);
-				writeText(Utils.localize("engineeringDiary." + chapterName + ".title"), 0, 0xFFCC00);
-				if (page == 0){
-					writeText(Utils.localize("engineeringDiary.requiredResearch"), 5, 0xFF0000);
-					writeText(chaptersToDisplay.get(chapter).newInstance().getRequiredResearch(), 6, 0x0000FF);
-					int line = writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player, chapterName) + " / " + EurekaRegistry.getMaxValue(chapterName), 8, 0xFFFF00);
-					if (!EurekaKnowledge.isFinished(player, chapterName)) {
-						line = writeText(chaptersToDisplay.get(chapter).newInstance().howToMakeProgress(), line, 0xFF6600);
-					} else {
-						line = writeText(Utils.localize("engineeringDiary.unlocked"), line, 0xFF6600);
-					}
-					writeText(chaptersToDisplay.get(chapter).newInstance().getText(page), line, 0xFFFFFF);
+			String chapterName = chapterList.get(chapter);
+			writeText(Utils.localize("engineeringDiary." + chapterName + ".title"), 0, 0xFFCC00);
+			if (page == 0){
+				writeText(Utils.localize("engineeringDiary.requiredResearch"), 5, 0xFF0000);
+				writeText(chaptersToDisplay.get(chapter).getRequiredResearch(), 6, 0x0000FF);
+				int line = writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player, chapterName) + " / " + EurekaRegistry.getMaxValue(chapterName), 8, 0xFFFF00);
+				if (!EurekaKnowledge.isFinished(player, chapterName)) {
+					line = writeText(chaptersToDisplay.get(chapter).howToMakeProgress(), line, 0xFF6600);
 				} else {
-					writeText(chaptersToDisplay.get(chapter).newInstance().getText(page), 4, 0xFFFFFF);
+					line = writeText(Utils.localize("engineeringDiary.unlocked"), line, 0xFF6600);
 				}
+				writeText(chaptersToDisplay.get(chapter).getText(page), line, 0xFFFFFF);
+			} else {
+				writeText(chaptersToDisplay.get(chapter).getText(page), 4, 0xFFFFFF);
+			}
 
-			} catch (Throwable e){}
 		}
 	}
 
@@ -249,7 +244,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 		chapterList.clear();
 		for (String key: keys){
 			if (EurekaRegistry.getCategory(key).equals(categoryList.get(category))) {
-				chaptersToDisplay.add(EurekaRegistry.getChapterClass(key));
+				chaptersToDisplay.add(EurekaRegistry.getChapterGui(key));
 				chapterList.add(key);
 			}
 		}
@@ -271,9 +266,8 @@ public class GuiEngineeringDiary extends GuiContainer {
 			page = 0;
 		}
 		boolean hasNextpage = false;
-		try {
-			hasNextpage = chaptersToDisplay.get(chapter).newInstance().hasNextPage(page);
-		}catch (Throwable e){}
+		if (!chaptersToDisplay.isEmpty() && chapter != -1)
+			hasNextpage = chaptersToDisplay.get(chapter).hasNextPage(page);
 		if (chapter == -1)
 			hasNextpage = !(Utils.localize("engineeringDiary." + categoryList.get(category) + ".page" + (page + 1)).equals("engineeringDiary." + categoryList.get(category) + ".page" + Integer.toString(page + 1)));
 		if (hasNextpage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (chapter == -1 || EurekaKnowledge.isFinished(player, chapterList.get(chapter))))

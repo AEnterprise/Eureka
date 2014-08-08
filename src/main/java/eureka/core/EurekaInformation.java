@@ -22,5 +22,5 @@ public abstract class EurekaInformation {
 
 	public abstract String getCategory();
 
-	public abstract Class<? extends EurekaChapter> getGuiClass();
+	public abstract  EurekaChapter getGui();
 }

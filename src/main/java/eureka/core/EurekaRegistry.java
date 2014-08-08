@@ -14,7 +14,7 @@ import java.util.HashMap;
  * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 public class EurekaRegistry {
-    private static HashMap<String, EurekaEntry> chapters = new HashMap<String, EurekaEntry>(50);
+    private static HashMap<String, EurekaInformation> chapters = new HashMap<String, EurekaInformation>(50);
 	private static ArrayList<String> keys = new ArrayList<String>(50);
 	private static ArrayList<String> categoriesList = new ArrayList<String>(20);
 	private static HashMap<String, ItemStack> categories = new HashMap<String, ItemStack>(20);
@@ -22,22 +22,10 @@ public class EurekaRegistry {
     /**
      * Register your keys here for the EUREKA system
      */
-    public static void registerKey(Class<? extends EurekaInformation> information){
-	    try {
-		    String category = information.newInstance().getCategory();
-		    String key = information.newInstance().getKey();
-		    int increment = information.newInstance().getIncrement();
-		    int maxValue = information.newInstance().getMaxValue();
-		    ItemStack stack = information.newInstance().getDisplayStack();
-		    Class<? extends EurekaChapter> chapterClass = information.newInstance().getGuiClass();
-		    chapters.put(key, new EurekaEntry(category, increment, maxValue, stack, chapterClass));
-		    keys.add(key);
-	    } catch (Throwable e){
-		    Logger.error("Error trying to register" + information.toString());
-		    e.printStackTrace();
+    public static void registerKey(EurekaInformation information){
+		    chapters.put(information.getKey(), information);
+		    keys.add(information.getKey());
 	    }
-
-    }
 
 	public static void registerCategory(String category, ItemStack stack){
 		categoriesList.add(category);
@@ -54,27 +42,27 @@ public class EurekaRegistry {
     public static int getMaxValue(String key){
         if (!keys.contains(key))
             return 0;
-        return chapters.get(key).maxValue;
+        return chapters.get(key).getMaxValue();
     }
 
     public static int getIncrement(String key){
         if (!keys.contains(key))
             return 0;
-        return chapters.get(key).increment;
+        return chapters.get(key).getIncrement();
     }
 
 	public static ItemStack getDisplayStack(String key){
 		if (!keys.contains(key))
 			return null;
-		return chapters.get(key).stack;
+		return chapters.get(key).getDisplayStack();
 	}
 
-	public static Class<? extends EurekaChapter> getChapterClass(String key){
-		return chapters.get(key).chapterClass;
+	public static EurekaChapter getChapterGui(String key){
+		return chapters.get(key).getGui();
 	}
 
 	public static String getCategory(String key){
-		return chapters.get(key).category;
+		return chapters.get(key).getCategory();
 	}
 
 	public static ArrayList<String> getCategoriesList(){
@@ -85,18 +73,5 @@ public class EurekaRegistry {
 		return categories.get(category);
 	}
 
-	public static class EurekaEntry{
-		public String category;
-		public int increment, maxValue;
-		public ItemStack stack;
-		public Class<? extends EurekaChapter> chapterClass;
 
-		public EurekaEntry(String category, int increment, int maxValue, ItemStack stack, Class <? extends EurekaChapter> chapterClass){
-			this.category = category;
-			this.increment = increment;
-			this.maxValue = maxValue;
-			this.stack = stack;
-			this.chapterClass = chapterClass;
-		}
-	}
 }
