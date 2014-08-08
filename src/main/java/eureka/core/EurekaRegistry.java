@@ -73,6 +73,10 @@ public class EurekaRegistry {
 		return chapters.get(key).chapterClass;
 	}
 
+	public static String getCategory(String key){
+		return chapters.get(key).category;
+	}
+
 	public static ArrayList<String> getCategoriesList(){
 		return (ArrayList) categoriesList.clone();
 	}

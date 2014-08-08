@@ -7,10 +7,12 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import eureka.client.gui.GuiHandler;
+import eureka.core.EurekaRegistry;
 import eureka.core.EventHandler;
 import eureka.core.ItemEngineeringDiary;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -44,6 +46,8 @@ public class Eureka {
 		engineeringDiary = new ItemEngineeringDiary();
 		engineeringDiary.setCreativeTab(eureka).setUnlocalizedName("engineeringDiary");
 		GameRegistry.registerItem(engineeringDiary, "engineeringDiary");
+
+		EurekaRegistry.registerCategory("Eureka", new ItemStack(engineeringDiary));
 	}
 
 	@Mod.EventHandler
