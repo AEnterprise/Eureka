@@ -1,5 +1,6 @@
 package eureka.client.gui;
 
+import eureka.core.EurekaKnowledge;
 import eureka.core.EurekaRegistry;
 import eureka.core.Utils;
 import net.minecraft.client.Minecraft;
@@ -22,7 +23,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 	public static ResourceLocation texture = new ResourceLocation("eureka", "textures/gui/EngineeringDiary.png");
 	public EntityPlayer player;
 	public int category, startX[], lineLimit[], page, chapter, categoryOffset, chapterOffset;
-	public boolean hasNextPage, hasPrevPage;
+	public boolean hasPrevPage;
 	public ArrayList<String> categoryList = EurekaRegistry.getCategoriesList();
 	public ArrayList<String> keys = EurekaRegistry.getKeys();
 	public ArrayList<Class<? extends EurekaChapter>> chaptersToDisplay = new ArrayList<Class<? extends EurekaChapter>>(20);
@@ -86,6 +87,10 @@ public class GuiEngineeringDiary extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		drawText();
+		try {
+			if (chapter != -1)
+				chaptersToDisplay.get(chapter).newInstance().drawCustomStuff(page);
+		} catch (Throwable e){}
 	}
 
 	@Override
@@ -100,8 +105,19 @@ public class GuiEngineeringDiary extends GuiContainer {
 		drawCategories();
 		drawChapters();
 		drawPageButtons(mouseX, mouseY);
-
+		if (chapter != -1 && page == 0)
+			drawProgressBar();
 		renderItems();
+	}
+
+	private void drawProgressBar() {
+		xSize = 210;
+		ySize = 180;
+		int x = (width - xSize) / 2;
+		int y = (height - ySize) / 2;
+		drawTexturedModalRect(x + 95, y + 38, 148, 180, 60, 7);
+		String key = chapterList.get(chapter);
+		drawTexturedModalRect(x + 96, y + 39, 148, 187, EurekaKnowledge.getProgress(player, key) * 58 / EurekaRegistry.getMaxValue(key), 7);
 	}
 
 	private void renderItems(){
@@ -131,12 +147,16 @@ public class GuiEngineeringDiary extends GuiContainer {
 		ySize = 180;
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
+		boolean hasNextpage = false;
 		try {
-			if (chaptersToDisplay.get(chapter).newInstance().hasNextPage(page))
-				drawTexturedModalRect(x + 143, y + 149, 82, 196, 16, 16);
-			if (chaptersToDisplay.get(chapter).newInstance().hasNextPage(page) && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y)
-				drawTexturedModalRect(x + 143, y + 149, 82, 180, 16, 16);
-		} catch (Throwable e){}
+			hasNextpage = chaptersToDisplay.get(chapter).newInstance().hasNextPage(page);
+		}catch (Throwable e){}
+		if (chapter == -1)
+			hasNextpage = !(Utils.localize("engineeringDiary." + categoryList.get(category) + ".page" + (page + 1)).equals("engineeringDiary." + categoryList.get(category) + ".page" + Integer.toString(page + 1)));
+		if (hasNextpage && (chapter == -1 || EurekaKnowledge.isFinished(player, chapterList.get(chapter))))
+			drawTexturedModalRect(x + 143, y + 149, 82, 196, 16, 16);
+		if (hasNextpage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (chapter == -1 || EurekaKnowledge.isFinished(player, chapterList.get(chapter))))
+			drawTexturedModalRect(x + 143, y + 149, 82, 180, 16, 16);
 		if (hasPrevPage)
 			drawTexturedModalRect(x + 44, y + 13, 66, 196, 16, 16);
 		if (hasPrevPage && mouseX > 44 + x && mouseX < 60 + x && mouseY > 13 + y && mouseY < 28 + y)
@@ -176,19 +196,38 @@ public class GuiEngineeringDiary extends GuiContainer {
 	}
 
 	private void drawText(){
-
 		if (chapter == -1){
-			writeText(Utils.localize("engineeringDiary." + categoryList.get(category) + ".title"), 1, 0xFFCC00);
-			writeText(Utils.localize("engineeringDiary." + categoryList.get(category) + ".intro"), 4, 0xFFFFFF);
+			String categoryName = categoryList.get(category);
+			writeText(Utils.localize("engineeringDiary." + categoryName + ".title"), 0, 0xFFCC00);
+			writeText(Utils.localize("engineeringDiary." + categoryName + ".page" + page), 4, 0xFFFFFF);
+		} else {
+			try {
+				String chapterName = chapterList.get(chapter);
+				writeText(Utils.localize("engineeringDiary." + chapterName + ".title"), 0, 0xFFCC00);
+				if (page == 0){
+					writeText(Utils.localize("engineeringDiary.requiredResearch"), 5, 0xFF0000);
+					writeText(chaptersToDisplay.get(chapter).newInstance().getRequiredResearch(), 6, 0x0000FF);
+					int line = writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player, chapterName) + " / " + EurekaRegistry.getMaxValue(chapterName), 8, 0xFFFF00);
+					if (!EurekaKnowledge.isFinished(player, chapterName)) {
+						line = writeText(chaptersToDisplay.get(chapter).newInstance().howToMakeProgress(), line, 0xFF6600);
+					} else {
+						line = writeText(Utils.localize("engineeringDiary.unlocked"), line, 0xFF6600);
+					}
+					writeText(chaptersToDisplay.get(chapter).newInstance().getText(page), line, 0xFFFFFF);
+				} else {
+					writeText(chaptersToDisplay.get(chapter).newInstance().getText(page), 4, 0xFFFFFF);
+				}
+
+			} catch (Throwable e){}
 		}
 	}
 
-	public void writeText(String text, int line, int color){
+	public int writeText(String text, int line, int color){
 		String[] words = text.split(" ", 0);
 		String output = "";
 		for (String word: words){
 			if (line == 20)
-				return;
+				return line;
 			if (output.length() + word.length() > lineLimit[line]){
 				drawTextAtLine(output, line, color);
 				output = "";
@@ -197,6 +236,8 @@ public class GuiEngineeringDiary extends GuiContainer {
 			output = output + word + " ";
 		}
 		drawTextAtLine(output, line, color);
+		line += 2;
+		return line;
 	}
 
 	public void drawTextAtLine(String text, int line, int color){
@@ -229,7 +270,20 @@ public class GuiEngineeringDiary extends GuiContainer {
 			chapter = (mouseY - y) / 25;
 			page = 0;
 		}
-		if (page > 0)
+		boolean hasNextpage = false;
+		try {
+			hasNextpage = chaptersToDisplay.get(chapter).newInstance().hasNextPage(page);
+		}catch (Throwable e){}
+		if (chapter == -1)
+			hasNextpage = !(Utils.localize("engineeringDiary." + categoryList.get(category) + ".page" + (page + 1)).equals("engineeringDiary." + categoryList.get(category) + ".page" + Integer.toString(page + 1)));
+		if (hasNextpage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (chapter == -1 || EurekaKnowledge.isFinished(player, chapterList.get(chapter))))
+			page++;
+		if (hasPrevPage && mouseX > 34 + x && mouseX < 59 + x && mouseY > 13 + y && mouseY < 28 + y)
+			page--;
+		if (page > 0) {
 			hasPrevPage = true;
+		} else{
+			hasPrevPage = false;
+		}
 	}
 }

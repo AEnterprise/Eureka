@@ -11,9 +11,9 @@ eureka.kineticToolFinished=While making yet another tool to replace your old one
 eureka.missingKnowledge=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
 eureka.missingKnowledgeKineticTool=You have no idea how this tool works (yet). You try to use it, but due to your incompetence, it falls apart.
 
-engineeringDiary.mainScreen.title=Engineering Diary
-engineeringDiary.mainScreen.description=This book is a Diary of your progress with discovering items and blocks through the Eureka system. As an Engineer, testing and experimentation is required before creating a machine,
-engineeringDiary.mainScreen.page1=and you’ll need to make and use simple machines in order to have the Eureka moment that leads to new creations. Have fun!
+engineeringDiary.Eureka.title=Engineering Diary
+engineeringDiary.Eureka.page0=This book is a Diary of your progress with discovering items and blocks through the Eureka system. As an Engineer, testing and experimentation is required before creating a machine,
+engineeringDiary.Eureka.page1=and you’ll need to make and use simple machines in order to have the Eureka moment that leads to new creations. Have fun!
 
 engineeringDiary.requiredResearch=Required research:
 engineeringDiary.progress=Progress:

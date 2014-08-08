@@ -16,4 +16,8 @@ public abstract class EurekaChapter extends GuiScreen {
 	public abstract void drawCustomStuff(int page);
 
 	public abstract boolean hasNextPage(int page);
+
+	public abstract String getRequiredResearch();
+
+	public abstract String howToMakeProgress();
 }
