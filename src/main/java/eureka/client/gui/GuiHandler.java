@@ -1,9 +1,10 @@
 package eureka.client.gui;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
+import eureka.core.EurekaRegistry;
+import eureka.network.EurekaMessage;
+import eureka.network.PacketHandeler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 /**
@@ -17,9 +18,8 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		if (ID == 1){
-			if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG))
-				player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound());
-			FMLClientHandler.instance().getClientPlayerEntity().getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG));
+			for (String key: EurekaRegistry.getKeys())
+				PacketHandeler.instance.sendToDimension(new EurekaMessage(player, key), world.provider.dimensionId);
 			return new ContainerEngineeringDiary(player);
 		}
 		return null;

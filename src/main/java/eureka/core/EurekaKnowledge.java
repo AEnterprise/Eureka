@@ -27,7 +27,7 @@ public class EurekaKnowledge {
 
     }
 
-    private static NBTTagCompound getTag (EntityPlayer player){
+    public static NBTTagCompound getTag (EntityPlayer player){
 	    if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)){
 		    player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound());
 	    }
@@ -70,11 +70,11 @@ public class EurekaKnowledge {
         }
     }
 
-    private static void setKey(NBTTagCompound tag, String key, int integer){
+    public static void setKey(NBTTagCompound tag, String key, int integer){
         tag.setInteger(key, integer);
     }
 
-    private static void setKey(NBTTagCompound tag, String key, boolean bool){
+    public static void setKey(NBTTagCompound tag, String key, boolean bool){
         tag.setBoolean(key, bool);
 
     }

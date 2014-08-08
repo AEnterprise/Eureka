@@ -10,6 +10,7 @@ import eureka.client.gui.GuiHandler;
 import eureka.core.EurekaRegistry;
 import eureka.core.EventHandler;
 import eureka.core.ItemEngineeringDiary;
+import eureka.network.PacketHandeler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -41,19 +42,21 @@ public class Eureka {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
 		engineeringDiary = new ItemEngineeringDiary();
 		engineeringDiary.setCreativeTab(eureka).setUnlocalizedName("engineeringDiary");
 		GameRegistry.registerItem(engineeringDiary, "engineeringDiary");
 
 		EurekaRegistry.registerCategory("Eureka", new ItemStack(engineeringDiary));
+
+		PacketHandeler.init();
 	}
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent evt) {
 		FMLCommonHandler.instance().bus().register(new EventHandler.FML());
 		MinecraftForge.EVENT_BUS.register(new EventHandler.Forge());
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 	}
 
 
