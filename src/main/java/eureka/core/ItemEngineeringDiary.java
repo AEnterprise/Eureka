@@ -1,5 +1,7 @@
 package eureka.core;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import eureka.Eureka;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +24,7 @@ public class ItemEngineeringDiary extends Item {
 		super();
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIconFromDamage(int damage) {
 		return icon;
@@ -29,6 +32,7 @@ public class ItemEngineeringDiary extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		if (world.isRemote && !player.isSneaking())
 		player.openGui(Eureka.instance, 1, world, (int)player.posX, (int) player.posY, (int) player.posZ);
 		return stack;
 	}

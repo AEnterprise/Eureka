@@ -1,5 +1,7 @@
 package eureka.client.gui;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import eureka.core.EurekaKnowledge;
 import eureka.core.EurekaRegistry;
 import eureka.core.Utils;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
+@SideOnly(Side.CLIENT)
 public class GuiEngineeringDiary extends GuiContainer {
 	public static ResourceLocation texture = new ResourceLocation("eureka", "textures/gui/EngineeringDiary.png");
 	public EntityPlayer player;
