@@ -1,0 +1,20 @@
+item.engineeringDiary.name=工程日志
+
+itemGroup.Eureka=灵光一现
+
+Eureka=灵光一现!
+eureka.dusterTier0Finished=你筹谋着将来的建筑规划, 开始意识到这会需要不计其数的材料. 与此同时, 你开始考虑是否有让这一切来得更容易的方法.
+eureka.dusterTier1Finished=在处理矿物时你猛然间意识到有效率更高的加工方法.
+eureka.dusterTier2-1Finished=在实现自动输出到物品栏的功能后你试图寻找让机器自动工作的方法.
+eureka.dusterTier2-2Finished=你不希望靠踩踏处理矿物, 同时也希望拥有自动输入输出的功能. 你想做一台兼有其能的机器. 那么不如试试激光? 
+eureka.kineticToolFinished=在制作出全新的工具以后你开始考虑有没有让它们永远用不坏的方法.
+eureka.missingKnowledge=你尚不明机器运行之原理. 你试着开动机器, 但它却由于你的胡乱操作分崩离析.
+eureka.missingKnowledgeKineticTool=你尚不明该工具作用之原理. 你试着使用工具, 但它却由于你的胡乱操作分崩离析.
+
+engineeringDiary.Eureka.title=工程日志
+engineeringDiary.Eureka.page0=这本日志记录了你通过灵光一现系统研究物品方块的进度. 作为一名工程师, 在制造机器前需要进行测试与实验,
+engineeringDiary.Eureka.page1=并且你也需要先制造和使用较简陋的机器来激发有关新发明的灵感. 希望你玩得开心哟!
+
+engineeringDiary.requiredResearch=需求研究:
+engineeringDiary.progress=进度:
+engineeringDiary.unlocked=解锁
