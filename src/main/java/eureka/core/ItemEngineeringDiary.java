@@ -37,6 +37,7 @@ public class ItemEngineeringDiary extends Item {
 		return stack;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister register) {
 		icon = register.registerIcon("eureka:engineeringDiary");

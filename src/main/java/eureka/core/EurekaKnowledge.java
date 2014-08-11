@@ -41,7 +41,7 @@ public class EurekaKnowledge {
 
     public static boolean isFinished(EntityPlayer player, String key){
         initKey(getTag(player), key);
-        return getTag(player).getBoolean(key + "Finished");
+        return player.capabilities.isCreativeMode || getTag(player).getBoolean(key + "Finished");
     }
 
     public static void makeProgress (EntityPlayer player, String key){
@@ -82,7 +82,7 @@ public class EurekaKnowledge {
     public static void eurekaBlockEvent(World world, IEurekaBlock block, int x, int y, int z, EntityPlayer player){
         if (block == null)
             return;
-        if (!world.isRemote && !block.isAllowed(player)){
+        if (!world.isRemote && !block.isAllowed(player) && !player.capabilities.isCreativeMode){
             ItemStack[] stackArray = block.getComponents();
             for (ItemStack stack : stackArray)
                 Utils.dropItemstack(world, x, y, z, stack);
