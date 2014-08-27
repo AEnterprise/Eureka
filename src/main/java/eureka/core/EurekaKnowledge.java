@@ -39,10 +39,22 @@ public class EurekaKnowledge {
         return getTag(player).getInteger(key + "Progress");
     }
 
+	public static int getProgress(ItemStack stack, String key){
+		if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("info"))
+			return ((NBTTagCompound)stack.stackTagCompound.getTag("info")).getInteger(key + "Progress");
+		return 0;
+	}
+
     public static boolean isFinished(EntityPlayer player, String key){
         initKey(getTag(player), key);
         return player.capabilities.isCreativeMode || getTag(player).getBoolean(key + "Finished");
     }
+
+	public static boolean isFinished (ItemStack stack, String key){
+		if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("info"))
+			return ((NBTTagCompound)stack.stackTagCompound.getTag("info")).getBoolean(key + "Finished");
+		return false;
+	}
 
     public static void makeProgress (EntityPlayer player, String key){
         if (player.worldObj.isRemote)

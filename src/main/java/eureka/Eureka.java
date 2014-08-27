@@ -10,7 +10,6 @@ import eureka.client.gui.GuiHandler;
 import eureka.core.EurekaRegistry;
 import eureka.core.EventHandler;
 import eureka.core.ItemEngineeringDiary;
-import eureka.network.PacketHandeler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -48,8 +47,6 @@ public class Eureka {
 		GameRegistry.registerItem(engineeringDiary, "engineeringDiary");
 
 		EurekaRegistry.registerCategory("Eureka", new ItemStack(engineeringDiary));
-
-		PacketHandeler.init();
 	}
 
 	@Mod.EventHandler
