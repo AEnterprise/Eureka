@@ -13,7 +13,6 @@ import net.minecraft.inventory.Container;
 public class ContainerEngineeringDiary extends Container {
 
 	public ContainerEngineeringDiary(EntityPlayer player){
-
 	}
 
 	@Override

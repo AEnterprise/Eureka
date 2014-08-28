@@ -2,6 +2,7 @@ package eureka;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -10,6 +11,8 @@ import eureka.client.gui.GuiHandler;
 import eureka.core.EurekaRegistry;
 import eureka.core.EventHandler;
 import eureka.core.ItemEngineeringDiary;
+import eureka.network.PacketHandler;
+import eureka.proxy.BaseProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,6 +32,9 @@ public class Eureka {
 
 	@Mod.Instance
 	public static Eureka instance;
+
+	@SidedProxy(clientSide="eureka.proxy.ClientProxy", serverSide="eureka.proxy.ServerProxy")
+	public static BaseProxy proxy;
 
 	public static CreativeTabs eureka = new CreativeTabs("Eureka") {
 
@@ -54,6 +60,7 @@ public class Eureka {
 		FMLCommonHandler.instance().bus().register(new EventHandler.FML());
 		MinecraftForge.EVENT_BUS.register(new EventHandler.Forge());
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+		PacketHandler.init();
 	}
 
 

@@ -32,8 +32,8 @@ public class ItemEngineeringDiary extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (!world.isRemote && !player.isSneaking())
-		player.openGui(Eureka.instance, 1, world, (int)player.posX, (int) player.posY, (int) player.posZ);
+		if (!world.isRemote)
+			player.openGui(Eureka.instance, 1, world, (int) player.posX, (int) player.posY, (int) player.posZ);
 		return stack;
 	}
 
