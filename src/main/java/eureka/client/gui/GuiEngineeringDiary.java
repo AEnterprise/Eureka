@@ -118,7 +118,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x + 95, y + 38, 148, 180, 60, 7);
 		String key = chapterList.get(chapter);
-		drawTexturedModalRect(x + 96, y + 39, 148, 187, EurekaKnowledge.getProgress(player.getCurrentEquippedItem(), key) * 58 / EurekaRegistry.getMaxValue(key), 7);
+		drawTexturedModalRect(x + 96, y + 39, 148, 187, EurekaKnowledge.getProgress(player, key) * 58 / EurekaRegistry.getMaxValue(key), 7);
 	}
 
 	private void renderItems(){
@@ -153,9 +153,9 @@ public class GuiEngineeringDiary extends GuiContainer {
 			hasNextpage = chaptersToDisplay.get(chapter).hasNextPage(page);
 		if (chapter == -1)
 			hasNextpage = !(Utils.localize("engineeringDiary." + categoryList.get(category) + ".page" + (page + 1)).equals("engineeringDiary." + categoryList.get(category) + ".page" + Integer.toString(page + 1)));
-		if (hasNextpage && (chapter == -1 || EurekaKnowledge.isFinished(player.getCurrentEquippedItem(), chapterList.get(chapter))))
+		if (hasNextpage && (chapter == -1 || EurekaKnowledge.isFinished(player, chapterList.get(chapter))))
 			drawTexturedModalRect(x + 143, y + 149, 82, 196, 16, 16);
-		if (hasNextpage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (chapter == -1 || EurekaKnowledge.isFinished(player.getCurrentEquippedItem(), chapterList.get(chapter))))
+		if (hasNextpage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (chapter == -1 || EurekaKnowledge.isFinished(player, chapterList.get(chapter))))
 			drawTexturedModalRect(x + 143, y + 149, 82, 180, 16, 16);
 		if (hasPrevPage)
 			drawTexturedModalRect(x + 44, y + 13, 66, 196, 16, 16);
@@ -206,8 +206,8 @@ public class GuiEngineeringDiary extends GuiContainer {
 			if (page == 0){
 				writeText(Utils.localize("engineeringDiary.requiredResearch"), 5, 0xFF0000);
 				writeText(chaptersToDisplay.get(chapter).getRequiredResearch(), 6, 0x0000FF);
-				int line = writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player.getCurrentEquippedItem(), chapterName) + " / " + EurekaRegistry.getMaxValue(chapterName), 8, 0xFFFF00);
-				if (!EurekaKnowledge.isFinished(player.getCurrentEquippedItem(), chapterName)) {
+				int line = writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player, chapterName) + " / " + EurekaRegistry.getMaxValue(chapterName), 8, 0xFFFF00);
+				if (!EurekaKnowledge.isFinished(player, chapterName)) {
 					line = writeText(chaptersToDisplay.get(chapter).howToMakeProgress(), line, 0xFF6600);
 				} else {
 					line = writeText(Utils.localize("engineeringDiary.unlocked"), line, 0xFF6600);
@@ -273,7 +273,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 			hasNextpage = chaptersToDisplay.get(chapter).hasNextPage(page);
 		if (chapter == -1)
 			hasNextpage = !(Utils.localize("engineeringDiary." + categoryList.get(category) + ".page" + (page + 1)).equals("engineeringDiary." + categoryList.get(category) + ".page" + Integer.toString(page + 1)));
-		if (hasNextpage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (chapter == -1 || EurekaKnowledge.isFinished(player.getCurrentEquippedItem(), chapterList.get(chapter))))
+		if (hasNextpage && mouseX > 143 + x && mouseX < 159 + x && mouseY > 149 + y && mouseY < 164 + y && (chapter == -1 || EurekaKnowledge.isFinished(player, chapterList.get(chapter))))
 			page++;
 		if (hasPrevPage && mouseX > 34 + x && mouseX < 59 + x && mouseY > 13 + y && mouseY < 28 + y)
 			page--;

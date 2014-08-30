@@ -51,16 +51,12 @@ public class MessageEngineeringDiary implements IMessage, IMessageHandler<Messag
 
 	@Override
 	public IMessage onMessage(MessageEngineeringDiary message, MessageContext ctx) {
-		NBTTagCompound info = new NBTTagCompound();
 		ArrayList<String> keys = EurekaRegistry.getKeys();
+		NBTTagCompound info = EurekaKnowledge.getTag(Eureka.proxy.getPlayer());
 		for (int t = 0; t < keys.size(); t++){
 			info.setInteger(keys.get(t) + "Progress", message.progress[t]);
 			info.setBoolean(keys.get(t) + "Finished", message.finished[t]);
 		}
-		if (Eureka.proxy.getPlayer().getCurrentEquippedItem().stackTagCompound == null){
-			Eureka.proxy.getPlayer().getCurrentEquippedItem().stackTagCompound = new NBTTagCompound();
-		}
-		Eureka.proxy.getPlayer().getCurrentEquippedItem().stackTagCompound.setTag("info", info);
 		return null;
 	}
 }
