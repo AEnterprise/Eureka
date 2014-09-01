@@ -1,4 +1,4 @@
-package eureka.interfaces;
+package eureka.api.interfaces;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

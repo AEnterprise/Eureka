@@ -1,4 +1,4 @@
-package eureka.interfaces;
+package eureka.api.interfaces;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,4 +26,9 @@ public interface IEurekaBlock {
      * The message 'dumb' players get when there machine falls apart
      */
     String getMessage();
+
+	/**
+	 * If the block should break when interacted with or not
+	 */
+	boolean breakOnInteraction();
 }

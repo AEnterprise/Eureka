@@ -1,6 +1,6 @@
-package eureka.core;
+package eureka.api;
 
-import eureka.client.gui.EurekaChapter;
+import eureka.api.client.gui.EurekaChapter;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;

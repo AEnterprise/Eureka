@@ -1,6 +1,7 @@
-package eureka.core;
+package eureka.api;
 
-import eureka.interfaces.IEurekaBlock;
+import eureka.api.interfaces.IEurekaBlock;
+import eureka.core.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -94,7 +95,7 @@ public class EurekaKnowledge {
     public static void eurekaBlockEvent(World world, IEurekaBlock block, int x, int y, int z, EntityPlayer player){
         if (block == null)
             return;
-        if (!world.isRemote && !block.isAllowed(player) && !player.capabilities.isCreativeMode){
+        if (!world.isRemote && !block.isAllowed(player) && !player.capabilities.isCreativeMode && block.breakOnInteraction()){
             ItemStack[] stackArray = block.getComponents();
             for (ItemStack stack : stackArray)
                 Utils.dropItemstack(world, x, y, z, stack);

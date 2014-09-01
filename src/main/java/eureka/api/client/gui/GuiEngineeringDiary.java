@@ -1,9 +1,10 @@
-package eureka.client.gui;
+package eureka.api.client.gui;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import eureka.core.EurekaKnowledge;
-import eureka.core.EurekaRegistry;
+import eureka.client.gui.ContainerEngineeringDiary;
+import eureka.api.EurekaKnowledge;
+import eureka.api.EurekaRegistry;
 import eureka.core.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;

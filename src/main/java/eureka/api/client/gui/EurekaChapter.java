@@ -1,4 +1,4 @@
-package eureka.client.gui;
+package eureka.api.client.gui;
 
 /**
  * Copyright (c) 2014, AEnterprise
