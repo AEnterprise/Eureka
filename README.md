@@ -13,8 +13,11 @@ Registering your keys
 ====
 For the eureka system to succesfully track the progress of a player you need to register 'keys'. These keys are also used for the localizations of the eureka moments and the text in the book. In the registration you also have to tell the eureka system how many times progress has to be made and in what increments. You register like this:
 ```
-EurekaRegistry.registerKey(<key>, <progress needed to unlock the next tier>, <progress increments>, <itemstack to display on the tab in the book>);
+EurekaRegistry.registerKey(<key>, <EurekaInformation>);
 ```
+
+The second argument there is a class that should extend EurekaInformation that contains all info about the specified entry (There is a class EurekaInfo you can use for a basic implementation).
+
 The Eureka knowledge
 ====
 As the Eureka system isn't all knowing you have to tell it when a player makes progress like so:
