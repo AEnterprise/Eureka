@@ -1,7 +1,8 @@
-package eureka.api.client.gui;
+package eureka.client.gui;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import eureka.api.client.gui.EurekaChapter;
 import eureka.client.gui.ContainerEngineeringDiary;
 import eureka.api.EurekaKnowledge;
 import eureka.api.EurekaRegistry;

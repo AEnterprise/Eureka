@@ -92,10 +92,10 @@ public class EurekaKnowledge {
 
     }
 
-    public static void eurekaBlockEvent(World world, IEurekaBlock block, int x, int y, int z, EntityPlayer player){
+    public static void eurekaBlockEvent(World world, IEurekaBlock block, int x, int y, int z, EntityPlayer player, boolean interaction){
         if (block == null)
             return;
-        if (!world.isRemote && !block.isAllowed(player) && !player.capabilities.isCreativeMode && block.breakOnInteraction()){
+        if (!world.isRemote && !block.isAllowed(player) && !player.capabilities.isCreativeMode && (block.breakOnInteraction() || !interaction)){
             ItemStack[] stackArray = block.getComponents();
             for (ItemStack stack : stackArray)
                 Utils.dropItemstack(world, x, y, z, stack);

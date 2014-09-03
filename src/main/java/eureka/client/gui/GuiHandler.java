@@ -1,7 +1,6 @@
 package eureka.client.gui;
 
 import cpw.mods.fml.common.network.IGuiHandler;
-import eureka.api.client.gui.GuiEngineeringDiary;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 

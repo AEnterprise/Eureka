@@ -50,7 +50,7 @@ public class EventHandler {
 				//eureka block check
 				Block block = event.world.getBlock(event.x, event.y, event.z);
 				if (block instanceof IEurekaBlock)
-					EurekaKnowledge.eurekaBlockEvent(event.world, (IEurekaBlock) block, event.x, event.y, event.z, event.entityPlayer);
+					EurekaKnowledge.eurekaBlockEvent(event.world, (IEurekaBlock) block, event.x, event.y, event.z, event.entityPlayer, true);
 
 				//eureka item check
 				if (event.entityPlayer.getCurrentEquippedItem() == null)
