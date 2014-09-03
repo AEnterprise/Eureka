@@ -131,7 +131,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 
 			if (teller + categoryOffset < categoryList.size()) {
 				RenderItem item = new RenderItem();
-				item.renderItemIntoGUI(fontRendererObj, mc.getTextureManager(), EurekaRegistry.getCategoryDisplayStack(categoryList.get(teller)), x + 12, y + 24 * teller + 9);
+				item.renderItemIntoGUI(fontRendererObj, mc.getTextureManager(), EurekaRegistry.getCategoryDisplayStack(categoryList.get(teller + categoryOffset)), x + 12, y + 24 * teller + 9);
 				GL11.glDisable(GL11.GL_LIGHTING);
 
 			}
@@ -141,6 +141,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 				GL11.glDisable(GL11.GL_LIGHTING);
 			}
 		}
+		GL11.glEnable(GL11.GL_LIGHTING);
 	}
 
 
@@ -162,6 +163,26 @@ public class GuiEngineeringDiary extends GuiContainer {
 			drawTexturedModalRect(x + 44, y + 13, 66, 196, 16, 16);
 		if (hasPrevPage && mouseX > 44 + x && mouseX < 60 + x && mouseY > 13 + y && mouseY < 28 + y)
 			drawTexturedModalRect(x + 44, y + 13, 66, 180, 16, 16);
+		if (categoryList.size() - categoryOffset > 7){
+			drawTexturedModalRect(x + 2, y + 180, 188, 192, 41, 17);
+			if (mouseX > x + 2 && mouseX < x + 43 && mouseY > y + 180 && mouseY < y + 197)
+				drawTexturedModalRect(x + 2, y + 180, 148, 192, 40, 17);
+		}
+		if (categoryOffset > 0){
+			drawTexturedModalRect(x + 2, y - 15, 188, 210, 41, 17);
+			if (mouseX > x + 2 && mouseX < x + 43 && mouseY > y - 15 && mouseY < y)
+				drawTexturedModalRect(x + 2, y -15 , 148, 210, 40, 17);
+		}
+		if (chaptersToDisplay.size() - chapterOffset > 7) {
+			drawTexturedModalRect(x + 165, y + 180, 18, 212, 40, 17);
+			if (mouseX > x + 165 && mouseX < x + 205 && mouseY > y + 180 && mouseY < y + 197)
+				drawTexturedModalRect(x + 165, y + 180, 58, 212, 40, 17);
+		}
+		if (chapterOffset > 0) {
+			drawTexturedModalRect(x + 160, y - 15, 18, 230, 40, 17);
+			if (mouseX > x + 160 && mouseX < x + 200 && mouseY > y - 15 && mouseY < y)
+				drawTexturedModalRect(x + 160, y - 15, 58, 230, 40, 17);
+		}
 	}
 
 	private void drawCategories(){
@@ -259,15 +280,15 @@ public class GuiEngineeringDiary extends GuiContainer {
 		super.mouseMovedOrUp(mouseX, mouseY, status);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
-		if (mouseX > x + 7 && mouseX < x +  31 &&  (mouseY - y) / 25 < categoryList.size()) {
-			category = (mouseY - y) / 25;
-			chapter = -1;
+		if (mouseX > x + 7 && mouseX < x +  31 &&  ((mouseY - y) / 25) + categoryOffset < categoryList.size()) {
 			page = 0;
+			category = ((mouseY - y) / 25) + categoryOffset;
+			chapter = -1;
 			rebuildChapterList();
 		}
 		if (mouseX > x + 174 && mouseX < x + 198 && (mouseY - y) / 25 < chaptersToDisplay.size()){
-			chapter = (mouseY - y) / 25;
 			page = 0;
+			chapter = ((mouseY - y) / 25) + chapterOffset;
 		}
 		boolean hasNextpage = false;
 		if (!chaptersToDisplay.isEmpty() && chapter != -1)
@@ -283,5 +304,14 @@ public class GuiEngineeringDiary extends GuiContainer {
 		} else{
 			hasPrevPage = false;
 		}
+		if (mouseX > x + 2 && mouseX < x + 43 && mouseY > y + 180 && mouseY < y + 197 && categoryList.size() - categoryOffset > 7)
+			categoryOffset++;
+		if (mouseX > x + 2 && mouseX < x + 43 && mouseY > y - 15 && mouseY < y && categoryOffset > 0)
+			categoryOffset--;
+
+		if (chaptersToDisplay.size() - chapterOffset > 7 && mouseX > x + 165 && mouseX < x + 205 && mouseY > y + 180 && mouseY < y + 197)
+			chapterOffset++;
+		if (chapterOffset > 0 && mouseX > x + 160 && mouseX < x + 200 && mouseY > y - 15 && mouseY < y)
+			chapterOffset--;
 	}
 }
