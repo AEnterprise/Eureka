@@ -73,5 +73,8 @@ public class EurekaRegistry {
 		return categories.get(category);
 	}
 
+	public static ArrayList<String> getRequiredReserch(String key){
+		return chapters.get(key).getRequiredResearch();
+	}
 
 }
