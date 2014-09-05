@@ -2,10 +2,9 @@ package eureka.client.gui;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import eureka.api.client.gui.EurekaChapter;
-import eureka.client.gui.ContainerEngineeringDiary;
 import eureka.api.EurekaKnowledge;
 import eureka.api.EurekaRegistry;
+import eureka.api.client.gui.EurekaChapter;
 import eureka.core.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -210,9 +209,9 @@ public class GuiEngineeringDiary extends GuiContainer {
 		for (int teller = 0; teller < 7; teller++){
 			if (teller + chapterOffset < chaptersToDisplay.size())
 				if (teller + chapterOffset == chapter) {
-					drawTexturedModalRect(x + 174, y + (24 * teller + 5), 98, 204, 25, 23);
-				} else {
 					drawTexturedModalRect(x + 174, y + (24 * teller + 5), 123, 204, 25, 23);
+				} else {
+					drawTexturedModalRect(x + 174, y + (24 * teller + 5), 98, 204, 25, 23);
 				}
 		}
 
@@ -244,6 +243,8 @@ public class GuiEngineeringDiary extends GuiContainer {
 	}
 
 	public int writeText(String text, int line, int color){
+		if (text == null)
+			return line;
 		String[] words = text.split(" ", 0);
 		String output = "";
 		for (String word: words){
@@ -281,13 +282,19 @@ public class GuiEngineeringDiary extends GuiContainer {
 		super.mouseMovedOrUp(mouseX, mouseY, status);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
-		if (mouseX > x + 7 && mouseX < x +  31 &&  ((mouseY - y) / 25) + categoryOffset < categoryList.size()) {
+		int max = 7;
+		if (categoryList.size() < 7)
+			max = categoryList.size();
+		if (mouseX > x + 7 && mouseX < x +  31 &&  (mouseY - y) / 25  < max) {
 			page = 0;
 			category = ((mouseY - y) / 25) + categoryOffset;
 			chapter = -1;
-			rebuildChapterList();
+			chapterOffset = 0;
 		}
-		if (mouseX > x + 174 && mouseX < x + 198 && (mouseY - y) / 25 < chaptersToDisplay.size()){
+		max = 7;
+		if (chaptersToDisplay.size() < 7)
+			max = chaptersToDisplay.size();
+		if (mouseX > x + 174 && mouseX < x + 198 && (mouseY - y) / 25 < max){
 			page = 0;
 			chapter = ((mouseY - y) / 25) + chapterOffset;
 		}
@@ -314,5 +321,6 @@ public class GuiEngineeringDiary extends GuiContainer {
 			chapterOffset++;
 		if (chapterOffset > 0 && mouseX > x + 160 && mouseX < x + 200 && mouseY > y - 15 && mouseY < y)
 			chapterOffset--;
+		rebuildChapterList();
 	}
 }
