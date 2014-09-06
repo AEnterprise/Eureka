@@ -1,22 +1,23 @@
 package eureka;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import eureka.client.gui.GuiHandler;
 import eureka.api.EurekaRegistry;
+import eureka.client.gui.GuiHandler;
 import eureka.core.EventHandler;
 import eureka.core.ItemEngineeringDiary;
 import eureka.network.PacketHandler;
 import eureka.proxy.BaseProxy;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -30,7 +31,8 @@ import net.minecraftforge.common.MinecraftForge;
 public class Eureka {
 	public static Item engineeringDiary;
 
-	@Mod.Instance
+	//This let it crash. However just for testing i changed
+	@Instance("eureka")
 	public static Eureka instance;
 
 	@SidedProxy(clientSide="eureka.proxy.ClientProxy", serverSide="eureka.proxy.ServerProxy")
