@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -130,20 +131,28 @@ public class GuiEngineeringDiary extends GuiContainer {
 		for (int teller = 0; teller < 7; teller++){
 
 			if (teller + categoryOffset < categoryList.size()) {
-				RenderItem item = new RenderItem();
-				item.renderItemIntoGUI(fontRendererObj, mc.getTextureManager(), EurekaRegistry.getCategoryDisplayStack(categoryList.get(teller + categoryOffset)), x + 12, y + 24 * teller + 9);
+				
+				renderItem(EurekaRegistry.getCategoryDisplayStack(categoryList.get(teller + categoryOffset)), x + 12, y + 24 * teller + 9);
 				GL11.glDisable(GL11.GL_LIGHTING);
 
 			}
 			if (teller + chapterOffset < chapterList.size()) {
-				RenderItem item = new RenderItem();
-				item.renderItemIntoGUI(fontRendererObj, mc.getTextureManager(), (EurekaRegistry.getDisplayStack(chapterList.get(teller + chapterOffset))), x + 177, y + 24 * teller + 9);
+				this.renderItem((EurekaRegistry.getDisplayStack(chapterList.get(teller + chapterOffset))), x + 177, y + 24 * teller + 9);
 				GL11.glDisable(GL11.GL_LIGHTING);
 			}
 		}
 		GL11.glEnable(GL11.GL_LIGHTING);
 	}
-
+	
+	private void renderItem(ItemStack par1, int x, int y)
+	{
+		GL11.glTranslatef(0.0F, 0.0F, 32.0F);
+		this.zLevel = 200.0F;
+		itemRender.zLevel = 200.0F;
+		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), par1, x, y);
+        this.zLevel = 0.0F;
+        itemRender.zLevel = 0.0F;
+	}
 
 	private void drawPageButtons(int mouseX, int mouseY) {
 		xSize = 210;
