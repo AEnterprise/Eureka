@@ -1,6 +1,7 @@
 package eureka.api;
 
 import eureka.api.client.gui.EurekaChapter;
+import eureka.core.Utils;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -38,9 +39,19 @@ public class EurekaInfo extends EurekaInformation {
 		this.maxValue = maxValue;
 		this.stack = stack;
 		if (researches.length > 0) {
-			gui = new BasicEurekaChapter(key, true);
+			boolean first = true;
+			String requiredResearch = "";
+			for (String research: researches){
+				if (first) {
+					requiredResearch = Utils.localize("engineeringDiary." + research + ".title");
+					first = false;
+				} else {
+					requiredResearch.concat(", " + Utils.localize("engineeringDiary." + research + ".title"));
+				}
+			}
+			gui = new BasicEurekaChapter(key, requiredResearch);
 		} else {
-			gui = new BasicEurekaChapter(key, false);
+			gui = new BasicEurekaChapter(key);
 		}
 		requiredResearch = new ArrayList<String>(researches.length);
 		for (String research: researches)
@@ -63,7 +74,7 @@ public class EurekaInfo extends EurekaInformation {
 		this.increment = increment;
 		this.maxValue = maxValue;
 		this.stack = stack;
-		gui = new BasicEurekaChapter(key, false);
+		gui = new BasicEurekaChapter(key);
 		this.requiredResearch = new  ArrayList<String>();
 	}
 

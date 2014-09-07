@@ -49,25 +49,29 @@ public class EurekaKnowledge {
     public static void makeProgress (EntityPlayer player, String key){
         if (player.worldObj.isRemote)
             return;
-	    if (!(EurekaRegistry.getRequiredReserch(key) == null))
-		    for (String requiredResearchKey: EurekaRegistry.getRequiredReserch(key)){
-			    if (!isFinished(player, requiredResearchKey))
-				    return;
+	    try {
+		    if (!(EurekaRegistry.getRequiredReserch(key) == null))
+			    for (String requiredResearchKey : EurekaRegistry.getRequiredReserch(key)) {
+				    if (!isFinished(player, requiredResearchKey))
+					    return;
+			    }
+		    int progress = getProgress(player, key);
+		    NBTTagCompound tag = getTag(player);
+		    if (progress < EurekaRegistry.getMaxValue(key)) {
+			    progress += EurekaRegistry.getIncrement(key);
+			    setKey(tag, key + "Progress", progress);
 		    }
-        int progress = getProgress(player, key);
-        NBTTagCompound tag = getTag(player);
-        if (progress < EurekaRegistry.getMaxValue(key)){
-	        progress += EurekaRegistry.getIncrement(key);
-            setKey(tag, key + "Progress", progress);
-        }
-        if (progress >= EurekaRegistry.getMaxValue(key)){
-            if (!isFinished(player, key)) {
-                setKey(tag, key + "Finished", true);
-                String message = Utils.localize("eureka." + key + "Finished");
-                player.addChatMessage(new ChatComponentText(Utils.localize("Eureka")));
-                player.addChatComponentMessage(new ChatComponentText(message));
-            }
-        }
+		    if (progress >= EurekaRegistry.getMaxValue(key)) {
+			    if (!isFinished(player, key)) {
+				    setKey(tag, key + "Finished", true);
+				    String message = Utils.localize("eureka." + key + "Finished");
+				    player.addChatMessage(new ChatComponentText(Utils.localize("Eureka")));
+				    player.addChatComponentMessage(new ChatComponentText(message));
+			    }
+		    }
+	    } catch (Throwable e){
+		    //fake player issue, ignoring
+	    }
     }
 
     private static void initKey(NBTTagCompound tag, String key){
