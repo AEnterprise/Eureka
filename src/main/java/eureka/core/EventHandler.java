@@ -1,5 +1,6 @@
 package eureka.core;
 
+import buildcraft.api.events.BlockInteractionEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import eureka.Eureka;
@@ -40,6 +41,14 @@ public class EventHandler {
 				}
 			}
 		}
+
+		@SubscribeEvent
+		public void BuildcraftBlockInteraction(BlockInteractionEvent event){
+			System.out.print("BLOCK INTERACTION EVENT RECIEVED 1");
+			event.setCanceled(true);
+		}
+
+
 	}
 
 
