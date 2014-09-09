@@ -12,16 +12,18 @@ import eureka.core.Utils;
  */
 public class BasicEurekaChapter extends EurekaChapter{
 	public String key, requiredResearch;
+	public boolean isInfoPage;
 
 	public BasicEurekaChapter(String key){
 		this.key = key;
 	}
 
-	public BasicEurekaChapter(String key, String requiredResearch){
+	public BasicEurekaChapter(String key, String requiredResearch, boolean isInfoPage){
 		this.key = key;
 		if (requiredResearch == null || requiredResearch == "")
 			requiredResearch = Utils.localize("engineeringDiary.noRequiredResearch");
 		this.requiredResearch = requiredResearch;
+		this.isInfoPage = isInfoPage;
 	}
 
 	@Override
@@ -47,5 +49,10 @@ public class BasicEurekaChapter extends EurekaChapter{
 	@Override
 	public String howToMakeProgress() {
 		return Utils.localize("engineeringDiary." + key + ".howToMakeProgress");
+	}
+
+	@Override
+	public boolean isInfoPage() {
+		return isInfoPage;
 	}
 }

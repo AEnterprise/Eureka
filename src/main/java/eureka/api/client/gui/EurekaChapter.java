@@ -18,4 +18,6 @@ public abstract class EurekaChapter {
 	public abstract String getRequiredResearch();
 
 	public abstract String howToMakeProgress();
+
+	public abstract boolean isInfoPage();
 }

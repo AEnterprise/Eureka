@@ -52,7 +52,7 @@ public class EurekaKnowledge {
 	    try {
 		    if (!(EurekaRegistry.getRequiredReserch(key) == null))
 			    for (String requiredResearchKey : EurekaRegistry.getRequiredReserch(key)) {
-				    if (!isFinished(player, requiredResearchKey))
+				    if (!isFinished(player, requiredResearchKey) && !EurekaRegistry.isInfoChapter(key))
 					    return;
 			    }
 		    int progress = getProgress(player, key);

@@ -49,7 +49,7 @@ public class EurekaInfo extends EurekaInformation {
 					requiredResearch.concat(", " + Utils.localize("engineeringDiary." + research + ".title"));
 				}
 			}
-			gui = new BasicEurekaChapter(key, requiredResearch);
+			gui = new BasicEurekaChapter(key, requiredResearch, false);
 		} else {
 			gui = new BasicEurekaChapter(key);
 		}
@@ -78,6 +78,32 @@ public class EurekaInfo extends EurekaInformation {
 		this.requiredResearch = new  ArrayList<String>();
 	}
 
+
+	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, boolean isInfoPage, String...researches){
+		this.key = key;
+		this.category = category;
+		this.increment = increment;
+		this.maxValue = maxValue;
+		this.stack = stack;
+		if (researches.length > 0) {
+			boolean first = true;
+			String requiredResearch = "";
+			for (String research: researches){
+				if (first) {
+					requiredResearch = Utils.localize("engineeringDiary." + research + ".title");
+					first = false;
+				} else {
+					requiredResearch.concat(", " + Utils.localize("engineeringDiary." + research + ".title"));
+				}
+			}
+			gui = new BasicEurekaChapter(key, requiredResearch, isInfoPage);
+		} else {
+			gui = new BasicEurekaChapter(key);
+		}
+		requiredResearch = new ArrayList<String>(researches.length);
+		for (String research: researches)
+			requiredResearch.add(research);
+	}
 	@Override
 	public String getKey() {
 		return key;

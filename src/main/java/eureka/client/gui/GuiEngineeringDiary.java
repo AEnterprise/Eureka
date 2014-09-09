@@ -107,7 +107,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 		drawCategories();
 		drawChapters();
 		drawPageButtons(mouseX, mouseY);
-		if (chapter != -1 && page == 0)
+		if (chapter != -1 && page == 0 && !chaptersToDisplay.get(chapter).isInfoPage())
 			drawProgressBar();
 		renderItems();
 	}

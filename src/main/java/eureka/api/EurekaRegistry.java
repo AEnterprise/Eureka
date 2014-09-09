@@ -77,4 +77,8 @@ public class EurekaRegistry {
 		return chapters.get(key).getRequiredResearch();
 	}
 
+	public static boolean isInfoChapter(String key){
+		return chapters.get(key).getGui().isInfoPage();
+	}
+
 }
