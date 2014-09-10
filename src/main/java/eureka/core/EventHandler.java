@@ -1,17 +1,23 @@
 package eureka.core;
 
-import buildcraft.api.events.BlockInteractionEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
-import eureka.Eureka;
-import eureka.api.EurekaKnowledge;
-import eureka.api.interfaces.IEurekaBlock;
-import eureka.api.interfaces.IEurekaItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
+
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+
+import buildcraft.api.events.BlockInteractionEvent;
+import buildcraft.api.events.BlockPlacedDownEvent;
+import buildcraft.api.events.PipePlacedEvent;
+
+import eureka.Eureka;
+import eureka.api.EurekaKnowledge;
+import eureka.api.interfaces.IEurekaBlock;
+import eureka.api.interfaces.IEurekaItem;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -44,10 +50,19 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void BuildcraftBlockInteraction(BlockInteractionEvent event){
-			System.out.print("BLOCK INTERACTION EVENT RECIEVED 1");
+			Logger.info(event.block.toString());
 			event.setCanceled(true);
 		}
 
+		@SubscribeEvent
+		public void BuildcraftPipePlaced(PipePlacedEvent event){
+			Logger.info(event.pipeType);
+		}
+
+		@SubscribeEvent
+		public void BuildcraftBlockPlaced(BlockPlacedDownEvent event){
+			Logger.info(event.block.toString());
+		}
 
 	}
 
