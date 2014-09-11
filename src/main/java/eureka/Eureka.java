@@ -89,6 +89,7 @@ public class Eureka {
             EurekaRegistry.register(new EurekaInfo("goldItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsgold")), "stoneItems"));
             EurekaRegistry.register(new EurekaInfo("ironItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsiron")), "stoneItems"));
             EurekaRegistry.register(new EurekaInfo("voidItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsvoid")), "stoneItems"));
+			EurekaRegistry.register(new EurekaInfo("structurePipe", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipestructurecobblestone")), "cobblestoneItems"));
             EurekaRegistry.register(new EurekaInfo("obsidianItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsobsidian")), "woodItems"));
             EurekaRegistry.register(new EurekaInfo("emeraldItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsemerald")), "woodItems"));
             EurekaRegistry.register(new EurekaInfo("diamondItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsdiamond")), "ironItems"));
@@ -111,9 +112,36 @@ public class Eureka {
             EurekaRegistry.register(new EurekaInfo("cobblestonePower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepowercobblestone")), "woodenPower", "cobblestoneItems"));
             EurekaRegistry.register(new EurekaInfo("stonePower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepowerstone")), "cobblestonePower", "stoneItems"));
             EurekaRegistry.register(new EurekaInfo("quartzPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepowerquartz")), "stonePower", "quartzItems"));
+            EurekaRegistry.register(new EurekaInfo("ironPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepoweriron")), "quartzPower", "ironItems"));
             EurekaRegistry.register(new EurekaInfo("goldPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepowergold")), "quartzPower", "goldItems"));
             EurekaRegistry.register(new EurekaInfo("diamondPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepowerdiamond")), "goldPower", "diamondItems"));
-        }
+
+
+			//Building
+			EurekaRegistry.registerCategory("Buildcraft|Building", new ItemStack(GameRegistry.findBlock("BuildCraft|Builders", "builderBlock")));
+			EurekaRegistry.register(new EurekaInfo("landmark", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Builders", "markerBlock"))));
+			EurekaRegistry.register(new EurekaInfo("pathmarker", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Builders", "pathMarkerBlock")), "landmark"));
+			EurekaRegistry.register(new EurekaInfo("template", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Builders", "templateItem"))));
+			EurekaRegistry.register(new EurekaInfo("blueprint", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Builders", "blueprintItem")), "template"));
+			EurekaRegistry.register(new EurekaInfo("blueprintLibrary", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Builders", "libraryBlock")), "blueprint", "landmark"));
+			EurekaRegistry.register(new EurekaInfo("filler", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Builders", "fillerBlock")), "landmark"));
+			EurekaRegistry.register(new EurekaInfo("architectTable", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Builders", "architectBlock")), "blueprint", "landmark"));
+			EurekaRegistry.register(new EurekaInfo("builder", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Builders", "builderBlock")), "architectTable", "pathmarker", "filler"));
+
+			//Silicon
+			EurekaRegistry.registerCategory("Buildcraft|Silicon", new ItemStack(GameRegistry.findBlock("BuildCraft|Silicon", "laserBlock")));
+			EurekaRegistry.register(new EurekaInfo("laser", "Buildcraft|Silicon", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Silicon", "laserBlock"))));
+			EurekaRegistry.register(new EurekaInfo("assemblyTable", "Buildcraft|Silicon", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Silicon", "null"), 1, 0), "laser"));
+			EurekaRegistry.register(new EurekaInfo("integrationTable", "Buildcraft|Silicon", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Silicon", "null"), 1, 1), "assemblyTable"));
+			EurekaRegistry.register(new EurekaInfo("advancedCraftingTable", "Buildcraft|Silicon", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Silicon", "null"), 1, 2), "laser", "autoWorkbench"));
+			EurekaRegistry.register(new EurekaInfo("pipePlug", "Buildcraft|Silicon", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "pipePlug"))));
+
+			//Engines
+			EurekaRegistry.registerCategory("Buildcraft|Engines", new ItemStack(GameRegistry.findBlock("BuildCraft|Energy", "engineBlock"), 1, 3));
+			EurekaRegistry.register(new EurekaInfo("redstoneEngine", "Buildcraft|Engines", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Energy", "engineBlock"), 1, 0)));
+			EurekaRegistry.register(new EurekaInfo("stilringEngine", "Buildcraft|Engines", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Energy", "engineBlock"), 1, 1), "redstoneEngine"));
+			EurekaRegistry.register(new EurekaInfo("combustionEngine", "Buildcraft|Engines", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Energy", "engineBlock"), 1, 2), "stirlingEngine"));
+	        }
 	}
 
 

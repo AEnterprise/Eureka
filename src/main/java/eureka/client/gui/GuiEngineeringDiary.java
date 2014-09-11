@@ -1,19 +1,22 @@
 package eureka.client.gui;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import eureka.api.EurekaKnowledge;
-import eureka.api.EurekaRegistry;
-import eureka.api.client.gui.EurekaChapter;
-import eureka.core.Utils;
+import java.util.ArrayList;
+
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import eureka.api.EurekaKnowledge;
+import eureka.api.EurekaRegistry;
+import eureka.api.client.gui.EurekaChapter;
+import eureka.core.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -235,8 +238,8 @@ public class GuiEngineeringDiary extends GuiContainer {
 			writeText(Utils.localize("engineeringDiary." + chapterName + ".title"), 0, 0xFFCC00);
 			if (page == 0){
 				writeText(Utils.localize("engineeringDiary.requiredResearch"), 5, 0xFF0000);
-				writeText(chaptersToDisplay.get(chapter).getRequiredResearch(), 6, 0x0000FF);
-				int line = writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player, chapterName) + " / " + EurekaRegistry.getMaxValue(chapterName), 8, 0xFFFF00);
+				int line = writeText(chaptersToDisplay.get(chapter).getRequiredResearch(), 6, 0x0000FF);
+				line = writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player, chapterName) + " / " + EurekaRegistry.getMaxValue(chapterName), line, 0xFFFF00);
 				if (!EurekaKnowledge.isFinished(player, chapterName)) {
 					line = writeText(chaptersToDisplay.get(chapter).howToMakeProgress(), line, 0xFF6600);
 				} else {

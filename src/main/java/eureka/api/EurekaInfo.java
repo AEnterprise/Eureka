@@ -1,10 +1,11 @@
 package eureka.api;
 
-import eureka.api.client.gui.EurekaChapter;
-import eureka.core.Utils;
+import java.util.ArrayList;
+
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
+import eureka.api.client.gui.EurekaChapter;
+import eureka.core.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -46,7 +47,7 @@ public class EurekaInfo extends EurekaInformation {
 					requiredResearch = Utils.localize("engineeringDiary." + research + ".title");
 					first = false;
 				} else {
-					requiredResearch.concat(", " + Utils.localize("engineeringDiary." + research + ".title"));
+					requiredResearch = requiredResearch + ", " + Utils.localize("engineeringDiary." + research + ".title");
 				}
 			}
 			gui = new BasicEurekaChapter(key, requiredResearch, false);

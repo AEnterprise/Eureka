@@ -16,6 +16,7 @@ public class BasicEurekaChapter extends EurekaChapter{
 
 	public BasicEurekaChapter(String key){
 		this.key = key;
+		requiredResearch = Utils.localize("engineeringDiary.noRequiredResearch");
 	}
 
 	public BasicEurekaChapter(String key, String requiredResearch, boolean isInfoPage){
