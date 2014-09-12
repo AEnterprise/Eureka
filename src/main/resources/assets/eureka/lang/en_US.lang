@@ -18,3 +18,84 @@ engineeringDiary.Eureka.page1=and you’ll need to make and use simple machines 
 engineeringDiary.requiredResearch=Required research:
 engineeringDiary.progress=Progress:
 engineeringDiary.unlocked=UNLOCKED
+engineeringDiary.noRequiredResearch=No Required Research
+
+engineeringDiary.Buildcraft|Automatization.title=Buildcraft Automatization
+engineeringDiary.Buildcraft|Automatization.page0=Automate all the things
+
+engineeringDiary.autoWorkbench.title=Auto Workbench
+engineeringDiary.autoWorkbench.howToMakeProgress=Craft items
+engineeringDiary.autoWorkbench.page0=Automated crafting
+engineeringDiary.autoWorkbench.page1=After your discovery on the upgradability of the Wooden Gear, you have a crazy thought: what if I can upgrade something with a Gear? You pick the first thing you have in hand (in this case a Crafting Table) and surround it with Wooden Gears.
+engineeringDiary.autoWorkbench.page2=The new block can actually hold the items on top of it, instead of just getting dropped on the ground. At first this makes you think the grid actually turned into an inventory, but the reality is so much better. When you try to extract some
+engineeringDiary.autoWorkbench.page2=planks out of the table using a Wooden Transport Pipe, they actually come out as a formed Chest! Obviously, you’ve crafted the world’s first Auto Workbench! After some experimentation you discover that recipes which involve non stackable
+engineeringDiary.autoWorkbench.page3=items cannot be automated, presumably due to the mechanical nature of Gears.
+
+engineeringDiary.tank.title=Tank
+engineeringDiary.tank.howToMakeProgress=Craft chests
+engineeringDiary.tank.page0=Liquid storage
+engineeringDiary.tank.page1=Storing and moving fluids was never an easy task, and working with many buckets can become annoying very fast. You decide its time to find a better solution. While messing around with materials in a Chest pattern, you discover that Glass
+engineeringDiary.tank.page2=has some interesting properties, starting with the fact that fluids inside it don’t leak or corrupt it. While other materials presented these two properties, the fact that stacking them vertically seems to make them share
+engineeringDiary.tank.page3=the fluids seamlessly is unique to them, and you decide that Sand is common enough that mass producing this block wouldn't be a pain, thus the Tank is born. Though they’re only able to store 16 Bucket’s worth of fluids, the fact that
+engineeringDiary.tank.page4=you don’t need to craft tons of buckets and that they’re stackable totally makes up for it. You wonder how you could automate this.
+
+engineeringDiary.miningWell.title=Mining Well
+engineeringDiary.miningWell.howToMakeProgress=Break blocks?
+engineeringDiary.miningWell.page0=First automated mining
+engineeringDiary.miningWell.page1=The Gear is an item with a ton of mechanical application, but today, for some reason, you notice that its spinning property might help you achieve the automation of a very important task: Mining. By crudely attaching
+engineeringDiary.miningWell.page2=a pickaxe to the end of a Gear, and then spinning said Gear, you realise it can break blocks. After giving it some thought, you flesh the mechanism into a full blown machine: the Mining Well. Using Redstone to conduct energy to the Gear,
+engineeringDiary.miningWell.page3=you can easilymake the pick break any sort of block, and from there you just encase everything with Iron Ingots. Items seem to pop out of the block, so attaching a chest or a pipe to it serves the system just fine.
+
+engineeringDiary.pump.title=Pump
+engineeringDiary.pump.howToMakeProgress=Fill buckets
+engineeringDiary.pump.page0=Automated liquid collection
+engineeringDiary.pump.page1=After the discovery of the Sealant, you’re one step closer to full automation of fluids, now needing only to automatically extract them from the world. And what better way to do that if not with the help of the Mining Well?
+engineeringDiary.pump.page1=By simply attaching a Tank to the top of the machine,  it trades its ability to mine through blocks for another: being able to suck fluids inside it and eject it into tanks or Fluid Pipes. You name it the Pump.
+
+engineeringDiary.floodgate.title=Floodgate
+engineeringDiary.floodgate.howToMakeProgress=Place liquids in the world
+engineeringDiary.floodgate.page0=Filling the pool.
+engineeringDiary.floodgate.page1=After hearing about a strange underwater structure in ruins, built long before your time, you decide you want to make an an underwater house. The problem is there’s no body of water nearby, the closest thing being a river that passes by your house.
+engineeringDiary.floodgate.page2=You then decide that its not a bad idea to build your own lake, and put a house on it. When the house is finished, you realise it’ll take weeks to completely flood the giant hole with water. Its time to create something new.
+engineeringDiary.floodgate.page3=You start experimenting with Tanks, and using the well known Iron Gear you find out that you can automate the output of fluid blocks with ease, but they fly everywhere. You decide to add some Iron Bars to the sides of the Tank, and then
+engineeringDiary.floodgate.page4=some Iron Ingots to reinforce the whole thing. You have successfully created the Flood Gate, which will flood all the area below it with any fluid you provide, stopping only when done, or after receiving a Redstone signal.
+
+engineeringDiary.quarry.title=Quarry
+engineeringDiary.quarry.howToMakeProgress=Break more blocks?
+engineeringDiary.quarry.page0=Fully automated mining
+engineeringDiary.quarry.page1=The Mining Well was certainly a handy tool for your mining operations, but its still very primitive. Finding yourself in need of a new challenge, you decide to put some Gears to use and you start putting things together.
+engineeringDiary.quarry.page2=Using some Redstone dust and this time a Diamond Pickaxe, you put together… Something @ You don’t really know what it is yet, but the machine looks promising, after all you had some high-tier Gears there.
+engineeringDiary.quarry.page3=Placing it down was strange.Even though there was no contact with Land Marks, the machine instantly determined an area to work with. After the initial surprise you powered it, only to discover it was setting up some sort of physical frame,
+engineeringDiary.quarry.page4=limiting even more its work area. Once the construction was complete you decided to break the block, just to see what happened, and as swiftly as they were placed down the frames started to disappear (truly a mystery).
+engineeringDiary.quarry.page5=You decide to actually set up an area with Land Marks this time, and the machine neatly places its frame again. This time you wait it out though, only to find yourself stunned by the orange and grey arm making its way through the dirt.
+engineeringDiary.quarry.page6=Realizing how it’ll destroy the land below it (just like a quarry, which is what you end up calling the machine), you place some chests down, and even manage a void pipe for Cobblestone and Dirt. More data is needed on the workings of this machine.
+
+engineeringDiary.refinery.title=Refinery
+engineeringDiary.refinery.howToMakeProgress=???
+engineeringDiary.refinery.page0=Redefining fuel
+engineeringDiary.refinery.page1=After having an accident with an Oil Spout and some lava, you decide that there must be a way to make this fluid less volatile, but you have no idea how. @  @ You’ve tried everything: Heating it on the Cauldron, mixing it with Water,
+engineeringDiary.refinery.page2=mixing it with lava, throwing Obsidian on it, even tried the Brewing Stand! But it comes to you by complete accident. @ @ You spilled some Oil on a Diamond Gear (which happened to be spinning on top of a Redstone Torch),
+engineeringDiary.refinery.page3=and the quick motion of the fluid on this pure material ends up turning it yellow! @  @ After repeating the process a few times, you end up with a bucket’s worth of it, and not only does it appear to not respond to fire, it also seems
+engineeringDiary.refinery.page4=to burn longer in the Combustion Engine and make it output more power! You decide to call the yellow fluid Fuel. @  @ You then quickly combine some Tanks, Redstone Torches and a Diamond Gear to make a machine which makes the
+engineeringDiary.refinery.page5=Oil stored in tanks move very fast inside them, thus turning into Fuel. You call this machine the Refinery.
+
+engineeringDiary.filteredBuffer.title=Filtered Buffer
+engineeringDiary.filteredBuffer.howToMakeProgress=???
+engineeringDiary.filteredBuffer.page0=Chose what you buffer?
+engineeringDiary.filteredBuffer.page1=While working on a new factory, you come across a complex problem that requires you to rethink your entire knowledge of Redstone. You need to somehow store a certain amount of items and hold them for a determined period of time until they
+engineeringDiary.filteredBuffer.page2=reach the required sum, but simply can’t work it in a compact manner. @ @ Even after trying some alternatives with Gates, you’re still not satisfied, so using the Diamond Transport Pipe’s filtering capabilities,
+engineeringDiary.filteredBuffer.page3=a buffer chest and a piston (sealed in some wood), you create the Filtered Buffer. @ @ The block can filter any item coming to it, and combined with Gates can allow to buffer large flow of items coming in and delay their arrival.
+engineeringDiary.filteredBuffer.page4=Surely it’ll come in handy on other builds.
+
+engineeringDiary.chute.title=Chute
+engineeringDiary.chute.howToMakeProgress=???
+engineeringDiary.chute.page0=Faster hopper
+engineeringDiary.chute.page1=The Hopper is a good way of moving items around, but it has its flaws. Specifically speaking, its too slow. @ @ You think about how you can upgrade its item moving speeds, and in the end you can only think of the Gear.
+engineeringDiary.chute.page2=Using a Wooden Gear simply doesn’t have any effect, and using an Iron one actually looks like it slows down the items. The Stone Gear has the perfect balance, where items falling into it give it just the right amount of speed.
+engineeringDiary.chute.page3=You decide to call it the Chute. Unfortunately the addition of this item seems to reduce the connection capabilities of the block, and now it can only connect vertically. It also appears to no longer
+engineeringDiary.chute.page3= be able to pull items from inventories.
+
+engineeringDiary.test.title=
+engineeringDiary.test.howToMakeProgress=
+engineeringDiary.test.page0=
+engineeringDiary.test.page1=

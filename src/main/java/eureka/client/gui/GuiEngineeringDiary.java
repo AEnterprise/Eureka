@@ -81,12 +81,12 @@ public class GuiEngineeringDiary extends GuiContainer {
 		lineLimit[10] = 22;
 		lineLimit[11] = 21;
 		lineLimit[12] = 19;
-		lineLimit[13] = 19;
-		lineLimit[14] = 18;
-		lineLimit[15] = 17;
+		lineLimit[13] = 18;
+		lineLimit[14] = 17;
+		lineLimit[15] = 16;
 		lineLimit[16] = 14;
-		lineLimit[17] = 14;
-		lineLimit[18] = 13;
+		lineLimit[17] = 13;
+		lineLimit[18] = 12;
 		lineLimit[19] = 12;
 	}
 
@@ -261,11 +261,12 @@ public class GuiEngineeringDiary extends GuiContainer {
 		for (String word: words){
 			if (line == 20)
 				return line;
-			if (output.length() + word.length() > lineLimit[line]){
+			if (output.length() + word.length() > lineLimit[line] || word.equals("@")){
 				drawTextAtLine(output, line, color);
 				output = "";
 				line++;
 			}
+			if (!(word.equals("@")))
 			output = output + word + " ";
 		}
 		drawTextAtLine(output, line, color);
@@ -274,6 +275,8 @@ public class GuiEngineeringDiary extends GuiContainer {
 	}
 
 	public void drawTextAtLine(String text, int line, int color){
+		if (text == null || text.equals("") || line == 20)
+			return;
 		fontRendererObj.drawString(text, startX[line], line*8 + 6, color);
 	}
 
