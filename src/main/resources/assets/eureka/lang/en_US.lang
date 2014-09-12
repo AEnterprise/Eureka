@@ -95,6 +95,91 @@ engineeringDiary.chute.page2=Using a Wooden Gear simply doesn’t have any effec
 engineeringDiary.chute.page3=You decide to call it the Chute. Unfortunately the addition of this item seems to reduce the connection capabilities of the block, and now it can only connect vertically. It also appears to no longer
 engineeringDiary.chute.page3= be able to pull items from inventories.
 
+engineeringDiary.Buildcraft|TransportPipes.title=Buildcraft Transport Pipes
+engineeringDiary.Buildcraft|TransportPipes.page0=ALL the transport pipes you will ever need
+
+engineeringDiary.woodItems.title=Wooden Transport Pipe
+engineeringDiary.woodItems.howToMakeProgress=???
+engineeringDiary.woodItems.page0=Auto-extracting of items
+engineeringDiary.woodItems.page1=NOT SURE ABOUT TEXT
+
+engineeringDiary.cobblestoneItems.title=Cobblestone Transport Pipe
+engineeringDiary.cobblestoneItems.howToMakeProgress=???
+engineeringDiary.cobblestoneItems.page0=Basic item transport
+engineeringDiary.cobblestoneItems.page1=You decide to try making new pipes, and what better starting material than Cobblestone? @ @ It turns out this pipe can actually connect to others of its kind, and with it you can dramatically increase the distance items can travel.
+engineeringDiary.cobblestoneItems.page2=However items that travel through it quickly lose speed. You decide to keep experimenting.
+
+engineeringDiary.stoneItems.title=Stone Transport Pipe
+engineeringDiary.stoneItems.howToMakeProgress=Place Cobblestone Transport Pipes
+engineeringDiary.stoneItems.page0=Smoother item transport
+engineeringDiary.stoneItems.page1=Following Cobblestone, the next step would obviously be Stone. The pipes made from this material don’t connect to Cobble pipes and also preserves the item movement speed a little better.
+
+engineeringDiary.quartzItems.title=Quartz Transport Pipe
+engineeringDiary.quartzItems.howToMakeProgress=Place Stone Transport Pipes
+engineeringDiary.quartzItems.page0=even Smoother item transport
+engineeringDiary.quartzItems.page1=Experimenting with new materials for pipes you land on Quartz, and you discover it has similar properties to Cobble and Stone pipes, meaning it doesn’t connect to either and slows items down at even slower paces.
+
+engineeringDiary.sandstoneItems.title=Sandstone Transport Pipe
+engineeringDiary.sandstoneItems.howToMakeProgress=Place cobblestone transport pipes
+engineeringDiary.sandstoneItems.page0=Connects only to other pipes
+engineeringDiary.sandstoneItems.page1=While still on the line of simple materials, Sandstone pipes appear to connect to any pipe, but not to blocks. Any type of Sandstone can be used to create this pipe.
+
+engineeringDiary.goldItems.title=Gold Transport Pipe
+engineeringDiary.goldItems.howToMakeProgress=Place Stone transport pipes
+engineeringDiary.goldItems.page0=High speed item transport
+engineeringDiary.goldItems.page1=While your previous discoveries have been great, the fact that items slow down so very quickly bothers you a lot. Thankfully, Gold provides the function you were hoping. @ @ Similarly to their work on Tools and Tracks,
+engineeringDiary.goldItems.page2=Gold Ingots on pipes make items traveling through them speed at incredible speeds. @ @ For some reason, a Redstone signal will deactivate this pipe’s function.
+
+engineeringDiary.ironItems.title=Iron Transport Pipe
+engineeringDiary.ironItems.howToMakeProgress=???
+engineeringDiary.ironItems.page0=That way stupid item!
+engineeringDiary.ironItems.page1=Even though pipes are very useful for performing simple tasks, any form of junction between three of them seems to make items travelling through go in random directions, and that’s just no good at all.
+engineeringDiary.ironItems.page2=Remembering the strong blocking properties of the Iron Door, it’s only logical that making a pipe out of them will give it those abilities. @ @ And it does. The pipe only has one end where items can pass through,
+engineeringDiary.ironItems.page3=and no matter what direction they come from, they always go there. Turns out you can also choose which end that is using a Wrench.
+
+engineeringDiary.voidItems.title=Void Transport Pipe
+engineeringDiary.voidItems.howToMakeProgress=???
+engineeringDiary.voidItems.page0=Bye bye junk!
+engineeringDiary.voidItems.page1=It was a chance discovery. Inventory full of items after a tired day of moving things to your new house, you accidentally swapped a piece of Stone for Redstone Dust when making Pipes. @ @ At the moment the Crafting Table only had some glass,
+engineeringDiary.voidItems.page2=and after a few attempts you discover that you can’t really make Redstone Pipes. Though the strangest thing happened when an Ink Sack made its way to the table, replacing a piece of Redstone Dust.
+engineeringDiary.voidItems.page3=The Pipe that came out had strange markings and any item that went into it didn’t come out. You weren’t sure how, but this would certainly have future applications.
+
+engineeringDiary.structurePipe.title=Cobblestone Structure Pipe
+engineeringDiary.structurePipe.howToMakeProgress=???
+engineeringDiary.structurePipe.page0=???
+engineeringDiary.structurePipe.page1=NO TEXT
+
+engineeringDiary.obsidianItems.title=Obsidian Transport Pipe
+engineeringDiary.obsidianItems.howToMakeProgress=Place Wooden Transport Pipes
+engineeringDiary.obsidianItems.page0=Item Collection
+engineeringDiary.obsidianItems.page1=As a block, Obsidian is a very hard material. As a pipe, it somehow increases the Glass’ absorbing ability swallows any items spit on it. @ @ Powering it with an Engine (something that only worked with the Wooden Pipe so far)
+engineeringDiary.obsidianItems.page2=seems to give it an area effect, making it suck up any nearby items.
+
+engineeringDiary.emeraldItems.title=Emerald Transport Pipe
+engineeringDiary.emeraldItems.howToMakeProgress=Place Wooden Transport Pipes
+engineeringDiary.emeraldItems.page0=Filtered item extraction
+engineeringDiary.emeraldItems.page1=After stumbling upon a Village and acquiring some Emeralds, you try to make a pipe out of its blocks. Failing that, its up to the emeralds themselves. @ @ It works and the pipe has properties similar to the Wooden ones, though the
+engineeringDiary.emeraldItems.page2=pure Gem turns out to have filtering properties, which allow you to indicate what order items will be pulled or maybe even which items aren’t to be extracted. @ @ Too bad it’s so expensive.
+
+engineeringDiary.diamondItems.title=Diamond Transport Pipe
+engineeringDiary.diamondItems.howToMakeProgress=???
+engineeringDiary.diamondItems.page0=Item Filtering
+engineeringDiary.diamondItems.page1=Even after the discovery of the Iron Pipe, you still don’t have enough control over item movement through pipes. This time, you’re being bothered by the fact that you’re yet to discover a way to make specific items go down specific paths.
+engineeringDiary.diamondItems.page2=So you continue experimenting with different materials for pipes, until you stumble upon some Diamonds. @ @ The pureness of the crystal turns out to be just what you wanted, and the pipes you make from it are perfect to be painted.
+engineeringDiary.diamondItems.page3=You can select which items go down which path, and when there’s an item selected to go down a path, the pipe doesn’t let any other items make it down that way. Perfect.
+
+engineeringDiary.lazuliItems.title=Lazuli Transport Pipe
+engineeringDiary.lazuliItems.howToMakeProgress=???
+engineeringDiary.lazuliItems.page0=Item painting
+engineeringDiary.lazuliItems.page1=Continuing your quest for all the possible pipes, you land on Lapis Lazuli. While the gem doesn’t seem to be able to make a pipe, its block surely does. @ @ This strange pipe seems to paint all traversing items blue,
+engineeringDiary.lazuliItems.page2=and after hitting it with a Wrench it looks like it can actually paint them all 16 Dye colors. @ @ So far painting doesn’t seem to affect routing in any way, but does ring you a bell about the Diamond Pipe’s colors…
+
+engineeringDiary.diazuliItems.title=Diazuli Transport Pipe
+engineeringDiary.diazuliItems.howToMakeProgress=Place Lazuli Transport Pipe
+engineeringDiary.diazuliItems.page0=Colour sorting
+engineeringDiary.diazuliItems.page1=You hadn’t actually considered the possibility that pipes could be crafted from two different materials until you saw the way the Lazuli Pipe’s colors matches the Diamond Pipe’s ones.
+engineeringDiary.diazuliItems.page2=This strange pipe is a combination of the Diamond pipe and the Iron pipe. Its clear side only allows items painted the same color as the pipe to pass through.
+
 engineeringDiary.test.title=
 engineeringDiary.test.howToMakeProgress=
 engineeringDiary.test.page0=
