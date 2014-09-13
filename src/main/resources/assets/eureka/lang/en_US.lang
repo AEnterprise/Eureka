@@ -101,7 +101,10 @@ engineeringDiary.Buildcraft|TransportPipes.page0=ALL the transport pipes you wil
 engineeringDiary.woodItems.title=Wooden Transport Pipe
 engineeringDiary.woodItems.howToMakeProgress=???
 engineeringDiary.woodItems.page0=Auto-extracting of items
-engineeringDiary.woodItems.page1=NOT SURE ABOUT TEXT
+engineeringDiary.woodItems.page1=It just comes to you one day. While sorting through a mining trip’s worth of ores, you realise what you can do with that Redstone Engine you made a while back. @ @ Remembering how the Glass worked around the Piston’s arm, and its
+engineeringDiary.woodItems.page2=light-allowing properties, you place some Wood besides a piece of Glass, and somehow acquire 8… Items? @ @ They’re smaller than blocks that’s for sure. But they can still be placed down (albeit not side by side)...
+engineeringDiary.woodItems.page3=You just call them Pipes and move on. @ @ Placing said Pipe next to an inventory (be it chest, furnace or other) seems to make it somehow connect to said block, and when the Redstone Engine hits the Pipe, an item pops out of it!
+engineeringDiary.woodItems.page4=If you place another inventory on the opposite side, you can transfer items in between them! @ @ You wonder if you can make ‘Pipes’ out of other materials.
 
 engineeringDiary.cobblestoneItems.title=Cobblestone Transport Pipe
 engineeringDiary.cobblestoneItems.howToMakeProgress=???
@@ -179,6 +182,49 @@ engineeringDiary.diazuliItems.howToMakeProgress=Place Lazuli Transport Pipe
 engineeringDiary.diazuliItems.page0=Colour sorting
 engineeringDiary.diazuliItems.page1=You hadn’t actually considered the possibility that pipes could be crafted from two different materials until you saw the way the Lazuli Pipe’s colors matches the Diamond Pipe’s ones.
 engineeringDiary.diazuliItems.page2=This strange pipe is a combination of the Diamond pipe and the Iron pipe. Its clear side only allows items painted the same color as the pipe to pass through.
+
+engineeringDiary.Buildcraft|PowerPipes.title=Kinesis Transport Pipes
+engineeringDiary.Buildcraft|PowerPipes.page0=Getting power from engine A to machine B
+
+engineeringDiary.woodenPower.title=Wooden Kinesis Pipe
+engineeringDiary.woodenPower.howToMakeProgress=Place Stirking engine
+engineeringDiary.woodenPower.page0=Power extraction
+engineeringDiary.woodenPower.page1=The Engine certainly makes you think about different types of energy, and you conclude that Redstone is definitely a powerful catalyst when it comes to creating artificial energy.
+engineeringDiary.woodenPower.page2=It is with this in mind that you decide to coat a Wooden Transport Pipe with it. @ @ It makes the Pipe lose its capability of pulling out from inventories, and it looks like the Pipe now actually connects to the Engine.
+engineeringDiary.woodenPower.page3=After connecting a few more engines to the Pipe you start to see a strange cyan light forming inside the Pipe, only to disappear when you turn the Engines off.
+
+engineeringDiary.cobblestonePower.title=Cobblestone Kinesis Pipe
+engineeringDiary.cobblestonePower.howToMakeProgress=Wooden Kinesis Pipe
+engineeringDiary.cobblestonePower.page0=First power transport
+engineeringDiary.cobblestonePower.page1=Since Wooden was out of the way, the next logical step was to make a Cobble Pipe. It works similarly to before, with the energy passing through it just fine. @ @ However this time your limiter is another:
+engineeringDiary.cobblestonePower.page2=There’s only so much energy this simple Cobble Pipe can transfer, and after so many Engines the cyan beam turns red, indicating a limiter. You’re going to keep trying for new materials.
+
+engineeringDiary.stonePower.title=Stone Kinesis Pipe
+engineeringDiary.stonePower.howToMakeProgress=Place Cobblestone Kinesis Pipe
+engineeringDiary.stonePower.page0=Slightly improved power transport
+engineeringDiary.stonePower.page1=After Cobble, you can only think of Stone. The finer-tuned material responds better than Cobble to the energy, apparently holding double the amount of power.
+
+engineeringDiary.quartzPower.title=Quartz Kinesis Pipe
+engineeringDiary.quartzPower.howToMakeProgress=Place Stone Kinesis Pipe
+engineeringDiary.quartzPower.page0=More capacity
+engineeringDiary.quartzPower.page1=Following your last steps, you make a Quartz Kinesis Pipe. The energy capacity increases even higher than before, this time quadrupling it.
+
+engineeringDiary.ironPower.title=Iron Kinesis Pipe
+engineeringDiary.ironPower.howToMakeProgress=???
+engineeringDiary.ironPower.page0=Limiting the power flow
+engineeringDiary.ironPower.page1=The Iron Transport Pipe holds a crucial place among the Transport Pipes, and its no surprise that its the same this time around. @ @ Holding double the energy of a Quartz Kinesis Pipe, this Pipe can also be adjusted
+engineeringDiary.ironPower.page2=by the Wrench, this time limiting the amount of energy that’s allowed through it (in the least, it’s four times less than the Cobble Pipe’s most).
+
+engineeringDiary.goldPower.title=Gold Kinesis Pipe
+engineeringDiary.goldPower.howToMakeProgress=Place Quartz Kinesis Pipe
+engineeringDiary.goldPower.page0=Even more power transport
+engineeringDiary.goldPower.page1=Gold is a very important material, so you’re reluctant to make it into this type of pipe, seeing as the last one was already holding such a considerable amount of power.
+engineeringDiary.goldPower.page2=You do it anyways, and yet again find out this pipe can hold four times the amount of the previous one.
+
+engineeringDiary.diamondPower.title=Diamond Kinesis Pipe
+engineeringDiary.diamondPower.howToMakeProgress=Place Gold Kinesis Pipe
+engineeringDiary.diamondPower.page0=All the power tranfer you should ever need
+engineeringDiary.diamondPower.page1=At this point you’re only doing it for the sake of it, just to see what’s gonna happen. You’re not surprised to discover that Diamond has the highest capacity of all pipes, once more quadruple the amount of your last pipe.
 
 engineeringDiary.test.title=
 engineeringDiary.test.howToMakeProgress=
