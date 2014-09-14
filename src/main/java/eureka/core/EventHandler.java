@@ -50,18 +50,17 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void BuildcraftBlockInteraction(BlockInteractionEvent event){
-			Logger.info(event.block.toString());
-			event.setCanceled(true);
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + event.block.getUnlocalizedName()));
 		}
 
 		@SubscribeEvent
 		public void BuildcraftPipePlaced(PipePlacedEvent event){
-			Logger.info(event.pipeType);
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft pipe placed: " + event.pipeType));
 		}
 
 		@SubscribeEvent
 		public void BuildcraftBlockPlaced(BlockPlacedDownEvent event){
-			Logger.info(event.block.toString());
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " + event.block.getUnlocalizedName()));
 		}
 
 	}
