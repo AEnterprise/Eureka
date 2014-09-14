@@ -284,12 +284,14 @@ engineeringDiary.pathmarker.page2=Unlike its Lapiz counterparts, this torch does
 engineeringDiary.template.title=Template
 engineeringDiary.template.howToMakeProgress=Craft paper
 engineeringDiary.template.page0=Basic drawings
-engineeringDiary.template.page1=...
+engineeringDiary.template.page1=After your initial Dye discoveries, you’re trying to mix them with everything. And everything includes Paper. After surrounding some Ink Sacks with Paper (usually its the other way around, but hey, you’re experimenting here), it appears to gain some interesting properties
+engineeringDiary.template.page2=The item seems to have good durability (certainly stronger than regular paper), and you can somehow draw very straight lines into it, though not much detail is possible. What kind of uses could this have?
 
 engineeringDiary.blueprint.title=Blueprint
 engineeringDiary.blueprint.howToMakeProgress=Craft templates
 engineeringDiary.blueprint.page0=More detailed drawings
-engineeringDiary.blueprint.page1=...
+engineeringDiary.blueprint.page1=After discovering the Template, you decide to surround more Dyes with Paper, and combining it with Lapiz Lazuli gives it properties similar to the Template. @ @ It also appears to be more resilient
+engineeringDiary.blueprint.page2=than the template and your drawings are also very well defined on it, you’re even able to draw each block individually, with detail so great you can tell which is which. This is starting to give you some ideas.
 
 engineeringDiary.blueprintLibrary.title=Blueprint Library
 engineeringDiary.blueprintLibrary.howToMakeProgress=Write blueprints/templates

@@ -50,6 +50,8 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void BuildcraftBlockInteraction(BlockInteractionEvent event){
+			if (event.player.getEntityWorld().isRemote)
+				return;
 			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + event.block.getUnlocalizedName()));
 		}
 
@@ -60,6 +62,8 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void BuildcraftBlockPlaced(BlockPlacedDownEvent event){
+			if (event.player.getEntityWorld().isRemote)
+				return;
 			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " + event.block.getUnlocalizedName()));
 		}
 
