@@ -183,6 +183,45 @@ engineeringDiary.diazuliItems.page0=Colour sorting
 engineeringDiary.diazuliItems.page1=You hadn’t actually considered the possibility that pipes could be crafted from two different materials until you saw the way the Lazuli Pipe’s colors matches the Diamond Pipe’s ones.
 engineeringDiary.diazuliItems.page2=This strange pipe is a combination of the Diamond pipe and the Iron pipe. Its clear side only allows items painted the same color as the pipe to pass through.
 
+engineeringDiary.Buildcraft|FluidPipes.title=Buildcraft Fluid Pipes
+engineeringDiary.Buildcraft|FluidPipes.page0=Getting fluids from pump A to tank B
+
+engineeringDiary.woodenFluid.title=Wooden Fluid Pipe
+engineeringDiary.woodenFluid.howToMakeProgress=???
+engineeringDiary.woodenFluid.page0=Fluid extraction
+engineeringDiary.woodenFluid.page1= At first, you were unsure of what to do with the Sealant, and only a few hours after the discovery you just put it away and forgot about it. Well, you almost did. @ @ After the creation of the Pipe, you decide to start experimenting with it again,
+engineeringDiary.woodenFluid.page2=and discover that its fluid sealing abilities work a great deal with them. @ @ Similar to item behaviour, fluids can be moved around from Tank to Tank. @ @ Strange how these Wooden Pipes also don’t connect to each other…
+
+engineeringDiary.cobblestoneFluid.title=Cobblestone Fluid Pipe
+engineeringDiary.cobblestoneFluid.howToMakeProgress=???
+engineeringDiary.cobblestoneFluid.page0=Fist fluid transport
+engineeringDiary.cobblestoneFluid.page1=It was only logical to make Cobble pipes next. Following the basic progression leaves you with the same results as last time: an extended capacity of transport.
+
+engineeringDiary.stoneFluid.title=Stone Fluid Pipe
+engineeringDiary.stoneFluid.howToMakeProgress=Place Cobblestone Fluid Pipes
+engineeringDiary.stoneFluid.page0=More fluid transport
+engineeringDiary.stoneFluid.page1=At this point you’re just backtracking. The Stone Fluid Pipe can carry more liquids than its cobble counterpart, and doesn’t connect to it.
+
+engineeringDiary.goldFluid.title=Golden Fluid Pipe
+engineeringDiary.goldFluid.howToMakeProgress=Place Stone Fluid Pipe
+engineeringDiary.goldFluid.page0=Faster fluid transport
+engineeringDiary.goldFluid.page1=It’s strange how this pipe doesn’t dramatically increase the speed of fluids traveling through it. They go by faster, sure, but its nothing like the Transport variety.
+
+engineeringDiary.ironFluid.title=Iron Fluid Pipe
+engineeringDiary.ironFluid.howToMakeProgress=Place stone Fluid pipes
+engineeringDiary.ironFluid.page0=Controlling the flow
+engineeringDiary.ironFluid.page1=This one works exactly like its other version, being able to direct the flow of fluids through it and all.
+
+engineeringDiary.emeraldFluid.title=Emerald Fluid Pipe
+engineeringDiary.emeraldFluid.howToMakeProgress=Place wooden fluid pipes
+engineeringDiary.emeraldFluid.page0=More fluid extraction
+engineeringDiary.emeraldFluid.page1=While you’re not able to filter extraction by fluids, this pipe does seem to extract more fluids than the Wooden one.
+
+engineeringDiary.voidFluid.title=Void Fluid Pipe
+engineeringDiary.voidFluid.howToMakeProgress=???
+engineeringDiary.voidFluid.page0=No more overflow of liquids
+engineeringDiary.voidFluid.page1=Just as mysterious as the Transport kind. This Pipe completely destroys all fluids that enter it.
+
 engineeringDiary.Buildcraft|PowerPipes.title=Kinesis Transport Pipes
 engineeringDiary.Buildcraft|PowerPipes.page0=Getting power from engine A to machine B
 
@@ -226,7 +265,126 @@ engineeringDiary.diamondPower.howToMakeProgress=Place Gold Kinesis Pipe
 engineeringDiary.diamondPower.page0=All the power tranfer you should ever need
 engineeringDiary.diamondPower.page1=At this point you’re only doing it for the sake of it, just to see what’s gonna happen. You’re not surprised to discover that Diamond has the highest capacity of all pipes, once more quadruple the amount of your last pipe.
 
-engineeringDiary.test.title=
-engineeringDiary.test.howToMakeProgress=
-engineeringDiary.test.page0=
-engineeringDiary.test.page1=
+engineeringDiary.Buildcraft|Building.title=Buildcraft Building
+engineeringDiary.Buildcraft|Building.page0=Automatic clearing, filling and building
+
+engineeringDiary.landmark.title=Landmark
+engineeringDiary.landmark.howToMakeProgress=???
+engineeringDiary.landmark.page0=Marking an area
+engineeringDiary.landmark.page1=When coming home from a successful mining trip, you accidentally drop some Lapiz Lazuli on top of a Redstone Torch, and is surprised by the flash it produces. Foreseeing future applications, you try replicating the results on a Crafting Table,
+engineeringDiary.landmark.page2=and successfully creates the Land Mark. @ @ On its own the item doesn’t appear to emit any light, however as soon as its powered by Redstone, beams of light flow in every direction. It appears to stick to any surface
+engineeringDiary.landmark.page3=(even to the ceiling!), and it somehow also interacts with other Land Marks in sight.
+
+engineeringDiary.pathmarker.title=Path marker
+engineeringDiary.pathmarker.howToMakeProgress=Place Landparks
+engineeringDiary.pathmarker.page0=Marking the path
+engineeringDiary.pathmarker.page1=After your experiment with the Land Mark, you decide to experiment with other Dyes in Redstone Torches, and you’re not surprised to see that Cactus Green has a particular effect on them.
+engineeringDiary.pathmarker.page2=Unlike its Lapiz counterparts, this torch does not react to Redstone, but it does appear to connect to the nearest one. After placing some around your sidewalk, you decide to call them Path Markers.
+
+engineeringDiary.template.title=Template
+engineeringDiary.template.howToMakeProgress=Craft paper
+engineeringDiary.template.page0=Basic drawings
+engineeringDiary.template.page1=...
+
+engineeringDiary.blueprint.title=Blueprint
+engineeringDiary.blueprint.howToMakeProgress=Craft templates
+engineeringDiary.blueprint.page0=More detailed drawings
+engineeringDiary.blueprint.page1=...
+
+engineeringDiary.blueprintLibrary.title=Blueprint Library
+engineeringDiary.blueprintLibrary.howToMakeProgress=Write blueprints/templates
+engineeringDiary.blueprintLibrary.page0=Easy blueprint storage
+engineeringDiary.blueprintLibrary.page1=Bookshelves are a great way to store books, but you now find yourself in need of storage for Blueprints and Templates. Simply surrounding a Bookshelf with Blueprints adds an interesting effect to it: it can not only store,
+engineeringDiary.blueprintLibrary.page2=but also be used to quickly make copies of Blueprints and Templates.
+
+engineeringDiary.filler.title=Filler
+engineeringDiary.filler.howToMakeProgress=???
+engineeringDiary.filler.page0=Terraforming the area
+engineeringDiary.filler.page1=Land Marks were always handy when it came to measuring and separating an area, but you always knew someday you’d find a better use for them. The day has finally come and when you’re requested to completely fill an old excavation site
+engineeringDiary.filler.page2=(the hole is huge in area, going all the way down to bedrock), you know its time to work something out. @ @ Using a Crafting Table as base for inscribing some  patterns onto the machine, you combine a Chest, a Land Mark and
+engineeringDiary.filler.page3=some Gold Gears for extra destructive (or constructive) power. After putting some Dyes to color the machine Yellow and Black (standart building colors), you decide to call it a day. Its only natural to name it the Filler,
+engineeringDiary.filler.page4=since that’ll be its primary task. @ @ It works like a charm. The build-in compatibility with Land Marks allows for it to work in any 2 or 3 dimensional space, and the 7 set patterns are very useful for building basic structures.
+
+engineeringDiary.architectTable.title=Architect table
+engineeringDiary.architectTable.howToMakeProgress=???
+engineeringDiary.architectTable.page0=Drawing the area
+engineeringDiary.architectTable.page1=Seeing how well the Filler experiment went, you decide to investigate further applications of the Land Mark and Crafting Table combination. The wind is strong, and by chance one of your Blueprints actually flies above a lit Land Mark,
+engineeringDiary.architectTable.page2=causing an an area similar to the size of the drawings you made earlier to project into the air. Curious, you realize the same happens with your Template. Considering the surprising precision drawings on them seem to have, you assume
+engineeringDiary.architectTable.page3=that with Gears and some manual assistance this could be used to increase your drawing speed. You quickly set up a machine with Yellow and Black Dye, as well as Diamond Gears (for maximum precision). The block seems to react to Land Marks
+engineeringDiary.architectTable.page4=just as well as the Filler, and placing a Blueprint or Template on it makes your work of hours into a few seconds. Its time to work on some practical applications.
+
+engineeringDiary.builder.title=Builder
+engineeringDiary.builder.howToMakeProgress=???
+engineeringDiary.builder.page0=Automated building
+engineeringDiary.builder.page1=The Architect Table was a great leap on your drawing hobby, but it opens up to a much more exciting possibility: the automation of building. Setting up a machine that combines the Filler and Architect table recipes,
+engineeringDiary.builder.page2=you get with the Builder. After placing a Blueprint on it, you can actually see what blocks were drawn into it, and supplying the machine with both items and power, it seems to place them in the exact order they existed
+engineeringDiary.builder.page3=in your drawings. Since the Template doesn’t have as much detail as the Blueprint, it can only store where the items were placed, but not their type.
+
+engineeringDiary.Buildcraft|Silicon.title=Buildcraft silicon
+engineeringDiary.Buildcraft|Silicon.page0=Advanced control over your machines
+
+engineeringDiary.laser.title=Laser
+engineeringDiary.laser.howToMakeProgress=???
+engineeringDiary.laser.page0=Who doesn't like lasers?
+engineeringDiary.laser.page1=Its never been a secret to anyone that the Diamond is the purest of Gems. It was you however that discovered its far more important energy directional capabilities. @ @ Originally, it was an attempt to achieve
+engineeringDiary.laser.page2=long distance power transmission. Directing energy beams through Diamonds and Redstone so they could propel it through air instead of passing through Pipes. It was hard work until you figured out the only thing it
+engineeringDiary.laser.page3=wouldn’t burn through was Obsidian, and then even longer to realise you were just not capable of converting the new light into the old one. Still this process of
+engineeringDiary.laser.page4=Light Amplification by Stimulated Emission of Redstone (LASER for short) holds some interesting properties, and you wonder what the future holds for it.
+
+engineeringDiary.assemblyTable.title=Assembly Table
+engineeringDiary.assemblyTable.howToMakeProgress=???
+engineeringDiary.assemblyTable.page0=Precision crafting
+engineeringDiary.assemblyTable.page1=It started with your attempt of long range energy transmission. Your plan was to pass the laser through the Redstone coated Diamond (which was placed on an Obsidian Tablet) and then place it on a Kinesis Pipe. That just didn’t work.
+engineeringDiary.assemblyTable.page2=It wasn’t until later that you realised a Gear could perfectly fit on the Pipe hole. Any Gear other than the Diamond one would break from the raw power that’s sent by the laser, so that’s the one you put there.
+engineeringDiary.assemblyTable.page3=The lasers cut it in seemingly random order, but after watching it for a while you start to notice some patterns. This table clearly holds potential for assembling objects in specific ways. You wonder how it would react
+engineeringDiary.assemblyTable.page4=to the placement of different objects on it.
+
+engineeringDiary.integrationTable.title=Integration Table
+engineeringDiary.integrationTable.howToMakeProgress=???
+engineeringDiary.integrationTable.page0=Installing upgrades
+engineeringDiary.integrationTable.page1=Right after discovering that Gates can’t be made from some Chipsets, you just wonder exactly what can be done with them. After a while you decide to stop thinking about it and switch to actually doing something about it. At first you
+engineeringDiary.integrationTable.page2=try to combine the Chipsets with the Gates themselves, failing. The Assembly Table simply isn’t made for that. So you decide to make a Table that is made for that. @ @ With a simple change (a Diamond to a Redstone Chipset,
+engineeringDiary.integrationTable.page3=you make a new table, and it is so much different. This new Table was made for integrating things, and that’s what you do. Each Chipset adds something to the Gates, in the form of triggers and actions.
+engineeringDiary.integrationTable.page4=But that’s not all this Table has to offer. You can actually combine two facades, and its possible to use a Redstone Chipset to tune them with a Pipe Wire of choice, effectively making you able to control which facade is shown
+engineeringDiary.integrationTable.page5=by activating or deactivating the Pipe Wire.
+
+engineeringDiary.advancedCraftingTable.title=Advanced Crafting Table
+engineeringDiary.advancedCraftingTable.howToMakeProgress=Make items
+engineeringDiary.advancedCraftingTable.page0=Better automated crafting
+engineeringDiary.advancedCraftingTable.page1=The old Auto Workbench had its uses, but the fact that it can’t handle unstackable items is really starting to annoy you. You decide to do what you do these days, and make a Laser-compatible machine.
+engineeringDiary.advancedCraftingTable.page2=By combining a Crafting Table and Chest with a Redstone Chipset (all encased within Obsidian), you make the Advanced Crafting Table. @ @ It uses Lasers to craft whatever you tell it to craft, and the best of all
+engineeringDiary.advancedCraftingTable.page3=is that they not only have internal inventories, but they can also access the inventories of connected Advanced Crafting Tables, allowing for compact crafting chains.
+
+engineeringDiary.pipePlug.title=Pipe Plug
+engineeringDiary.pipePlug.howToMakeProgress=???
+engineeringDiary.pipePlug.page0=Compacter builds
+engineeringDiary.pipePlug.page1=You said there’d be other uses… Here they are. Putting the Support Pipe in the Assembly Table caused them to be sliced into little pieces. Little pieces that perfectly fit pipes and blocks them from connecting
+engineeringDiary.pipePlug.page2=to one another (one can say they perfectly ‘plug’ into pipes). @ @ A great way to make more compact systems.
+
+engineeringDiary.Buildcraft|Engines.title=Buildcraft Engines
+engineeringDiary.Buildcraft|Engines.page0=Creating power to do stuff
+
+engineeringDiary.redstoneEngine.title=Redstone Engine
+engineeringDiary.redstoneEngine.howToMakeProgress=Craft pistons
+engineeringDiary.redstoneEngine.page0=A small bit of power
+engineeringDiary.redstoneEngine.page1=While working with Pistons on a Redstone contraption, it comes to you that they’re pretty interesting blocks, being capable of such important feats only by receiving a Redstone Signal. @ @ After you finish your project,
+engineeringDiary.redstoneEngine.page2=you try to somehow improve them through Gears, without much success. It takes you sometime to realise that you also need to reinforce the piston head, and so when you finally come up with something that works, it is totally different
+engineeringDiary.redstoneEngine.page3=from what you expected. @ @ This new block doesn’t seem to actually be able to move blocks, but the constant movement of the new head looks like it’ll have some applications in the future. Based on its power source,
+engineeringDiary.redstoneEngine.page4=you name it the Redstone Engine and move on.
+
+engineeringDiary.stilringEngine.title=Stirling Engine
+engineeringDiary.stilringEngine.howToMakeProgress=Make Redstone Engines
+engineeringDiary.stilringEngine.page0=First machine power
+engineeringDiary.stilringEngine.page1=If Gears can be upgraded, why couldn’t Engines? That’s what you thought when you tried to make a Stone Engine, but apparently you failed. The Engine just didn’t start when you powered it with a Lever, but you keep trying, thinking it might be
+engineeringDiary.stilringEngine.page2=because of the weak Redstone signal and instead you make some more levers. @ @ By chance, a stick falls into the Engine and it suddenly starts, its power much stronger than the Redstone Engine. Just as quickly
+engineeringDiary.stilringEngine.page3=as it started, it ends, and you throw more Wood in it. Blocks, this time. @ @ After some experimentation you realise it lasts the same time on the engine as it would on a furnace, and sure enough a piece of Coal also works on the machine.
+engineeringDiary.stilringEngine.page4=Too bad it seems to overheat after some time, requiring a long cooldown period. @ @ By the quick movement of the Engine head, you decide to call it the Stirling Engine.
+
+engineeringDiary.combustionEngine.title=Combustion Engine
+engineeringDiary.combustionEngine.howToMakeProgress=Make Stirling Engines
+engineeringDiary.combustionEngine.page0=More powergen
+engineeringDiary.combustionEngine.page1=After the discovery of the Stirling Engine, you’re sure new Engines can be created from different Gears. What you’re not sure of is what kind of requirements these Engines have to activate. @ @ It turns out this one has a taste for Fluids.
+engineeringDiary.combustionEngine.page2=Specifically, that weird black Oil you found a while back. At first it makes some very loud sounds, and if the burning smell is to go by things aren’t going well… @ @ But sure enough the Engine stabilizes and produces way more energy
+engineeringDiary.combustionEngine.page3=than before, this time its cooldown period even longer. @ @ Curious about its liquid properties, you throw in some water, without realising the Engine still had some Oil inside, you start it up and immediately
+engineeringDiary.combustionEngine.page4=see your error. Though perhaps it wasn’t an error, considering the Engine works just like it had before. You decide to put more Oil and Water in it, and not only do they not mix, the cool water completely denies the
+engineeringDiary.combustionEngine.page5=heating of the Engine, theoretically letting it run forever.
