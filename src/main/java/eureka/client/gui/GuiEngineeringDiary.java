@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import eureka.api.EurekaKnowledge;
 import eureka.api.EurekaRegistry;
 import eureka.api.client.gui.EurekaChapter;
-import eureka.core.Utils;
+import eureka.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise

@@ -18,6 +18,8 @@ import eureka.Eureka;
 import eureka.api.EurekaKnowledge;
 import eureka.api.interfaces.IEurekaBlock;
 import eureka.api.interfaces.IEurekaItem;
+import eureka.utils.BCUtils;
+import eureka.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -52,25 +54,31 @@ public class EventHandler {
 		public void BuildcraftBlockInteraction(BlockInteractionEvent event){
 			if (event.player.getEntityWorld().isRemote)
 				return;
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + event.block.getUnlocalizedName()));
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + BCUtils.getBCKey(event.block.getUnlocalizedName())));
 		}
 
 		@SubscribeEvent
 		public void BuildcraftPipePlaced(PipePlacedEvent event){
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft pipe placed: " + event.pipeType));
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft pipe placed: " +BCUtils.getBCKey(event.pipeType)));
 		}
 
 		@SubscribeEvent
 		public void BuildcraftBlockPlaced(BlockPlacedDownEvent event){
 			if (event.player.getEntityWorld().isRemote)
 				return;
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " + event.block.getUnlocalizedName()));
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " + BCUtils.getBCKey(event.block.getUnlocalizedName())));
 		}
 
 	}
 
 
 	public static class Forge {
+
+		@SubscribeEvent
+		public void onCrafted(PlayerEvent.ItemCraftedEvent event){
+			EurekaKnowledge.makeProgress(event.player, "autoWorkbench");
+		}
+
 		@SubscribeEvent
 		public void onPlayerUsesBlock(PlayerInteractEvent event) {
 			if (event != null) {

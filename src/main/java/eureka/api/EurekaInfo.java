@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 
 import eureka.api.client.gui.EurekaChapter;
-import eureka.core.Utils;
+import eureka.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise

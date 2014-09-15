@@ -1,4 +1,4 @@
-package eureka.core;
+package eureka.utils;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -28,4 +28,6 @@ public class Utils {
 		if (!world.isRemote)
 			world.spawnEntityInWorld(itemToDrop);
 	}
+
+
 }

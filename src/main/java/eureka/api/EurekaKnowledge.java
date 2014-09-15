@@ -1,7 +1,7 @@
 package eureka.api;
 
 import eureka.api.interfaces.IEurekaBlock;
-import eureka.core.Utils;
+import eureka.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
