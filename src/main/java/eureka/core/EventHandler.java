@@ -13,6 +13,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import buildcraft.api.events.BlockInteractionEvent;
 import buildcraft.api.events.BlockPlacedDownEvent;
 import buildcraft.api.events.PipePlacedEvent;
+import buildcraft.api.events.RobotPlacementEvent;
+
 
 import eureka.Eureka;
 import eureka.api.EurekaKnowledge;
@@ -67,6 +69,13 @@ public class EventHandler {
 			if (event.player.getEntityWorld().isRemote)
 				return;
 			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " + BCUtils.getBCKey(event.block.getUnlocalizedName())));
+		}
+
+		@SubscribeEvent
+		public void BuildcraftRobotPlaced(RobotPlacementEvent event){
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft robot placed: " + BCUtils.getBCKey(event.robotProgram)));
+			event.setCanceled(true);
+
 		}
 
 	}
