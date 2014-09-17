@@ -10,7 +10,7 @@ import java.util.HashMap;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BCUtils {
-	private static HashMap<String, String> BCKeys = new HashMap(50);
+	private static HashMap<String, String> BCKeys = new HashMap(100);
 
 	public static void addBCKey(String unlocalizedname, String key){
 		BCKeys.put(unlocalizedname, key);

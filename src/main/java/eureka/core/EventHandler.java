@@ -56,7 +56,7 @@ public class EventHandler {
 		public void BuildcraftBlockInteraction(BlockInteractionEvent event){
 			if (event.player.getEntityWorld().isRemote)
 				return;
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + BCUtils.getBCKey(event.block.getUnlocalizedName())));
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + BCUtils.getBCKey(event.block.getUnlocalizedName() + event.meta)));
 		}
 
 		@SubscribeEvent
@@ -66,15 +66,14 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void BuildcraftBlockPlaced(BlockPlacedDownEvent event){
-			if (event.player.getEntityWorld().isRemote)
+			if (event.player.getEntityWorld().isRemote || event.block.getUnlocalizedName().equals("tile.pipeBlock"))
 				return;
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " + BCUtils.getBCKey(event.block.getUnlocalizedName())));
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " + BCUtils.getBCKey(event.block.getUnlocalizedName() + event.meta)));
 		}
 
 		@SubscribeEvent
 		public void BuildcraftRobotPlaced(RobotPlacementEvent event){
 			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft robot placed: " + BCUtils.getBCKey(event.robotProgram)));
-			event.setCanceled(true);
 
 		}
 

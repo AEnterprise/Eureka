@@ -16,6 +16,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
 
+
 import eureka.api.EurekaInfo;
 import eureka.api.EurekaRegistry;
 import eureka.client.gui.GuiHandler;
@@ -69,6 +70,7 @@ public class Eureka {
 		PacketHandler.init();
 		EurekaRegistry.registerCategory("Eureka", new ItemStack(engineeringDiary));
 		if (Loader.isModLoaded("BuildCraft|Core")) {
+			//Automatization
 			EurekaRegistry.registerCategory("Buildcraft|Automatization", new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "machineBlock")));
 			EurekaRegistry.register(new EurekaInfo("autoWorkbench", "Buildcraft|Automatization", 1, 50, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "autoWorkbenchBlock"))));
 			EurekaRegistry.register(new EurekaInfo("tank", "Buildcraft|Automatization", 1, 10, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "tankBlock"))));
@@ -79,6 +81,15 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("refinery", "Buildcraft|Automatization", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "refineryBlock"))));
 			EurekaRegistry.register(new EurekaInfo("filteredBuffer", "Buildcraft|Automatization", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Transport", "filteredBufferBlock"))));
 			EurekaRegistry.register(new EurekaInfo("chute", "Buildcraft|Automatization", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "blockHopper"))));
+			BCUtils.addBCKey("tile.autoWorkbenchBlock", "autoWorkbench");
+			BCUtils.addBCKey("tile.tankBlock", "tank");
+			BCUtils.addBCKey("tile.miningWellBlock", "miningWell");
+			BCUtils.addBCKey("tile.pumpBlock", "pump");
+			BCUtils.addBCKey("tile.floodGateBlock", "floodgate");
+			BCUtils.addBCKey("tile.machineBlock", "quarry");
+			BCUtils.addBCKey("tile.refineryBlock", "refinery");
+			BCUtils.addBCKey("tile.filteredBufferBlock", "filteredBuffer");
+			BCUtils.addBCKey("tile.blockHopper", "chute");
 
 			//Transport Pipes
 			EurekaRegistry.registerCategory("Buildcraft|TransportPipes", new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsdiamond")));
@@ -96,16 +107,39 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("diamondItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsdiamond")), "ironItems"));
 			EurekaRegistry.register(new EurekaInfo("lazuliItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemslapis")), "diamondItems"));
 			EurekaRegistry.register(new EurekaInfo("diazuliItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsdaizuli")), "diamondItems"));
+			BCUtils.addBCKey("item.PipeItemsWood", "woodItems");
+			BCUtils.addBCKey("item.PipeItemsCobblestone", "cobblestoneItems");
+			BCUtils.addBCKey("item.PipeItemsStone", "stoneItems");
+			BCUtils.addBCKey("item.PipeItemsQuartz", "quartzItems");
+			BCUtils.addBCKey("item.PipeItemsSandstone", "sandstoneItems");
+			BCUtils.addBCKey("item.PipeItemsGold", "goldItems");
+			BCUtils.addBCKey("item.PipeItemsIron", "ironItems");
+			BCUtils.addBCKey("item.PipeItemsVoid", "voidItems");
+			BCUtils.addBCKey("item.PipeItemsObsidian", "obsidianItems");
+			BCUtils.addBCKey("item.PipeItemsEmerald", "emeraldItems");
+			BCUtils.addBCKey("item.PipeItemsDiamond", "diamondItems");
+			BCUtils.addBCKey("item.PipeItemsLapis", "lazuliItems");
+			BCUtils.addBCKey("item.PipeItemsDaizuli", "diazuliItems");
+			BCUtils.addBCKey("item.PipeStructureCobblestone", "structurePipe");
 
 			//Fluid pipes
 			EurekaRegistry.registerCategory("Buildcraft|FluidPipes", new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsemerald")));
 			EurekaRegistry.register(new EurekaInfo("woodenFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidswood")), "woodItems"));
 			EurekaRegistry.register(new EurekaInfo("cobblestoneFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidscobblestone")), "woodenFluid", "cobblestoneItems"));
 			EurekaRegistry.register(new EurekaInfo("stoneFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsstone")), "cobblestoneFluid", "stoneItems"));
+			EurekaRegistry.register(new EurekaInfo("sandstoneFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidssandstone")), "stoneFluid", "sandstoneItems"));
 			EurekaRegistry.register(new EurekaInfo("goldFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsgold")), "stoneFluid", "goldItems"));
 			EurekaRegistry.register(new EurekaInfo("ironFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsiron")), "cobblestoneFluid", "ironItems"));
 			EurekaRegistry.register(new EurekaInfo("emeraldFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsemerald")), "woodenFluid", "emeraldItems"));
 			EurekaRegistry.register(new EurekaInfo("voidFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsvoid")), "cobblestoneFluid", "voidItems"));
+			BCUtils.addBCKey("item.PipeFluidsWood", "woodenFluid");
+			BCUtils.addBCKey("item.PipeFluidsCobblestone", "cobblestoneFluid");
+			BCUtils.addBCKey("item.PipeFluidsStone", "stoneFluid");
+			BCUtils.addBCKey("item.PipeFluidsSandstone", "sandstoneFluid");
+			BCUtils.addBCKey("item.PipeFluidsGold", "goldFluid");
+			BCUtils.addBCKey("item.PipeFluidsIron", "ironFluid");
+			BCUtils.addBCKey("item.PipeFluidsEmerald", "emeraldFluid");
+			BCUtils.addBCKey("item.PipeFluidsVoid", "voidFluid");
 
 			//Kinetic pipes
 			EurekaRegistry.registerCategory("Buildcraft|PowerPipes", new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepowerdiamond")));
@@ -116,6 +150,15 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("ironPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepoweriron")), "quartzPower", "ironItems"));
 			EurekaRegistry.register(new EurekaInfo("goldPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepowergold")), "quartzPower", "goldItems"));
 			EurekaRegistry.register(new EurekaInfo("diamondPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepowerdiamond")), "goldPower", "diamondItems"));
+			EurekaRegistry.register(new EurekaInfo("emeraldPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipepoweremerald")), "diamondPower"));
+			BCUtils.addBCKey("item.PipePowerWood", "woodenPower");
+			BCUtils.addBCKey("item.PipePowerCobblestone", "cobblestonePower");
+			BCUtils.addBCKey("item.PipePowerStone", "stonePower");
+			BCUtils.addBCKey("item.PipePowerQuartz", "quartzPower");
+			BCUtils.addBCKey("item.PipePowerIron", "ironPower");
+			BCUtils.addBCKey("item.PipePowerGold", "goldPower");
+			BCUtils.addBCKey("item.PipePowerDiamond", "diamondPower");
+			BCUtils.addBCKey("item.PipePowerEmerald", "emeraldPower");
 
 
 			//Building
@@ -128,6 +171,12 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("filler", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Builders", "fillerBlock")), "landmark"));
 			EurekaRegistry.register(new EurekaInfo("architectTable", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Builders", "architectBlock")), "blueprint", "landmark"));
 			EurekaRegistry.register(new EurekaInfo("builder", "Buildcraft|Building", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Builders", "builderBlock")), "architectTable", "pathmarker", "filler"));
+			BCUtils.addBCKey("tile.markerBlock", "landmark");
+			BCUtils.addBCKey("tile.pathMarkerBlock", "pathmarker");
+			BCUtils.addBCKey("tile.libraryBlock", "blueprintLibrary");
+			BCUtils.addBCKey("tile.fillerBlock", "filler");
+			BCUtils.addBCKey("tile.architectBlock", "architectTable");
+			BCUtils.addBCKey("tile.builderBlock", "builder");
 
 			//Silicon
 			EurekaRegistry.registerCategory("Buildcraft|Silicon", new ItemStack(GameRegistry.findBlock("BuildCraft|Silicon", "laserBlock")));
@@ -144,7 +193,7 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("combustionEngine", "Buildcraft|Engines", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Energy", "engineBlock"), 1, 2), "stilringEngine"));
 
 			//add keys for block recognition
-			BCUtils.addBCKey("tile.autoWorkbenchBlock", "autoWorkbench");
+
 		}
 	}
 

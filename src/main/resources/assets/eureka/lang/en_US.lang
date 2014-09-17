@@ -222,6 +222,11 @@ engineeringDiary.voidFluid.howToMakeProgress=???
 engineeringDiary.voidFluid.page0=No more overflow of liquids
 engineeringDiary.voidFluid.page1=Just as mysterious as the Transport kind. This Pipe completely destroys all fluids that enter it.
 
+engineeringDiary.sandstoneFluid.title=Sandstone Fluid pipe
+engineeringDiary.sandstoneFluid.howToMakeProgress=???
+engineeringDiary.sandstoneFluid.page0=No fluids for that machine
+engineeringDiary.sandstoneFluid.page1=...
+
 engineeringDiary.Buildcraft|PowerPipes.title=Kinesis Transport Pipes
 engineeringDiary.Buildcraft|PowerPipes.page0=Getting power from engine A to machine B
 
@@ -264,6 +269,11 @@ engineeringDiary.diamondPower.title=Diamond Kinesis Pipe
 engineeringDiary.diamondPower.howToMakeProgress=Place Gold Kinesis Pipe
 engineeringDiary.diamondPower.page0=All the power tranfer you should ever need
 engineeringDiary.diamondPower.page1=At this point you’re only doing it for the sake of it, just to see what’s gonna happen. You’re not surprised to discover that Diamond has the highest capacity of all pipes, once more quadruple the amount of your last pipe.
+
+engineeringDiary.emeraldPower.title=Emerald Kinesis Pipe
+engineeringDiary.emeraldPower.howToMakeProgress=Place Diamond Kinesis Pipe
+engineeringDiary.emeraldPower.page0=Even MORE
+engineeringDiary.emeraldPower.page1=...
 
 engineeringDiary.Buildcraft|Building.title=Buildcraft Building
 engineeringDiary.Buildcraft|Building.page0=Automatic clearing, filling and building
