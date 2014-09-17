@@ -1,6 +1,9 @@
 package eureka.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import net.minecraft.item.ItemStack;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -10,10 +13,15 @@ import java.util.HashMap;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class BCUtils {
-	private static HashMap<String, String> BCKeys = new HashMap(100);
+	private static HashMap<String, String> BCKeys = new HashMap<String, String>(100);
+	private static HashMap<String, ArrayList<ItemStack>> drops = new HashMap<String, ArrayList<ItemStack>>(100);
 
-	public static void addBCKey(String unlocalizedname, String key){
+	public static void addBCKey(String unlocalizedname, String key, ItemStack...stacks){
 		BCKeys.put(unlocalizedname, key);
+		ArrayList<ItemStack> tempList = new ArrayList<ItemStack>(9);
+		for (ItemStack stack: stacks)
+			tempList.add(stack);
+		drops.put(key, tempList);
 	}
 
 	public static String getBCKey(String unlocalizedname){
@@ -21,5 +29,11 @@ public class BCUtils {
 			return BCKeys.get(unlocalizedname);
 		else
 			return unlocalizedname;
+	}
+
+	public static ArrayList<ItemStack> getBCDrops(String key){
+		if (drops.containsKey(key))
+			return drops.get(key);
+		return null;
 	}
 }

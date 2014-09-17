@@ -1,6 +1,8 @@
 package eureka;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -81,9 +83,9 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("refinery", "Buildcraft|Automatization", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "refineryBlock"))));
 			EurekaRegistry.register(new EurekaInfo("filteredBuffer", "Buildcraft|Automatization", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Transport", "filteredBufferBlock"))));
 			EurekaRegistry.register(new EurekaInfo("chute", "Buildcraft|Automatization", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "blockHopper"))));
-			BCUtils.addBCKey("tile.autoWorkbenchBlock", "autoWorkbench");
-			BCUtils.addBCKey("tile.tankBlock", "tank");
-			BCUtils.addBCKey("tile.miningWellBlock", "miningWell");
+			BCUtils.addBCKey("tile.autoWorkbenchBlock", "autoWorkbench", new ItemStack(GameRegistry.findItem("BuildCraft|Core", "woodenGearItem"), 4), new ItemStack(Blocks.crafting_table));
+			BCUtils.addBCKey("tile.tankBlock", "tank", new ItemStack(Blocks.glass, 8));
+			BCUtils.addBCKey("tile.miningWellBlock", "miningWell", new ItemStack(Items.iron_ingot, 6), new ItemStack(Items.iron_pickaxe), new ItemStack(Items.redstone), new ItemStack(GameRegistry.findItem("BuildCraft|Core", "ironGearItem")));
 			BCUtils.addBCKey("tile.pumpBlock", "pump");
 			BCUtils.addBCKey("tile.floodGateBlock", "floodgate");
 			BCUtils.addBCKey("tile.machineBlock", "quarry");
@@ -95,7 +97,7 @@ public class Eureka {
 			EurekaRegistry.registerCategory("Buildcraft|TransportPipes", new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsdiamond")));
 			EurekaRegistry.register(new EurekaInfo("woodItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemswood"))));
 			EurekaRegistry.register(new EurekaInfo("cobblestoneItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemscobblestone"))));
-			EurekaRegistry.register(new EurekaInfo ("stoneItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsstone")), "cobblestoneItems"));
+			EurekaRegistry.register(new EurekaInfo("stoneItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsstone")), "cobblestoneItems"));
 			EurekaRegistry.register(new EurekaInfo("quartzItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsquartz")), "cobblestoneItems"));
 			EurekaRegistry.register(new EurekaInfo("sandstoneItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemssandstone")), "cobblestoneItems"));
 			EurekaRegistry.register(new EurekaInfo("goldItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsgold")), "stoneItems"));

@@ -1,6 +1,7 @@
 package eureka.core;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -8,6 +9,7 @@ import net.minecraft.util.ChatComponentText;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 
+import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import buildcraft.api.events.BlockInteractionEvent;
@@ -54,21 +56,28 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void BuildcraftBlockInteraction(BlockInteractionEvent event){
-			if (event.player.getEntityWorld().isRemote)
-				return;
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + BCUtils.getBCKey(event.block.getUnlocalizedName() + event.meta)));
+			String key = BCUtils.getBCKey(event.block.getUnlocalizedName());
+			event.setCanceled(!EurekaKnowledge.isFinished(event.player, key));
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + key));
 		}
 
 		@SubscribeEvent
 		public void BuildcraftPipePlaced(PipePlacedEvent event){
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft pipe placed: " +BCUtils.getBCKey(event.pipeType)));
+			String key = BCUtils.getBCKey(event.pipeType);
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft pipe placed: " + key));
 		}
 
 		@SubscribeEvent
 		public void BuildcraftBlockPlaced(BlockPlacedDownEvent event){
 			if (event.player.getEntityWorld().isRemote || event.block.getUnlocalizedName().equals("tile.pipeBlock"))
 				return;
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " + BCUtils.getBCKey(event.block.getUnlocalizedName() + event.meta)));
+			String key = BCUtils.getBCKey(event.block.getUnlocalizedName());
+			if (!EurekaKnowledge.isFinished(event.player, key)){
+				event.player.worldObj.setBlockToAir(event.x, event.y, event.z);
+				for (ItemStack stack: BCUtils.getBCDrops(key))
+					Utils.dropItemstack(event.player.worldObj, event.x, event.y, event.z, stack);
+			}
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " +  key));
 		}
 
 		@SubscribeEvent
@@ -77,14 +86,21 @@ public class EventHandler {
 
 		}
 
+		@SubscribeEvent
+		public void onCrafted(PlayerEvent.ItemCraftedEvent event){
+			EurekaKnowledge.makeProgress(event.player, "autoWorkbench");
+			if (event.crafting.getItem() == new ItemStack(Blocks.chest).getItem())
+				EurekaKnowledge.makeProgress(event.player, "tank");
+		}
+
 	}
 
 
 	public static class Forge {
 
 		@SubscribeEvent
-		public void onCrafted(PlayerEvent.ItemCraftedEvent event){
-			EurekaKnowledge.makeProgress(event.player, "autoWorkbench");
+		public void BucketFill(FillBucketEvent event){
+			EurekaKnowledge.makeProgress(event.entityPlayer, "pump");
 		}
 
 		@SubscribeEvent
