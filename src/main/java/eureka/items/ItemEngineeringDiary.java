@@ -1,4 +1,4 @@
-package eureka.core;
+package eureka.items;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
