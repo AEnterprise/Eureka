@@ -40,7 +40,7 @@ engineeringDiary.tank.page3=the fluids seamlessly is unique to them, and you dec
 engineeringDiary.tank.page4=you don’t need to craft tons of buckets and that they’re stackable totally makes up for it. You wonder how you could automate this.
 
 engineeringDiary.miningWell.title=Mining Well
-engineeringDiary.miningWell.howToMakeProgress=Break blocks?
+engineeringDiary.miningWell.howToMakeProgress=Break blocks
 engineeringDiary.miningWell.page0=First automated mining
 engineeringDiary.miningWell.page1=The Gear is an item with a ton of mechanical application, but today, for some reason, you notice that its spinning property might help you achieve the automation of a very important task: Mining. By crudely attaching
 engineeringDiary.miningWell.page2=a pickaxe to the end of a Gear, and then spinning said Gear, you realise it can break blocks. After giving it some thought, you flesh the mechanism into a full blown machine: the Mining Well. Using Redstone to conduct energy to the Gear,
@@ -61,7 +61,7 @@ engineeringDiary.floodgate.page3=You start experimenting with Tanks, and using t
 engineeringDiary.floodgate.page4=some Iron Ingots to reinforce the whole thing. You have successfully created the Flood Gate, which will flood all the area below it with any fluid you provide, stopping only when done, or after receiving a Redstone signal.
 
 engineeringDiary.quarry.title=Quarry
-engineeringDiary.quarry.howToMakeProgress=Break more blocks?
+engineeringDiary.quarry.howToMakeProgress=Break more blocks
 engineeringDiary.quarry.page0=Fully automated mining
 engineeringDiary.quarry.page1=The Mining Well was certainly a handy tool for your mining operations, but its still very primitive. Finding yourself in need of a new challenge, you decide to put some Gears to use and you start putting things together.
 engineeringDiary.quarry.page2=Using some Redstone dust and this time a Diamond Pickaxe, you put together… Something @ You don’t really know what it is yet, but the machine looks promising, after all you had some high-tier Gears there.

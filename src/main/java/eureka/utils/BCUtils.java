@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import net.minecraft.item.ItemStack;
 
+
+import eureka.core.Logger;
+
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -19,8 +22,13 @@ public class BCUtils {
 	public static void addBCKey(String unlocalizedname, String key, ItemStack...stacks){
 		BCKeys.put(unlocalizedname, key);
 		ArrayList<ItemStack> tempList = new ArrayList<ItemStack>(9);
-		for (ItemStack stack: stacks)
+		int teller = 0;
+		for (ItemStack stack: stacks) {
 			tempList.add(stack);
+			if (stack == null)
+				Logger.error("Itemstack parameter " + teller + "was null" +  key);
+			teller++;
+		}
 		drops.put(key, tempList);
 	}
 

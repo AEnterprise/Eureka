@@ -79,19 +79,19 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("miningWell", "Buildcraft|Automatization", 1, 200, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "miningWellBlock"))));
 			EurekaRegistry.register(new EurekaInfo("pump", "Buildcraft|Automatization", 1, 6, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "pumpBlock")), "tank", "miningWell"));
 			EurekaRegistry.register(new EurekaInfo("floodgate", "Buildcraft|Automatization", 1, 6, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "floodGateBlock")), "tank", "pump"));
-			EurekaRegistry.register(new EurekaInfo("quarry", "Buildcraft|Automatization", 1, 5, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "machineBlock")), "miningWell"));
+			EurekaRegistry.register(new EurekaInfo("quarry", "Buildcraft|Automatization", 1, 500, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "machineBlock")), "miningWell"));
 			EurekaRegistry.register(new EurekaInfo("refinery", "Buildcraft|Automatization", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "refineryBlock"))));
 			EurekaRegistry.register(new EurekaInfo("filteredBuffer", "Buildcraft|Automatization", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Transport", "filteredBufferBlock"))));
 			EurekaRegistry.register(new EurekaInfo("chute", "Buildcraft|Automatization", 1, 1, new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "blockHopper"))));
 			BCUtils.addBCKey("tile.autoWorkbenchBlock", "autoWorkbench", new ItemStack(GameRegistry.findItem("BuildCraft|Core", "woodenGearItem"), 4), new ItemStack(Blocks.crafting_table));
 			BCUtils.addBCKey("tile.tankBlock", "tank", new ItemStack(Blocks.glass, 8));
 			BCUtils.addBCKey("tile.miningWellBlock", "miningWell", new ItemStack(Items.iron_ingot, 6), new ItemStack(Items.iron_pickaxe), new ItemStack(Items.redstone), new ItemStack(GameRegistry.findItem("BuildCraft|Core", "ironGearItem")));
-			BCUtils.addBCKey("tile.pumpBlock", "pump");
-			BCUtils.addBCKey("tile.floodGateBlock", "floodgate");
-			BCUtils.addBCKey("tile.machineBlock", "quarry");
-			BCUtils.addBCKey("tile.refineryBlock", "refinery");
-			BCUtils.addBCKey("tile.filteredBufferBlock", "filteredBuffer");
-			BCUtils.addBCKey("tile.blockHopper", "chute");
+			BCUtils.addBCKey("tile.pumpBlock", "pump", new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "miningWellBlock")), new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "tankBlock")));
+			BCUtils.addBCKey("tile.floodGateBlock", "floodgate", new ItemStack(Items.iron_ingot, 4), new ItemStack(Blocks.iron_bars, 3), new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "tankBlock")), new ItemStack(GameRegistry.findItem("BuildCraft|Core", "ironGearItem")));
+			BCUtils.addBCKey("tile.machineBlock", "quarry", new ItemStack(GameRegistry.findItem("BuildCraft|Core", "ironGearItem"), 3), new ItemStack(GameRegistry.findItem("BuildCraft|Core", "goldGearItem"), 2), new ItemStack(GameRegistry.findItem("BuildCraft|Core", "diamondGearItem"), 2), new ItemStack(Items.redstone), new ItemStack(Items.diamond_pickaxe));
+			BCUtils.addBCKey("tile.refineryBlock", "refinery", new ItemStack(Blocks.redstone_torch, 2), new ItemStack(GameRegistry.findBlock("BuildCraft|Factory", "tankBlock"), 3), new ItemStack(GameRegistry.findItem("BuildCraft|Core", "diamondGearItem")));
+			BCUtils.addBCKey("tile.filteredBufferBlock", "filteredBuffer", new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsdiamond")), new ItemStack(Blocks.chest), new ItemStack(Blocks.piston), new ItemStack(Blocks.planks, 6));
+			BCUtils.addBCKey("tile.blockHopper", "chute", new ItemStack(GameRegistry.findItem("BuildCraft|Core", "stoneGearItem")), new ItemStack(Blocks.chest), new ItemStack(Items.iron_ingot, 5));
 
 			//Transport Pipes
 			EurekaRegistry.registerCategory("Buildcraft|TransportPipes", new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitemsdiamond")));

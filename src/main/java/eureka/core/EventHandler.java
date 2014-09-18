@@ -11,6 +11,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent;
 
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 
 import buildcraft.api.events.BlockInteractionEvent;
 import buildcraft.api.events.BlockPlacedDownEvent;
@@ -103,6 +104,8 @@ public class EventHandler {
 			EurekaKnowledge.makeProgress(event.entityPlayer, "pump");
 		}
 
+
+
 		@SubscribeEvent
 		public void onPlayerUsesBlock(PlayerInteractEvent event) {
 			if (event != null) {
@@ -127,6 +130,12 @@ public class EventHandler {
 					}
 				}
 			}
+		}
+
+		@SubscribeEvent
+		public void blockBreakEvent(BlockEvent.BreakEvent event){
+			EurekaKnowledge.makeProgress(event.getPlayer(), "miningWell");
+			EurekaKnowledge.makeProgress(event.getPlayer(), "quarry");
 		}
 	}
 }
