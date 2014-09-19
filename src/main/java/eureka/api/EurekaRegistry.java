@@ -1,10 +1,16 @@
 package eureka.api;
 
-import eureka.api.client.gui.EurekaChapter;
-import net.minecraft.item.ItemStack;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import net.minecraft.item.ItemStack;
+
+
+import cpw.mods.fml.common.registry.GameRegistry;
+
+
+import eureka.api.client.gui.EurekaChapter;
+import eureka.items.ResearchNote;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -14,42 +20,43 @@ import java.util.HashMap;
  * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
  */
 public class EurekaRegistry {
-    private static HashMap<String, EurekaInformation> chapters = new HashMap<String, EurekaInformation>(50);
+	private static HashMap<String, EurekaInformation> chapters = new HashMap<String, EurekaInformation>(50);
 	private static ArrayList<String> keys = new ArrayList<String>(50);
 	private static ArrayList<String> categoriesList = new ArrayList<String>(20);
 	private static HashMap<String, ItemStack> categories = new HashMap<String, ItemStack>(20);
 
-    /**
-     * Register your keys here for the EUREKA system
-     */
-    public static void register(EurekaInformation information){
-		    chapters.put(information.getKey(), information);
-		    keys.add(information.getKey());
-	    }
+	/**
+	 * Register your keys here for the EUREKA system
+	 */
+	public static void register(EurekaInformation information){
+		chapters.put(information.getKey(), information);
+		keys.add(information.getKey());
+		GameRegistry.registerItem(new ResearchNote(information.getKey()).setUnlocalizedName("researchNote" + information.getKey()), "researchNote" + information.getKey());
+	}
 
 	public static void registerCategory(String category, ItemStack stack){
 		categoriesList.add(category);
 		categories.put(category, stack);
 	}
 
-    /**
-     * @return a clone of the list containing all EUREKA keys
-     */
-    public static ArrayList<String> getKeys(){
-        return (ArrayList) keys.clone();
-    }
+	/**
+	 * @return a clone of the list containing all EUREKA keys
+	 */
+	public static ArrayList<String> getKeys(){
+		return (ArrayList) keys.clone();
+	}
 
-    public static int getMaxValue(String key){
-        if (!keys.contains(key))
-            return 0;
-        return chapters.get(key).getMaxValue();
-    }
+	public static int getMaxValue(String key){
+		if (!keys.contains(key))
+			return 0;
+		return chapters.get(key).getMaxValue();
+	}
 
-    public static int getIncrement(String key){
-        if (!keys.contains(key))
-            return 0;
-        return chapters.get(key).getIncrement();
-    }
+	public static int getIncrement(String key){
+		if (!keys.contains(key))
+			return 0;
+		return chapters.get(key).getIncrement();
+	}
 
 	public static ItemStack getDisplayStack(String key){
 		if (!keys.contains(key))
