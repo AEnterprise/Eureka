@@ -86,7 +86,7 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("miningWell", "Buildcraft|Automatization", 1, 200, new ItemStack(BCUtils.BCItems.MINING_WELL)));
 			EurekaRegistry.register(new EurekaInfo("pump", "Buildcraft|Automatization", 1, 6, new ItemStack(BCUtils.BCItems.PUMP), "tank", "miningWell"));
 			EurekaRegistry.register(new EurekaInfo("floodgate", "Buildcraft|Automatization", 1, 6, new ItemStack(BCUtils.BCItems.FLOODGATE), "tank", "pump"));
-			EurekaRegistry.register(new EurekaInfo("QUARRY", "Buildcraft|Automatization", 1, 500, new ItemStack(BCUtils.BCItems.QUARRY), "miningWell"));
+			EurekaRegistry.register(new EurekaInfo("quarry", "Buildcraft|Automatization", 1, 500, new ItemStack(BCUtils.BCItems.QUARRY), "miningWell"));
 			EurekaRegistry.register(new EurekaInfo("refinery", "Buildcraft|Automatization", 1, 1, new ItemStack(BCUtils.BCItems.REFINERY)));
 			EurekaRegistry.register(new EurekaInfo("filteredBuffer", "Buildcraft|Automatization", 1, 1, new ItemStack(BCUtils.BCItems.FILTERED_BUFFER)));
 			EurekaRegistry.register(new EurekaInfo("chute", "Buildcraft|Automatization", 1, 1, new ItemStack(BCUtils.BCItems.HOPPER)));
@@ -95,7 +95,7 @@ public class Eureka {
 			BCUtils.addBCKey("tile.miningWellBlock", "miningWell", new ItemStack(Items.iron_ingot, 6), new ItemStack(Items.iron_pickaxe), new ItemStack(Items.redstone), new ItemStack(BCUtils.BCItems.IRON_GEAR));
 			BCUtils.addBCKey("tile.pumpBlock", "pump", new ItemStack(BCUtils.BCItems.MINING_WELL), new ItemStack(BCUtils.BCItems.TANK));
 			BCUtils.addBCKey("tile.floodGateBlock", "floodgate", new ItemStack(Items.iron_ingot, 4), new ItemStack(Blocks.iron_bars, 3), new ItemStack(BCUtils.BCItems.TANK), new ItemStack(BCUtils.BCItems.IRON_GEAR));
-			BCUtils.addBCKey("tile.machineBlock", "QUARRY", new ItemStack(BCUtils.BCItems.IRON_GEAR, 3), new ItemStack(GameRegistry.findItem("BuildCraft|Core", "goldGearItem"), 2), new ItemStack(BCUtils.BCItems.DIAMOND_GEAR, 2), new ItemStack(Items.redstone), new ItemStack(Items.diamond_pickaxe));
+			BCUtils.addBCKey("tile.machineBlock", "quarry", new ItemStack(BCUtils.BCItems.IRON_GEAR, 3), new ItemStack(GameRegistry.findItem("BuildCraft|Core", "goldGearItem"), 2), new ItemStack(BCUtils.BCItems.DIAMOND_GEAR, 2), new ItemStack(Items.redstone), new ItemStack(Items.diamond_pickaxe));
 			BCUtils.addBCKey("tile.refineryBlock", "refinery", new ItemStack(Blocks.redstone_torch, 2), new ItemStack(BCUtils.BCItems.TANK, 3), new ItemStack(BCUtils.BCItems.DIAMOND_GEAR));
 			BCUtils.addBCKey("tile.filteredBufferBlock", "filteredBuffer", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_DIAMOND), new ItemStack(Blocks.chest), new ItemStack(Blocks.piston), new ItemStack(Blocks.planks, 6));
 			BCUtils.addBCKey("tile.blockHopper", "chute", new ItemStack(BCUtils.BCItems.STONE_GEAR), new ItemStack(Blocks.chest), new ItemStack(Items.iron_ingot, 5));
@@ -116,19 +116,19 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("diamondItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_ITEMS_DIAMOND), "ironItems"));
 			EurekaRegistry.register(new EurekaInfo("lazuliItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_ITEMS_LAPIS), "diamondItems"));
 			EurekaRegistry.register(new EurekaInfo("diazuliItems", "Buildcraft|TransportPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_ITEMS_DIAZULI), "diamondItems"));
-			handlePipe("Wood", 0xffffff);
-			handlePipe("Cobblestone", 0xffffff);
-			handlePipe("Stone", 0xffffff);
-			handlePipe("Quartz", 0xffffff);
-			handlePipe("Sandstone", 0xffffff);
-			handlePipe("Gold", 0xffffff);
-			handlePipe("Iron", 0xffffff);
-			handlePipe("Void", 0xffffff);
-			handlePipe("Obsidian", 0xffffff);
-			handlePipe("Emerald", 0xffffff);
-			handlePipe("Diamond", 0xffffff);
-			handlePipe("Lapis", 0xffffff);
-			handlePipe("Daizuli", 0xffffff);
+			handlePipe("Wood");
+			handlePipe("Cobblestone");
+			handlePipe("Stone");
+			handlePipe("Quartz");
+			handlePipe("Sandstone");
+			handlePipe("Gold");
+			handlePipe("Iron");
+			handlePipe("Void");
+			handlePipe("Obsidian");
+			handlePipe("Emerald");
+			handlePipe("Diamond");
+			handlePipe("Lapis");
+			handlePipe("Daizuli");
 			BCUtils.addBCKey("item.PipeItemsWood", "woodItems", new ItemStack(getPipePart("Wood"), 2), new ItemStack(glassShard));
 			BCUtils.addBCKey("item.PipeItemsCobblestone", "cobblestoneItems", new ItemStack(getPipePart("Cobblestone"), 2), new ItemStack(glassShard));
 			BCUtils.addBCKey("item.PipeItemsStone", "stoneItems", new ItemStack(getPipePart("Stone"), 2), new ItemStack(glassShard));
@@ -151,18 +151,20 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("cobblestoneFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_FLUID_COBBLESTONE), "woodenFluid", "cobblestoneItems"));
 			EurekaRegistry.register(new EurekaInfo("stoneFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_FLUID_STONE), "cobblestoneFluid", "stoneItems"));
 			EurekaRegistry.register(new EurekaInfo("sandstoneFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_FLUID_SANDSTONE), "stoneFluid", "sandstoneItems"));
+			EurekaRegistry.register(new EurekaInfo("quartzFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_FLUID_QUARTZ), "stoneFluid", "quartzItems"));
 			EurekaRegistry.register(new EurekaInfo("goldFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_FLUID_GOLD), "stoneFluid", "goldItems"));
 			EurekaRegistry.register(new EurekaInfo("ironFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_FLUID_IRON), "cobblestoneFluid", "ironItems"));
 			EurekaRegistry.register(new EurekaInfo("emeraldFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_FLUID_EMERALD), "woodenFluid", "emeraldItems"));
 			EurekaRegistry.register(new EurekaInfo("voidFluid", "Buildcraft|FluidPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_FLUID_VOID), "cobblestoneFluid", "voidItems"));
-			BCUtils.addBCKey("item.PipeFluidsWood", "woodenFluid");
-			BCUtils.addBCKey("item.PipeFluidsCobblestone", "cobblestoneFluid");
-			BCUtils.addBCKey("item.PipeFluidsStone", "stoneFluid");
-			BCUtils.addBCKey("item.PipeFluidsSandstone", "sandstoneFluid");
-			BCUtils.addBCKey("item.PipeFluidsGold", "goldFluid");
-			BCUtils.addBCKey("item.PipeFluidsIron", "ironFluid");
-			BCUtils.addBCKey("item.PipeFluidsEmerald", "emeraldFluid");
-			BCUtils.addBCKey("item.PipeFluidsVoid", "voidFluid");
+			BCUtils.addBCKey("item.PipeFluidsWood", "woodenFluid", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_WOOD), new ItemStack(BCUtils.BCItems.SEALANT));
+			BCUtils.addBCKey("item.PipeFluidsCobblestone", "cobblestoneFluid", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_COBBLESTONE), new ItemStack(BCUtils.BCItems.SEALANT));
+			BCUtils.addBCKey("item.PipeFluidsStone", "stoneFluid", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_STONE), new ItemStack(BCUtils.BCItems.SEALANT));
+			BCUtils.addBCKey("item.PipeFluidsSandstone", "sandstoneFluid", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_SANDSTONE), new ItemStack(BCUtils.BCItems.SEALANT));
+			BCUtils.addBCKey("item.PipeFluidsQuartz", "quartzFluid", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_QUARTZ), new ItemStack(BCUtils.BCItems.SEALANT));
+			BCUtils.addBCKey("item.PipeFluidsGold", "goldFluid", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_GOLD), new ItemStack(BCUtils.BCItems.SEALANT));
+			BCUtils.addBCKey("item.PipeFluidsIron", "ironFluid", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_IRON), new ItemStack(BCUtils.BCItems.SEALANT));
+			BCUtils.addBCKey("item.PipeFluidsEmerald", "emeraldFluid", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_EMERALD), new ItemStack(BCUtils.BCItems.SEALANT));
+			BCUtils.addBCKey("item.PipeFluidsVoid", "voidFluid", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_VOID), new ItemStack(BCUtils.BCItems.SEALANT));
 
 			//Kinetic pipes
 			EurekaRegistry.registerCategory("Buildcraft|PowerPipes", new ItemStack(BCUtils.BCItems.PIPE_POWER_EMERALD));
@@ -174,14 +176,14 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("goldPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_POWER_GOLD), "quartzPower", "goldItems"));
 			EurekaRegistry.register(new EurekaInfo("diamondPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_POWER_DIAMOND), "goldPower", "diamondItems"));
 			EurekaRegistry.register(new EurekaInfo("emeraldPower", "Buildcraft|PowerPipes", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_POWER_EMERALD), "diamondPower"));
-			BCUtils.addBCKey("item.PipePowerWood", "woodenPower");
-			BCUtils.addBCKey("item.PipePowerCobblestone", "cobblestonePower");
-			BCUtils.addBCKey("item.PipePowerStone", "stonePower");
-			BCUtils.addBCKey("item.PipePowerQuartz", "quartzPower");
-			BCUtils.addBCKey("item.PipePowerIron", "ironPower");
-			BCUtils.addBCKey("item.PipePowerGold", "goldPower");
-			BCUtils.addBCKey("item.PipePowerDiamond", "diamondPower");
-			BCUtils.addBCKey("item.PipePowerEmerald", "emeraldPower");
+			BCUtils.addBCKey("item.PipePowerWood", "woodenPower", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_WOOD), new ItemStack(Items.redstone));
+			BCUtils.addBCKey("item.PipePowerCobblestone", "cobblestonePower", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_COBBLESTONE), new ItemStack(Items.redstone));
+			BCUtils.addBCKey("item.PipePowerStone", "stonePower", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_STONE), new ItemStack(Items.redstone));
+			BCUtils.addBCKey("item.PipePowerQuartz", "quartzPower", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_QUARTZ), new ItemStack(Items.redstone));
+			BCUtils.addBCKey("item.PipePowerIron", "ironPower", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_IRON), new ItemStack(Items.redstone));
+			BCUtils.addBCKey("item.PipePowerGold", "goldPower", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_GOLD), new ItemStack(Items.redstone));
+			BCUtils.addBCKey("item.PipePowerDiamond", "diamondPower", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_DIAMOND), new ItemStack(Items.redstone));
+			BCUtils.addBCKey("item.PipePowerEmerald", "emeraldPower", new ItemStack(BCUtils.BCItems.PIPE_ITEMS_EMERALD), new ItemStack(Items.redstone));
 
 
 			//Building
@@ -194,12 +196,12 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("filler", "Buildcraft|Building", 1, 1, new ItemStack(BCUtils.BCItems.FILLER), "landmark"));
 			EurekaRegistry.register(new EurekaInfo("architectTable", "Buildcraft|Building", 1, 1, new ItemStack(BCUtils.BCItems.ARCHITECT), "blueprint", "landmark"));
 			EurekaRegistry.register(new EurekaInfo("builder", "Buildcraft|Building", 1, 1, new ItemStack(BCUtils.BCItems.BUILDER), "architectTable", "pathmarker", "filler"));
-			BCUtils.addBCKey("tile.markerBlock", "landmark");
-			BCUtils.addBCKey("tile.pathMarkerBlock", "pathmarker");
-			BCUtils.addBCKey("tile.libraryBlock", "blueprintLibrary");
-			BCUtils.addBCKey("tile.fillerBlock", "filler");
-			BCUtils.addBCKey("tile.architectBlock", "architectTable");
-			BCUtils.addBCKey("tile.builderBlock", "builder");
+			BCUtils.addBCKey("tile.markerBlock", "landmark", new ItemStack(Blocks.redstone_torch), new ItemStack(Items.dye, 1, 4));
+			BCUtils.addBCKey("tile.pathMarkerBlock", "pathmarker", new ItemStack(Blocks.redstone_torch), new ItemStack(Items.dye, 1, 2));
+			BCUtils.addBCKey("tile.libraryBlock", "blueprintLibrary", new ItemStack(Blocks.bookshelf), new ItemStack(BCUtils.BCItems.BLUEPRINT, 8));
+			BCUtils.addBCKey("tile.fillerBlock", "filler", new ItemStack(Items.dye, 2, 0), new ItemStack(Items.dye, 2, 11), new ItemStack(BCUtils.BCItems.MARKER), new ItemStack(Blocks.crafting_table), new ItemStack(BCUtils.BCItems.GOLD_GEAR, 2), new ItemStack(Blocks.chest));
+			BCUtils.addBCKey("tile.architectBlock", "architectTable", new ItemStack(Items.dye, 2, 0), new ItemStack(Items.dye, 2, 11), new ItemStack(BCUtils.BCItems.MARKER), new ItemStack(Blocks.crafting_table), new ItemStack(BCUtils.BCItems.DIAMOND_GEAR, 2), new ItemStack(BCUtils.BCItems.BLUEPRINT));
+			BCUtils.addBCKey("tile.builderBlock", "builder", new ItemStack(Items.dye, 2, 0), new ItemStack(Items.dye, 2, 11), new ItemStack(BCUtils.BCItems.MARKER), new ItemStack(Blocks.crafting_table), new ItemStack(BCUtils.BCItems.DIAMOND_GEAR, 2), new ItemStack(Blocks.chest));
 
 			//Silicon
 			EurekaRegistry.registerCategory("Buildcraft|Silicon", new ItemStack(BCUtils.BCItems.LASER));
@@ -208,18 +210,27 @@ public class Eureka {
 			EurekaRegistry.register(new EurekaInfo("integrationTable", "Buildcraft|Silicon", 1, 1, new ItemStack(BCUtils.BCItems.LASERTABLES, 1, 2), "assemblyTable"));
 			EurekaRegistry.register(new EurekaInfo("advancedCraftingTable", "Buildcraft|Silicon", 1, 1, new ItemStack(BCUtils.BCItems.LASERTABLES, 1, 1), "laser", "autoWorkbench"));
 			EurekaRegistry.register(new EurekaInfo("pipePlug", "Buildcraft|Silicon", 1, 1, new ItemStack(BCUtils.BCItems.PIPE_PLUG)));
+			BCUtils.addBCKey("tile.laserBlock", "laser", new ItemStack(Blocks.obsidian, 2), new ItemStack(Items.diamond, 2), new ItemStack(Items.redstone, 5));
+			BCUtils.addBCKey("lasertable1", "assemblyTable", new ItemStack(Blocks.obsidian, 6), new ItemStack(Items.redstone), new ItemStack(Items.diamond), new ItemStack(BCUtils.BCItems.DIAMOND_GEAR));
+			BCUtils.addBCKey("lasertabble2", "advancedCraftingTable", new ItemStack(Blocks.obsidian, 6), new ItemStack(Blocks.crafting_table), new ItemStack(Blocks.chest), new ItemStack(BCUtils.BCItems.CHIPSET_REDSTONE));
+			BCUtils.addBCKey("lasertable3", "integrationTable", new ItemStack(Blocks.obsidian, 6), new ItemStack(Items.redstone), new ItemStack(BCUtils.BCItems.CHIPSET_REDSTONE), new ItemStack(BCUtils.BCItems.DIAMOND_GEAR));
+
+
 
 			//Engines
 			EurekaRegistry.registerCategory("Buildcraft|Engines", new ItemStack(BCUtils.BCItems.ENGINES, 1, 3));
 			EurekaRegistry.register(new EurekaInfo("redstoneEngine", "Buildcraft|Engines", 1, 1, new ItemStack(BCUtils.BCItems.ENGINES, 1, 0)));
 			EurekaRegistry.register(new EurekaInfo("stilringEngine", "Buildcraft|Engines", 1, 1, new ItemStack(BCUtils.BCItems.ENGINES, 1, 1), "redstoneEngine"));
 			EurekaRegistry.register(new EurekaInfo("combustionEngine", "Buildcraft|Engines", 1, 1, new ItemStack(BCUtils.BCItems.ENGINES, 1, 2), "stilringEngine"));
+			BCUtils.addBCKey("engineBlock0", "redstoneEngine", new ItemStack(Blocks.planks, 3), new ItemStack(Blocks.piston), new ItemStack(BCUtils.BCItems.WOODEN_GEAR, 2));
+			BCUtils.addBCKey("engineBlock1", "stilringEngine", new ItemStack(Blocks.cobblestone, 3), new ItemStack(Blocks.piston), new ItemStack(BCUtils.BCItems.STONE_GEAR));
+			BCUtils.addBCKey("engineBlock2", "combustionEngine", new ItemStack(Items.iron_ingot, 3), new ItemStack(Blocks.piston), new ItemStack(BCUtils.BCItems.IRON_GEAR));
 
 		}
 	}
 
-	public void handlePipe(String material, int color){
-		pipePart = new ItemPipePart(color).setUnlocalizedName("pipePart" + material);
+	public void handlePipe(String material){
+		pipePart = new ItemPipePart(material).setUnlocalizedName("pipePart" + material);
 		GameRegistry.registerItem(pipePart, "pipePart" + material);
 		GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitems" + material.toLowerCase())), "PGP", 'P', pipePart, 'G', glassShard);
 	}

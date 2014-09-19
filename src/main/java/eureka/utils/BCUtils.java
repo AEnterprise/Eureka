@@ -96,6 +96,7 @@ public class BCUtils {
 		public static final Item PIPE_FLUID_COBBLESTONE = GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidscobblestone");
 		public static final Item PIPE_FLUID_STONE = GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsstone");
 		public static final Item PIPE_FLUID_SANDSTONE = GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidssandstone");
+		public static final Item PIPE_FLUID_QUARTZ = GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsquartz");
 		public static final Item PIPE_FLUID_GOLD = GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsgold");
 		public static final Item PIPE_FLUID_IRON = GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsiron");
 		public static final Item PIPE_FLUID_EMERALD = GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipefluidsemerald");
@@ -115,5 +116,9 @@ public class BCUtils {
 
 		public static final Item LASERTABLES = GameRegistry.findItem("BuildCraft|Silicon", "null");
 		public static final Item PIPE_PLUG = GameRegistry.findItem("BuildCraft|Transport", "pipePlug");
+
+		public static final Item SEALANT = GameRegistry.findItem("BuildCraft|Transport", "pipeWaterproof");
+
+		public static final Item CHIPSET_REDSTONE = GameRegistry.findItem("BuildCraft|Silicon", "redstoneChipset");
 	}
 }

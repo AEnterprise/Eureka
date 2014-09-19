@@ -71,8 +71,32 @@ public class EventHandler {
 			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft pipe placed: " + key));
 			if (!EurekaKnowledge.isFinished(event.player, key)){
 				event.player.worldObj.setBlockToAir( event.x, event.y, event.z);
-				for (ItemStack stack: BCUtils.getBCDrops(key))
-					Utils.dropItemstack(event.player.worldObj, event.x, event.y, event.z, stack.copy());
+				for (ItemStack stack: BCUtils.getBCDrops(key)) {
+					if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_WOOD && !EurekaKnowledge.isFinished(event.player, "woodItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("woodItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_COBBLESTONE && !EurekaKnowledge.isFinished(event.player, "cobblestoneItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("cobblestoneItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_STONE && !EurekaKnowledge.isFinished(event.player, "stoneItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("stoneItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_QUARTZ && !EurekaKnowledge.isFinished(event.player, "quartzItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("quartzItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_SANDSTONE && !EurekaKnowledge.isFinished(event.player, "sandstoneItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("sandstoneItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_GOLD && !EurekaKnowledge.isFinished(event.player, "goldItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("goldItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_IRON && !EurekaKnowledge.isFinished(event.player, "ironItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("ironItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_VOID && !EurekaKnowledge.isFinished(event.player, "voidItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("voidItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_OBSIDIAN && !EurekaKnowledge.isFinished(event.player, "obsidianItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("obsidianItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_EMERALD && !EurekaKnowledge.isFinished(event.player, "emeraldItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("emeraldItems"));
+					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_DIAMOND && !EurekaKnowledge.isFinished(event.player, "diamondItems"))
+						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("diamondItems"));
+					else
+						Utils.dropItemstack(event.player.worldObj, event.x, event.y, event.z, stack.copy());
+				}
 			}
 		}
 
@@ -81,6 +105,24 @@ public class EventHandler {
 			if (event.player.getEntityWorld().isRemote || event.block.getUnlocalizedName().equals("tile.air"))
 				return;
 			String key = BCUtils.getBCKey(event.block.getUnlocalizedName());
+			if (event.block.getUnlocalizedName().equals("tile.null")){
+				int meta = event.player.worldObj.getBlockMetadata(event.x, event.y, event.z);
+					if (meta == 0)
+						key = "assemblyTable";
+				else if (meta == 1)
+						key = "advancedCraftingTable";
+				else
+						key = "integrationTable";
+			}
+			if (event.block.getUnlocalizedName().equals("tile.engineBlock")){
+				int meta = event.player.worldObj.getBlockMetadata(event.x, event.y, event.z);
+				if (meta == 0)
+					key = "redstoneEngine";
+				else if (meta == 1)
+					key = "stilringEngine";
+				else
+					key = "combustionEngine";
+			}
 			if (!EurekaKnowledge.isFinished(event.player, key)){
 				event.player.worldObj.setBlockToAir(event.x, event.y, event.z);
 				for (ItemStack stack: BCUtils.getBCDrops(key)) {
@@ -126,11 +168,11 @@ public class EventHandler {
 				EurekaKnowledge.makeProgress(event.player, "tank");
 		}
 
+
 		private void dropItemsFromList(World world, int x, int y, int z, ArrayList<ItemStack> stacks){
 			for (ItemStack stack: stacks)
 				Utils.dropItemstack(world, x, y, z, stack.copy());
 		}
-
 	}
 
 

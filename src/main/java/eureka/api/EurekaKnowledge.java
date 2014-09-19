@@ -45,6 +45,8 @@ public class EurekaKnowledge {
 
 	public static boolean isFinished(EntityPlayer player, String key){
 		initKey(getTag(player), key);
+		if (player == null)
+			return false;
 		return player.capabilities.isCreativeMode || getTag(player).getBoolean(key + "Finished");
 	}
 

@@ -2,7 +2,6 @@ package eureka.items;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,23 +18,18 @@ import eureka.Eureka;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class ItemPipePart extends Item {
-	public int color;
+	public String material;
 	public IIcon icon;
 
-	public ItemPipePart (int color){
-		this.color = color;
+	public ItemPipePart (String material){
+		this.material = material;
 		setCreativeTab(Eureka.eureka);
-	}
-
-	@Override
-	public int getColorFromItemStack(ItemStack stack, int meta) {
-		return color;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister) {
-		icon = par1IconRegister.registerIcon("eureka:pipePart");
+		icon = par1IconRegister.registerIcon("eureka:pipePart" + material);
 	}
 
 	@Override
