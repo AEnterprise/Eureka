@@ -1,24 +1,32 @@
 package eureka;
 
+import java.io.File;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import net.minecraftforge.common.MinecraftForge;
+
+
 import eureka.api.EurekaInfo;
 import eureka.api.EurekaRegistry;
 import eureka.client.gui.GuiHandler;
 import eureka.core.BlockDetector;
 import eureka.core.EventHandler;
+import eureka.json.FileReader;
 import eureka.items.ItemEngineeringDiary;
 import eureka.items.ItemGlassShard;
 import eureka.items.ItemPipePart;
@@ -59,7 +67,10 @@ public class Eureka {
 		engineeringDiary = new ItemEngineeringDiary();
 		engineeringDiary.setCreativeTab(eureka).setUnlocalizedName("engineeringDiary");
 		GameRegistry.registerItem(engineeringDiary, "engineeringDiary");
-		new BlockDetector();
+		BlockDetector blockDetector = new BlockDetector();
+		FMLCommonHandler.instance().bus().register(blockDetector);
+		MinecraftForge.EVENT_BUS.register(blockDetector);
+		FileReader.setMainfolder(new File(event.getModConfigurationDirectory(), "Eureka"));
 	}
 
 	@Mod.EventHandler
@@ -68,7 +79,6 @@ public class Eureka {
 		MinecraftForge.EVENT_BUS.register(new EventHandler.Forge());
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		PacketHandler.init();
-		EurekaRegistry.registerCategory("Eureka", new ItemStack(engineeringDiary));
 		if (Loader.isModLoaded("BuildCraft|Core") && false) {
 			glassShard = new ItemGlassShard();
 			GameRegistry.registerItem(glassShard, "glassShard");
@@ -223,6 +233,10 @@ public class Eureka {
 			addBCKey("engineBlock2", "combustionEngine", new ItemStack(Items.iron_ingot, 3), new ItemStack(Blocks.piston), new ItemStack(BCItems.IRON_GEAR));
 			*/
 		}
+	}
+	@Mod.EventHandler
+	public void doneLoading(FMLLoadCompleteEvent event){
+		FileReader.readFiles();
 	}
 
 	public void handlePipe(String material) {

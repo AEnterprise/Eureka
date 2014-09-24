@@ -6,28 +6,29 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
-import eureka.api.event.BlockPlacedEvent;
+
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+
+
+import eureka.api.events.BlockPlacedEvent;
 
 public class BlockDetector
 {
 	public static BlockDetector instance;
 	public ArrayList<PlacePosition> placed = new ArrayList<PlacePosition>();
-	
-	
+
+
 	public BlockDetector()
 	{
 		instance = this;
-		FMLCommonHandler.instance().bus().register(this);
-		MinecraftForge.EVENT_BUS.register(this);
+
 	}
 	
 	@SubscribeEvent
@@ -50,12 +51,6 @@ public class BlockDetector
 			placed.removeAll(remove);
 		}
 		
-	}
-	
-	@SubscribeEvent
-	public void onBlockPlacedEvent(BlockPlacedEvent evt)
-	{
-		FMLLog.getLogger().info("Test: "+evt.print());
 	}
 	
 	//Has to be lowest because we want to know if another mod says Nope you are not allowed to place Blocks.
