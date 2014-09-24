@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 
 import eureka.Eureka;
 import eureka.api.EurekaKnowledge;
+import eureka.api.EurekaRegistry;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -37,9 +38,7 @@ public class ResearchNote extends Item {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (EurekaKnowledge.isFinished(player, key))
 			return stack;
-		while (!EurekaKnowledge.isFinished(player, key)) {
-			EurekaKnowledge.makeProgress(player, key);
-		}
+		EurekaKnowledge.makeProgress(player, key, EurekaRegistry.getMaxValue(key) - EurekaKnowledge.getProgress(player, key));
 		if (stack.stackSize == 1)
 			return new ItemStack(Items.paper);
 		stack.stackSize--;

@@ -1,14 +1,10 @@
 package eureka.api;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.World;
 
 
-import eureka.api.interfaces.IEurekaBlock;
 import eureka.utils.Utils;
 
 /**
@@ -50,7 +46,7 @@ public class EurekaKnowledge {
 		return player.capabilities.isCreativeMode || getTag(player).getBoolean(key + "Finished");
 	}
 
-	public static void makeProgress(EntityPlayer player, String key) {
+	public static void makeProgress(EntityPlayer player, String key, int amount) {
 		if (player.worldObj.isRemote)
 			return;
 		try {
@@ -62,7 +58,7 @@ public class EurekaKnowledge {
 			int progress = getProgress(player, key);
 			NBTTagCompound tag = getTag(player);
 			if (progress < EurekaRegistry.getMaxValue(key)) {
-				progress += EurekaRegistry.getIncrement(key);
+				progress += amount;
 				setKey(tag, key + "Progress", progress);
 			}
 			if (progress >= EurekaRegistry.getMaxValue(key)) {
@@ -91,20 +87,5 @@ public class EurekaKnowledge {
 
 	public static void setKey(NBTTagCompound tag, String key, boolean bool) {
 		tag.setBoolean(key, bool);
-
-	}
-
-	public static void eurekaBlockEvent(World world, IEurekaBlock block, int x, int y, int z, EntityPlayer player, boolean interaction) {
-		if (block == null)
-			return;
-		if (!world.isRemote && !block.isAllowed(player) && !player.capabilities.isCreativeMode && (block.breakOnInteraction() || !interaction)) {
-			ItemStack[] stackArray = block.getComponents();
-			for (ItemStack stack : stackArray)
-				Utils.dropItemstack(world, x, y, z, stack);
-			world.setBlock(x, y, z, Blocks.air);
-			world.removeTileEntity(x, y, z);
-			world.markBlockForUpdate(x, y, z);
-			player.addChatComponentMessage(new ChatComponentText((block).getMessage()));
-		}
 	}
 }
