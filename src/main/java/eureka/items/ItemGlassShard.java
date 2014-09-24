@@ -20,7 +20,7 @@ import eureka.Eureka;
 public class ItemGlassShard extends Item {
 	public IIcon icon;
 
-	public ItemGlassShard(){
+	public ItemGlassShard() {
 		setUnlocalizedName("glassShard");
 		setCreativeTab(Eureka.eureka);
 	}

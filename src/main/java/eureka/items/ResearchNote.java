@@ -23,7 +23,7 @@ public class ResearchNote extends Item {
 	public IIcon icon;
 	public String key;
 
-	public ResearchNote(String key){
+	public ResearchNote(String key) {
 		this.key = key;
 		setCreativeTab(Eureka.eureka);
 	}
@@ -37,7 +37,7 @@ public class ResearchNote extends Item {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (EurekaKnowledge.isFinished(player, key))
 			return stack;
-		while (!EurekaKnowledge.isFinished(player, key)){
+		while (!EurekaKnowledge.isFinished(player, key)) {
 			EurekaKnowledge.makeProgress(player, key);
 		}
 		if (stack.stackSize == 1)

@@ -10,16 +10,16 @@ import eureka.utils.Utils;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class BasicEurekaChapter extends EurekaChapter{
+public class BasicEurekaChapter extends EurekaChapter {
 	public String key, requiredResearch;
 	public boolean isInfoPage;
 
-	public BasicEurekaChapter(String key){
+	public BasicEurekaChapter(String key) {
 		this.key = key;
 		requiredResearch = Utils.localize("engineeringDiary.noRequiredResearch");
 	}
 
-	public BasicEurekaChapter(String key, String requiredResearch, boolean isInfoPage){
+	public BasicEurekaChapter(String key, String requiredResearch, boolean isInfoPage) {
 		this.key = key;
 		if (requiredResearch == null || requiredResearch == "")
 			requiredResearch = Utils.localize("engineeringDiary.noRequiredResearch");

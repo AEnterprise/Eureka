@@ -21,7 +21,7 @@ public class ItemPipePart extends Item {
 	public String material;
 	public IIcon icon;
 
-	public ItemPipePart (String material){
+	public ItemPipePart(String material) {
 		this.material = material;
 		setCreativeTab(Eureka.eureka);
 	}

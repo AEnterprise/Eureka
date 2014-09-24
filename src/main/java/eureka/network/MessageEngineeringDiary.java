@@ -27,16 +27,17 @@ public class MessageEngineeringDiary implements IMessage, IMessageHandler<Messag
 	int[] progress = new int[100];
 	boolean[] finished = new boolean[100];
 
-	public MessageEngineeringDiary(){}
+	public MessageEngineeringDiary() {
+	}
 
-	public MessageEngineeringDiary(EntityPlayer player){
+	public MessageEngineeringDiary(EntityPlayer player) {
 		this.player = player;
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		ArrayList<String> keys = EurekaRegistry.getKeys();
-		for (int t = 0; t < keys.size(); t++){
+		for (int t = 0; t < keys.size(); t++) {
 			progress[t] = buf.readInt();
 			finished[t] = buf.readBoolean();
 		}
@@ -45,7 +46,7 @@ public class MessageEngineeringDiary implements IMessage, IMessageHandler<Messag
 	@Override
 	public void toBytes(ByteBuf buf) {
 		ArrayList<String> keys = EurekaRegistry.getKeys();
-		for (int t = 0; t < keys.size(); t++){
+		for (int t = 0; t < keys.size(); t++) {
 			buf.writeInt(EurekaKnowledge.getProgress(player, keys.get(t)));
 			buf.writeBoolean(EurekaKnowledge.isFinished(player, keys.get(t)));
 		}
@@ -56,7 +57,7 @@ public class MessageEngineeringDiary implements IMessage, IMessageHandler<Messag
 	public IMessage onMessage(MessageEngineeringDiary message, MessageContext ctx) {
 		ArrayList<String> keys = EurekaRegistry.getKeys();
 		NBTTagCompound info = EurekaKnowledge.getTag(Eureka.proxy.getPlayer());
-		for (int t = 0; t < keys.size(); t++){
+		for (int t = 0; t < keys.size(); t++) {
 			info.setInteger(keys.get(t) + "Progress", message.progress[t]);
 			info.setBoolean(keys.get(t) + "Finished", message.finished[t]);
 		}

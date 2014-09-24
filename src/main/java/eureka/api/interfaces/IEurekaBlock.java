@@ -12,20 +12,20 @@ import net.minecraft.item.ItemStack;
  */
 public interface IEurekaBlock {
 
-    /**
-     * Used to check if the player can use this or not, call the eureka system here for the check or do your own check
-     */
-    boolean isAllowed(EntityPlayer player);
+	/**
+	 * Used to check if the player can use this or not, call the eureka system here for the check or do your own check
+	 */
+	boolean isAllowed(EntityPlayer player);
 
-    /**
-     * Use this to specify what items get dropped when a 'dumb' player tries to use it
-     */
-    ItemStack[] getComponents();
+	/**
+	 * Use this to specify what items get dropped when a 'dumb' player tries to use it
+	 */
+	ItemStack[] getComponents();
 
-    /**
-     * The message 'dumb' players get when there machine falls apart
-     */
-    String getMessage();
+	/**
+	 * The message 'dumb' players get when there machine falls apart
+	 */
+	String getMessage();
 
 	/**
 	 * If the block should break when interacted with or not

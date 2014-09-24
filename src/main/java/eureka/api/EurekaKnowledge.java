@@ -20,8 +20,8 @@ import eureka.utils.Utils;
  */
 public class EurekaKnowledge {
 
-	public static void init(EntityPlayer player){
-		if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)){
+	public static void init(EntityPlayer player) {
+		if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
 			player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound());
 		}
 		NBTTagCompound tag = getTag(player);
@@ -30,27 +30,27 @@ public class EurekaKnowledge {
 
 	}
 
-	public static NBTTagCompound getTag (EntityPlayer player){
-		if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)){
+	public static NBTTagCompound getTag(EntityPlayer player) {
+		if (!player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
 			player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound());
 		}
 		return (NBTTagCompound) player.getEntityData().getTag(EntityPlayer.PERSISTED_NBT_TAG);
 	}
 
-	public static int getProgress(EntityPlayer player, String key){
+	public static int getProgress(EntityPlayer player, String key) {
 		initKey(getTag(player), key);
 		return getTag(player).getInteger(key + "Progress");
 	}
 
 
-	public static boolean isFinished(EntityPlayer player, String key){
+	public static boolean isFinished(EntityPlayer player, String key) {
 		initKey(getTag(player), key);
 		if (player == null)
 			return false;
 		return player.capabilities.isCreativeMode || getTag(player).getBoolean(key + "Finished");
 	}
 
-	public static void makeProgress (EntityPlayer player, String key){
+	public static void makeProgress(EntityPlayer player, String key) {
 		if (player.worldObj.isRemote)
 			return;
 		try {
@@ -73,31 +73,31 @@ public class EurekaKnowledge {
 					player.addChatComponentMessage(new ChatComponentText(message));
 				}
 			}
-		} catch (Throwable e){
+		} catch (Throwable e) {
 			//fake player issue, ignoring
 		}
 	}
 
-	private static void initKey(NBTTagCompound tag, String key){
-		if (!tag.hasKey(key + "Progress")){
+	private static void initKey(NBTTagCompound tag, String key) {
+		if (!tag.hasKey(key + "Progress")) {
 			setKey(tag, key + "Progress", 0);
 			setKey(tag, key + "Finished", false);
 		}
 	}
 
-	public static void setKey(NBTTagCompound tag, String key, int integer){
+	public static void setKey(NBTTagCompound tag, String key, int integer) {
 		tag.setInteger(key, integer);
 	}
 
-	public static void setKey(NBTTagCompound tag, String key, boolean bool){
+	public static void setKey(NBTTagCompound tag, String key, boolean bool) {
 		tag.setBoolean(key, bool);
 
 	}
 
-	public static void eurekaBlockEvent(World world, IEurekaBlock block, int x, int y, int z, EntityPlayer player, boolean interaction){
+	public static void eurekaBlockEvent(World world, IEurekaBlock block, int x, int y, int z, EntityPlayer player, boolean interaction) {
 		if (block == null)
 			return;
-		if (!world.isRemote && !block.isAllowed(player) && !player.capabilities.isCreativeMode && (block.breakOnInteraction() || !interaction)){
+		if (!world.isRemote && !block.isAllowed(player) && !player.capabilities.isCreativeMode && (block.breakOnInteraction() || !interaction)) {
 			ItemStack[] stackArray = block.getComponents();
 			for (ItemStack stack : stackArray)
 				Utils.dropItemstack(world, x, y, z, stack);

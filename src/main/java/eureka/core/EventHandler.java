@@ -38,10 +38,10 @@ import eureka.utils.Utils;
  */
 public class EventHandler {
 
-	public static class FML{
+	public static class FML {
 
 		@SubscribeEvent
-		public void playerLogin (PlayerEvent.PlayerLoggedInEvent event) {
+		public void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
 			//initialize player knowledge if needed
 			EurekaKnowledge.init(event.player);
 
@@ -59,19 +59,19 @@ public class EventHandler {
 		}
 
 		@SubscribeEvent
-		public void BuildcraftBlockInteraction(BlockInteractionEvent event){
+		public void BuildcraftBlockInteraction(BlockInteractionEvent event) {
 			String key = BCUtils.getBCKey(event.block.getUnlocalizedName());
 			event.setCanceled(!EurekaKnowledge.isFinished(event.player, key));
 			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + key));
 		}
 
 		@SubscribeEvent
-		public void BuildcraftPipePlaced(PipePlacedEvent event){
+		public void BuildcraftPipePlaced(PipePlacedEvent event) {
 			String key = BCUtils.getBCKey(event.pipeType);
 			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft pipe placed: " + key));
-			if (!EurekaKnowledge.isFinished(event.player, key)){
-				event.player.worldObj.setBlockToAir( event.x, event.y, event.z);
-				for (ItemStack stack: BCUtils.getBCDrops(key)) {
+			if (!EurekaKnowledge.isFinished(event.player, key)) {
+				event.player.worldObj.setBlockToAir(event.x, event.y, event.z);
+				for (ItemStack stack : BCUtils.getBCDrops(key)) {
 					if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_WOOD && !EurekaKnowledge.isFinished(event.player, "woodItems"))
 						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("woodItems"));
 					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_COBBLESTONE && !EurekaKnowledge.isFinished(event.player, "cobblestoneItems"))
@@ -101,20 +101,20 @@ public class EventHandler {
 		}
 
 		@SubscribeEvent
-		public void BuildcraftBlockPlaced(BlockPlacedDownEvent event){
+		public void BuildcraftBlockPlaced(BlockPlacedDownEvent event) {
 			if (event.player.getEntityWorld().isRemote || event.block.getUnlocalizedName().equals("tile.air"))
 				return;
 			String key = BCUtils.getBCKey(event.block.getUnlocalizedName());
-			if (event.block.getUnlocalizedName().equals("tile.null")){
+			if (event.block.getUnlocalizedName().equals("tile.null")) {
 				int meta = event.player.worldObj.getBlockMetadata(event.x, event.y, event.z);
-					if (meta == 0)
-						key = "assemblyTable";
+				if (meta == 0)
+					key = "assemblyTable";
 				else if (meta == 1)
-						key = "advancedCraftingTable";
+					key = "advancedCraftingTable";
 				else
-						key = "integrationTable";
+					key = "integrationTable";
 			}
-			if (event.block.getUnlocalizedName().equals("tile.engineBlock")){
+			if (event.block.getUnlocalizedName().equals("tile.engineBlock")) {
 				int meta = event.player.worldObj.getBlockMetadata(event.x, event.y, event.z);
 				if (meta == 0)
 					key = "redstoneEngine";
@@ -123,9 +123,9 @@ public class EventHandler {
 				else
 					key = "combustionEngine";
 			}
-			if (!EurekaKnowledge.isFinished(event.player, key)){
+			if (!EurekaKnowledge.isFinished(event.player, key)) {
 				event.player.worldObj.setBlockToAir(event.x, event.y, event.z);
-				for (ItemStack stack: BCUtils.getBCDrops(key)) {
+				for (ItemStack stack : BCUtils.getBCDrops(key)) {
 					if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_WOOD && !EurekaKnowledge.isFinished(event.player, "woodItems"))
 						dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, BCUtils.getBCDrops("woodItems"));
 					else if (stack.getItem() == BCUtils.BCItems.PIPE_ITEMS_COBBLESTONE && !EurekaKnowledge.isFinished(event.player, "cobblestoneItems"))
@@ -152,25 +152,25 @@ public class EventHandler {
 						Utils.dropItemstack(event.player.worldObj, event.x, event.y, event.z, stack.copy());
 				}
 			}
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " +  key));
+			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block placed: " + key));
 		}
 
 		@SubscribeEvent
-		public void BuildcraftRobotPlaced(RobotPlacementEvent event){
+		public void BuildcraftRobotPlaced(RobotPlacementEvent event) {
 			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft robot placed: " + BCUtils.getBCKey(event.robotProgram)));
 
 		}
 
 		@SubscribeEvent
-		public void onCrafted(PlayerEvent.ItemCraftedEvent event){
+		public void onCrafted(PlayerEvent.ItemCraftedEvent event) {
 			EurekaKnowledge.makeProgress(event.player, "autoWorkbench");
 			if (event.crafting.getItem() == new ItemStack(Blocks.chest).getItem())
 				EurekaKnowledge.makeProgress(event.player, "tank");
 		}
 
 
-		private void dropItemsFromList(World world, int x, int y, int z, ArrayList<ItemStack> stacks){
-			for (ItemStack stack: stacks)
+		private void dropItemsFromList(World world, int x, int y, int z, ArrayList<ItemStack> stacks) {
+			for (ItemStack stack : stacks)
 				Utils.dropItemstack(world, x, y, z, stack.copy());
 		}
 	}
@@ -179,10 +179,9 @@ public class EventHandler {
 	public static class Forge {
 
 		@SubscribeEvent
-		public void BucketFill(FillBucketEvent event){
+		public void BucketFill(FillBucketEvent event) {
 			EurekaKnowledge.makeProgress(event.entityPlayer, "pump");
 		}
-
 
 
 		@SubscribeEvent
@@ -212,7 +211,7 @@ public class EventHandler {
 		}
 
 		@SubscribeEvent
-		public void blockBreakEvent(BlockEvent.BreakEvent event){
+		public void blockBreakEvent(BlockEvent.BreakEvent event) {
 			EurekaKnowledge.makeProgress(event.getPlayer(), "miningWell");
 			EurekaKnowledge.makeProgress(event.getPlayer(), "QUARRY");
 		}

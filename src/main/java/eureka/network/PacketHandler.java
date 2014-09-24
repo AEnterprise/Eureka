@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 public class PacketHandler {
 	public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel("eureka");
 
-	public static void init(){
+	public static void init() {
 		instance.registerMessage(MessageEngineeringDiary.class, MessageEngineeringDiary.class, 0, Side.CLIENT);
 	}
 }

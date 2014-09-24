@@ -12,9 +12,9 @@ import net.minecraft.item.ItemStack;
  */
 public interface IEurekaItem {
 
-    boolean isAllowed(EntityPlayer player);
+	boolean isAllowed(EntityPlayer player);
 
-    String getMessage();
+	String getMessage();
 
 	ItemStack[] getComponents();
 }

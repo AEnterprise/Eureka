@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 
+
 import eureka.api.client.gui.EurekaChapter;
 import eureka.utils.Utils;
 
@@ -21,7 +22,7 @@ public class EurekaInfo extends EurekaInformation {
 	public EurekaChapter gui;
 	public ArrayList<String> requiredResearch;
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, EurekaChapter gui, String...researches){
+	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, EurekaChapter gui, String... researches) {
 		this.key = key;
 		this.category = category;
 		this.increment = increment;
@@ -29,11 +30,11 @@ public class EurekaInfo extends EurekaInformation {
 		this.stack = stack;
 		this.gui = gui;
 		requiredResearch = new ArrayList<String>(researches.length);
-		for (String research: researches)
+		for (String research : researches)
 			requiredResearch.add(research);
 	}
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, String...researches){
+	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, String... researches) {
 		this.key = key;
 		this.category = category;
 		this.increment = increment;
@@ -42,7 +43,7 @@ public class EurekaInfo extends EurekaInformation {
 		if (researches.length > 0) {
 			boolean first = true;
 			String requiredResearch = "";
-			for (String research: researches){
+			for (String research : researches) {
 				if (first) {
 					requiredResearch = Utils.localize("engineeringDiary." + research + ".title");
 					first = false;
@@ -55,32 +56,32 @@ public class EurekaInfo extends EurekaInformation {
 			gui = new BasicEurekaChapter(key);
 		}
 		requiredResearch = new ArrayList<String>(researches.length);
-		for (String research: researches)
+		for (String research : researches)
 			requiredResearch.add(research);
 	}
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, EurekaChapter gui){
+	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, EurekaChapter gui) {
 		this.key = key;
 		this.category = category;
 		this.increment = increment;
 		this.maxValue = maxValue;
 		this.stack = stack;
 		this.gui = gui;
-		this.requiredResearch = new  ArrayList<String>();
+		this.requiredResearch = new ArrayList<String>();
 	}
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack){
+	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack) {
 		this.key = key;
 		this.category = category;
 		this.increment = increment;
 		this.maxValue = maxValue;
 		this.stack = stack;
 		gui = new BasicEurekaChapter(key);
-		this.requiredResearch = new  ArrayList<String>();
+		this.requiredResearch = new ArrayList<String>();
 	}
 
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, boolean isInfoPage, String...researches){
+	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, boolean isInfoPage, String... researches) {
 		this.key = key;
 		this.category = category;
 		this.increment = increment;
@@ -89,7 +90,7 @@ public class EurekaInfo extends EurekaInformation {
 		if (researches.length > 0) {
 			boolean first = true;
 			String requiredResearch = "";
-			for (String research: researches){
+			for (String research : researches) {
 				if (first) {
 					requiredResearch = Utils.localize("engineeringDiary." + research + ".title");
 					first = false;
@@ -102,9 +103,10 @@ public class EurekaInfo extends EurekaInformation {
 			gui = new BasicEurekaChapter(key);
 		}
 		requiredResearch = new ArrayList<String>(researches.length);
-		for (String research: researches)
+		for (String research : researches)
 			requiredResearch.add(research);
 	}
+
 	@Override
 	public String getKey() {
 		return key;

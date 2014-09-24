@@ -18,7 +18,7 @@ public class Utils {
 		return StatCollector.translateToLocal(key);
 	}
 
-	public static void dropItemstack(World world, int x, int y, int z, ItemStack stack){
+	public static void dropItemstack(World world, int x, int y, int z, ItemStack stack) {
 		float f1 = 0.7F;
 		double d = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;
 		double d1 = (world.rand.nextFloat() * f1) + (1.0F - f1) * 0.5D;

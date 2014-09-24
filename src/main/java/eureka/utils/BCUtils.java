@@ -23,33 +23,33 @@ public class BCUtils {
 	private static HashMap<String, String> BCKeys = new HashMap<String, String>(100);
 	private static HashMap<String, ArrayList<ItemStack>> drops = new HashMap<String, ArrayList<ItemStack>>(100);
 
-	public static void addBCKey(String unlocalizedname, String key, ItemStack...stacks){
+	public static void addBCKey(String unlocalizedname, String key, ItemStack... stacks) {
 		BCKeys.put(unlocalizedname, key);
 		ArrayList<ItemStack> tempList = new ArrayList<ItemStack>(9);
 		int teller = 0;
-		for (ItemStack stack: stacks) {
+		for (ItemStack stack : stacks) {
 			tempList.add(stack);
 			if (stack == null)
-				Logger.error("Itemstack parameter " + teller + "was null" +  key);
+				Logger.error("Itemstack parameter " + teller + "was null" + key);
 			teller++;
 		}
 		drops.put(key, tempList);
 	}
 
-	public static String getBCKey(String unlocalizedname){
+	public static String getBCKey(String unlocalizedname) {
 		if (BCKeys.containsKey(unlocalizedname))
 			return BCKeys.get(unlocalizedname);
 		else
 			return unlocalizedname;
 	}
 
-	public static ArrayList<ItemStack> getBCDrops(String key){
+	public static ArrayList<ItemStack> getBCDrops(String key) {
 		if (drops.containsKey(key))
 			return (ArrayList<ItemStack>) drops.get(key).clone();
 		return null;
 	}
 
-	public static final class BCItems{
+	public static final class BCItems {
 		public static final Block QUARRY = GameRegistry.findBlock("BuildCraft|Factory", "machineBlock");
 		public static final Block AUTOWORKBENCH = GameRegistry.findBlock("BuildCraft|Factory", "autoWorkbenchBlock");
 		public static final Block TANK = GameRegistry.findBlock("BuildCraft|Factory", "tankBlock");

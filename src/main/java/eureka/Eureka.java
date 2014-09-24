@@ -41,16 +41,6 @@ import eureka.utils.BCUtils;
 @Mod(modid = "eureka", name = "Eureka", version = "@VERSION@", acceptedMinecraftVersions = "1.7.10")
 public class Eureka {
 	public static Item engineeringDiary;
-	public static Item pipePart;
-	public static Item glassShard;
-
-	//This let it crash. However just for testing i changed
-	@Instance("eureka")
-	public static Eureka instance;
-
-	@SidedProxy(clientSide="eureka.proxy.ClientProxy", serverSide="eureka.proxy.ServerProxy")
-	public static BaseProxy proxy;
-
 	public static CreativeTabs eureka = new CreativeTabs("Eureka") {
 
 		@Override
@@ -59,6 +49,13 @@ public class Eureka {
 		}
 
 	};
+	public static Item pipePart;
+	public static Item glassShard;
+	//This let it crash. However just for testing i changed
+	@Instance("eureka")
+	public static Eureka instance;
+	@SidedProxy(clientSide = "eureka.proxy.ClientProxy", serverSide = "eureka.proxy.ServerProxy")
+	public static BaseProxy proxy;
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -216,7 +213,6 @@ public class Eureka {
 			BCUtils.addBCKey("lasertable3", "integrationTable", new ItemStack(Blocks.obsidian, 6), new ItemStack(Items.redstone), new ItemStack(BCUtils.BCItems.CHIPSET_REDSTONE), new ItemStack(BCUtils.BCItems.DIAMOND_GEAR));
 
 
-
 			//Engines
 			EurekaRegistry.registerCategory("Buildcraft|Engines", new ItemStack(BCUtils.BCItems.ENGINES, 1, 3));
 			EurekaRegistry.register(new EurekaInfo("redstoneEngine", "Buildcraft|Engines", 1, 1, new ItemStack(BCUtils.BCItems.ENGINES, 1, 0)));
@@ -229,13 +225,13 @@ public class Eureka {
 		}
 	}
 
-	public void handlePipe(String material){
+	public void handlePipe(String material) {
 		pipePart = new ItemPipePart(material).setUnlocalizedName("pipePart" + material);
 		GameRegistry.registerItem(pipePart, "pipePart" + material);
 		GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitems" + material.toLowerCase())), "PGP", 'P', pipePart, 'G', glassShard);
 	}
 
-	public Item getPipePart(String material){
+	public Item getPipePart(String material) {
 		return GameRegistry.findItem("eureka", "pipePart" + material);
 	}
 }

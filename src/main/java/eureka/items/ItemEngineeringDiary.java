@@ -26,7 +26,7 @@ import eureka.network.PacketHandler;
 public class ItemEngineeringDiary extends Item {
 	public static IIcon icon;
 
-	public ItemEngineeringDiary(){
+	public ItemEngineeringDiary() {
 		super();
 	}
 

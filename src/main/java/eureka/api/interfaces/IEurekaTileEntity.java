@@ -11,5 +11,5 @@ import net.minecraft.entity.player.EntityPlayer;
  */
 public interface IEurekaTileEntity {
 
-    void makeProgress(EntityPlayer player, String key);
+	void makeProgress(EntityPlayer player, String key);
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import net.minecraft.item.ItemStack;
 
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
 
@@ -29,13 +28,13 @@ public class EurekaRegistry {
 	/**
 	 * Register your keys here for the EUREKA system
 	 */
-	public static void register(EurekaInformation information){
+	public static void register(EurekaInformation information) {
 		chapters.put(information.getKey(), information);
 		keys.add(information.getKey());
 		GameRegistry.registerItem(new ResearchNote(information.getKey()).setUnlocalizedName("researchNote" + information.getKey()), "researchNote" + information.getKey());
 	}
 
-	public static void registerCategory(String category, ItemStack stack){
+	public static void registerCategory(String category, ItemStack stack) {
 		categoriesList.add(category);
 		categories.put(category, stack);
 	}
@@ -43,49 +42,49 @@ public class EurekaRegistry {
 	/**
 	 * @return a clone of the list containing all EUREKA keys
 	 */
-	public static ArrayList<String> getKeys(){
+	public static ArrayList<String> getKeys() {
 		return (ArrayList) keys.clone();
 	}
 
-	public static int getMaxValue(String key){
+	public static int getMaxValue(String key) {
 		if (!keys.contains(key))
 			return 0;
 		return chapters.get(key).getMaxValue();
 	}
 
-	public static int getIncrement(String key){
+	public static int getIncrement(String key) {
 		if (!keys.contains(key))
 			return 0;
 		return chapters.get(key).getIncrement();
 	}
 
-	public static ItemStack getDisplayStack(String key){
+	public static ItemStack getDisplayStack(String key) {
 		if (!keys.contains(key))
 			return null;
 		return chapters.get(key).getDisplayStack();
 	}
 
-	public static EurekaChapter getChapterGui(String key){
+	public static EurekaChapter getChapterGui(String key) {
 		return chapters.get(key).getGui();
 	}
 
-	public static String getCategory(String key){
+	public static String getCategory(String key) {
 		return chapters.get(key).getCategory();
 	}
 
-	public static ArrayList<String> getCategoriesList(){
+	public static ArrayList<String> getCategoriesList() {
 		return (ArrayList) categoriesList.clone();
 	}
 
-	public static ItemStack getCategoryDisplayStack(String category){
+	public static ItemStack getCategoryDisplayStack(String category) {
 		return categories.get(category);
 	}
 
-	public static ArrayList<String> getRequiredReserch(String key){
+	public static ArrayList<String> getRequiredReserch(String key) {
 		return chapters.get(key).getRequiredResearch();
 	}
 
-	public static boolean isInfoChapter(String key){
+	public static boolean isInfoChapter(String key) {
 		return chapters.get(key).getGui().isInfoPage();
 	}
 

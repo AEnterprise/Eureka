@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+
 import eureka.api.EurekaKnowledge;
 import eureka.api.EurekaRegistry;
 import eureka.api.client.gui.EurekaChapter;
@@ -36,7 +37,6 @@ public class GuiEngineeringDiary extends GuiContainer {
 	public ArrayList<String> keys = EurekaRegistry.getKeys();
 	public ArrayList<EurekaChapter> chaptersToDisplay = new ArrayList<EurekaChapter>(20);
 	public ArrayList<String> chapterList = new ArrayList<String>(20);
-
 
 
 	public GuiEngineeringDiary(EntityPlayer player) {
@@ -126,15 +126,15 @@ public class GuiEngineeringDiary extends GuiContainer {
 		drawTexturedModalRect(x + 96, y + 39, 148, 187, EurekaKnowledge.getProgress(player, key) * 58 / EurekaRegistry.getMaxValue(key), 7);
 	}
 
-	private void renderItems(){
+	private void renderItems() {
 		xSize = 210;
 		ySize = 180;
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
-		for (int teller = 0; teller < 7; teller++){
+		for (int teller = 0; teller < 7; teller++) {
 
 			if (teller + categoryOffset < categoryList.size()) {
-				
+
 				renderItem(EurekaRegistry.getCategoryDisplayStack(categoryList.get(teller + categoryOffset)), x + 12, y + 24 * teller + 9);
 				GL11.glDisable(GL11.GL_LIGHTING);
 
@@ -146,23 +146,22 @@ public class GuiEngineeringDiary extends GuiContainer {
 		}
 		GL11.glEnable(GL11.GL_LIGHTING);
 	}
-	
-	private void renderItem(ItemStack stack, int x, int y)
-	{
+
+	private void renderItem(ItemStack stack, int x, int y) {
 		GL11.glTranslatef(0.0F, 0.0F, 32.0F);
 		this.zLevel = 200.0F;
 		itemRender.zLevel = 200.0F;
 		try {
 			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), stack, x, y);
-		} catch (Throwable e){
+		} catch (Throwable e) {
 			try {
 				itemRender.renderItemIntoGUI(fontRendererObj, this.mc.getTextureManager(), stack, x, y);
-			} catch (Throwable e2){
+			} catch (Throwable e2) {
 				Logger.error("Failed to render item for category " + categoryList.get(category));
 			}
 		}
-        this.zLevel = 0.0F;
-        itemRender.zLevel = 0.0F;
+		this.zLevel = 0.0F;
+		itemRender.zLevel = 0.0F;
 	}
 
 	private void drawPageButtons(int mouseX, int mouseY) {
@@ -183,15 +182,15 @@ public class GuiEngineeringDiary extends GuiContainer {
 			drawTexturedModalRect(x + 44, y + 13, 66, 196, 16, 16);
 		if (hasPrevPage && mouseX > 44 + x && mouseX < 60 + x && mouseY > 13 + y && mouseY < 28 + y)
 			drawTexturedModalRect(x + 44, y + 13, 66, 180, 16, 16);
-		if (categoryList.size() - categoryOffset > 7){
+		if (categoryList.size() - categoryOffset > 7) {
 			drawTexturedModalRect(x + 2, y + 180, 188, 192, 41, 17);
 			if (mouseX > x + 2 && mouseX < x + 43 && mouseY > y + 180 && mouseY < y + 197)
 				drawTexturedModalRect(x + 2, y + 180, 148, 192, 40, 17);
 		}
-		if (categoryOffset > 0){
+		if (categoryOffset > 0) {
 			drawTexturedModalRect(x + 2, y - 15, 188, 210, 41, 17);
 			if (mouseX > x + 2 && mouseX < x + 43 && mouseY > y - 15 && mouseY < y)
-				drawTexturedModalRect(x + 2, y -15 , 148, 210, 40, 17);
+				drawTexturedModalRect(x + 2, y - 15, 148, 210, 40, 17);
 		}
 		if (chaptersToDisplay.size() - chapterOffset > 7) {
 			drawTexturedModalRect(x + 165, y + 180, 18, 212, 40, 17);
@@ -205,7 +204,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 		}
 	}
 
-	private void drawCategories(){
+	private void drawCategories() {
 		xSize = 210;
 		ySize = 180;
 		int x = (width - xSize) / 2;
@@ -221,12 +220,12 @@ public class GuiEngineeringDiary extends GuiContainer {
 
 	}
 
-	private void drawChapters(){
+	private void drawChapters() {
 		xSize = 210;
 		ySize = 180;
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
-		for (int teller = 0; teller < 7; teller++){
+		for (int teller = 0; teller < 7; teller++) {
 			if (teller + chapterOffset < chaptersToDisplay.size())
 				if (teller + chapterOffset == chapter) {
 					drawTexturedModalRect(x + 174, y + (24 * teller + 5), 123, 204, 25, 23);
@@ -237,15 +236,15 @@ public class GuiEngineeringDiary extends GuiContainer {
 
 	}
 
-	private void drawText(){
-		if (chapter == -1){
+	private void drawText() {
+		if (chapter == -1) {
 			String categoryName = categoryList.get(category);
 			writeText(Utils.localize("engineeringDiary." + categoryName + ".title"), 0, 0xFFCC00);
 			writeText(Utils.localize("engineeringDiary." + categoryName + ".page" + page), 4, 0xFFFFFF);
 		} else {
 			String chapterName = chapterList.get(chapter);
 			writeText(Utils.localize("engineeringDiary." + chapterName + ".title"), 0, 0xFFCC00);
-			if (page == 0){
+			if (page == 0) {
 				writeText(Utils.localize("engineeringDiary.requiredResearch"), 5, 0xFF0000);
 				int line = writeText(chaptersToDisplay.get(chapter).getRequiredResearch(), 6, 0x0000FF);
 				line = writeText(Utils.localize("engineeringDiary.progress") + " " + EurekaKnowledge.getProgress(player, chapterName) + " / " + EurekaRegistry.getMaxValue(chapterName), line, 0xFFFF00);
@@ -262,37 +261,37 @@ public class GuiEngineeringDiary extends GuiContainer {
 		}
 	}
 
-	public int writeText(String text, int line, int color){
+	public int writeText(String text, int line, int color) {
 		if (text == null)
 			return line;
 		String[] words = text.split(" ", 0);
 		String output = "";
-		for (String word: words){
+		for (String word : words) {
 			if (line == 20)
 				return line;
-			if (output.length() + word.length() > lineLimit[line] || word.equals("@")){
+			if (output.length() + word.length() > lineLimit[line] || word.equals("@")) {
 				drawTextAtLine(output, line, color);
 				output = "";
 				line++;
 			}
 			if (!(word.equals("@")))
-			output = output + word + " ";
+				output = output + word + " ";
 		}
 		drawTextAtLine(output, line, color);
 		line += 2;
 		return line;
 	}
 
-	public void drawTextAtLine(String text, int line, int color){
+	public void drawTextAtLine(String text, int line, int color) {
 		if (text == null || text.equals("") || line == 20)
 			return;
-		fontRendererObj.drawString(text, startX[line], line*8 + 6, color);
+		fontRendererObj.drawString(text, startX[line], line * 8 + 6, color);
 	}
 
-	private void rebuildChapterList(){
+	private void rebuildChapterList() {
 		chaptersToDisplay.clear();
 		chapterList.clear();
-		for (String key: keys){
+		for (String key : keys) {
 			if (EurekaRegistry.getCategory(key).equals(categoryList.get(category))) {
 				chaptersToDisplay.add(EurekaRegistry.getChapterGui(key));
 				chapterList.add(key);
@@ -308,7 +307,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 		int max = 7;
 		if (categoryList.size() < 7)
 			max = categoryList.size();
-		if (mouseX > x + 7 && mouseX < x +  31 &&  (mouseY - y) / 25  < max) {
+		if (mouseX > x + 7 && mouseX < x + 31 && (mouseY - y) / 25 < max) {
 			page = 0;
 			category = ((mouseY - y) / 25) + categoryOffset;
 			chapter = -1;
@@ -317,7 +316,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 		max = 7;
 		if (chaptersToDisplay.size() < 7)
 			max = chaptersToDisplay.size();
-		if (mouseX > x + 174 && mouseX < x + 198 && (mouseY - y) / 25 < max){
+		if (mouseX > x + 174 && mouseX < x + 198 && (mouseY - y) / 25 < max) {
 			page = 0;
 			chapter = ((mouseY - y) / 25) + chapterOffset;
 		}
@@ -332,7 +331,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 			page--;
 		if (page > 0) {
 			hasPrevPage = true;
-		} else{
+		} else {
 			hasPrevPage = false;
 		}
 		if (mouseX > x + 2 && mouseX < x + 43 && mouseY > y + 180 && mouseY < y + 197 && categoryList.size() - categoryOffset > 7)
