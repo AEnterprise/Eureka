@@ -16,13 +16,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import eureka.api.EurekaKnowledge;
 import eureka.api.EurekaRegistry;
 import eureka.api.client.gui.EurekaChapter;
+import eureka.core.Logger;
 import eureka.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
  * http://buildcraftadditions.wordpress.com/
- * Buildcraft Additions is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Eureka is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 @SideOnly(Side.CLIENT)
@@ -146,12 +147,20 @@ public class GuiEngineeringDiary extends GuiContainer {
 		GL11.glEnable(GL11.GL_LIGHTING);
 	}
 	
-	private void renderItem(ItemStack par1, int x, int y)
+	private void renderItem(ItemStack stack, int x, int y)
 	{
 		GL11.glTranslatef(0.0F, 0.0F, 32.0F);
 		this.zLevel = 200.0F;
 		itemRender.zLevel = 200.0F;
-		itemRender.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), par1, x, y);
+		try {
+			itemRender.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), stack, x, y);
+		} catch (Throwable e){
+			try {
+				itemRender.renderItemIntoGUI(fontRendererObj, this.mc.getTextureManager(), stack, x, y);
+			} catch (Throwable e2){
+				Logger.error("Failed to render item for category " + categoryList.get(category));
+			}
+		}
         this.zLevel = 0.0F;
         itemRender.zLevel = 0.0F;
 	}

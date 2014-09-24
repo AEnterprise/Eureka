@@ -32,10 +32,10 @@ import eureka.utils.BCUtils;
 
 /**
  * Copyright (c) 2014, AEnterprise
- * http://buildcraftAdditions.wordpress.com/
- * Eureka is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://buildcraftAdditions.wordpress.com/wiki/licensing-stuff/
+ * http://buildcraftadditions.wordpress.com/
+ * Eureka is distributed under the terms of GNU GPL v3.0
+ * Please check the contents of the license located in
+ * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
 @Mod(modid = "eureka", name = "Eureka", version = "@VERSION@", acceptedMinecraftVersions = "1.7.10")
@@ -75,7 +75,7 @@ public class Eureka {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		PacketHandler.init();
 		EurekaRegistry.registerCategory("Eureka", new ItemStack(engineeringDiary));
-		if (Loader.isModLoaded("BuildCraft|Core")) {
+		if (Loader.isModLoaded("BuildCraft|Core") && false) {
 			glassShard = new ItemGlassShard();
 			GameRegistry.registerItem(glassShard, "glassShard");
 
