@@ -17,15 +17,14 @@ import eureka.utils.Utils;
  */
 public class EurekaInfo extends EurekaInformation {
 	public String key, category;
-	public int increment, maxValue;
+	public int maxValue;
 	public ItemStack stack;
 	public EurekaChapter gui;
 	public ArrayList<String> requiredResearch;
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, EurekaChapter gui, String... researches) {
+	public EurekaInfo(String key, String category, int maxValue, ItemStack stack, EurekaChapter gui, String... researches) {
 		this.key = key;
 		this.category = category;
-		this.increment = increment;
 		this.maxValue = maxValue;
 		this.stack = stack;
 		this.gui = gui;
@@ -34,10 +33,9 @@ public class EurekaInfo extends EurekaInformation {
 			requiredResearch.add(research);
 	}
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, String... researches) {
+	public EurekaInfo(String key, String category, int maxValue, ItemStack stack, String... researches) {
 		this.key = key;
 		this.category = category;
-		this.increment = increment;
 		this.maxValue = maxValue;
 		this.stack = stack;
 		if (researches.length > 0) {
@@ -60,20 +58,18 @@ public class EurekaInfo extends EurekaInformation {
 			requiredResearch.add(research);
 	}
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, EurekaChapter gui) {
+	public EurekaInfo(String key, String category, int maxValue, ItemStack stack, EurekaChapter gui) {
 		this.key = key;
 		this.category = category;
-		this.increment = increment;
 		this.maxValue = maxValue;
 		this.stack = stack;
 		this.gui = gui;
 		this.requiredResearch = new ArrayList<String>();
 	}
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack) {
+	public EurekaInfo(String key, String category, int maxValue, ItemStack stack) {
 		this.key = key;
 		this.category = category;
-		this.increment = increment;
 		this.maxValue = maxValue;
 		this.stack = stack;
 		gui = new BasicEurekaChapter(key);
@@ -81,10 +77,9 @@ public class EurekaInfo extends EurekaInformation {
 	}
 
 
-	public EurekaInfo(String key, String category, int increment, int maxValue, ItemStack stack, boolean isInfoPage, String... researches) {
+	public EurekaInfo(String key, String category, int maxValue, ItemStack stack, boolean isInfoPage, String... researches) {
 		this.key = key;
 		this.category = category;
-		this.increment = increment;
 		this.maxValue = maxValue;
 		this.stack = stack;
 		if (researches.length > 0) {
@@ -110,11 +105,6 @@ public class EurekaInfo extends EurekaInformation {
 	@Override
 	public String getKey() {
 		return key;
-	}
-
-	@Override
-	public int getIncrement() {
-		return increment;
 	}
 
 	@Override

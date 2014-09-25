@@ -119,12 +119,6 @@ public class EurekaRegistry {
 		return chapters.get(key).getMaxValue();
 	}
 
-	public static int getIncrement(String key) {
-		if (!keys.contains(key))
-			return 0;
-		return chapters.get(key).getIncrement();
-	}
-
 	public static ItemStack getDisplayStack(String key) {
 		if (!keys.contains(key))
 			return null;

@@ -18,8 +18,6 @@ public abstract class EurekaInformation {
 
 	public abstract String getKey();
 
-	public abstract int getIncrement();
-
 	public abstract int getMaxValue();
 
 	public abstract ItemStack getDisplayStack();

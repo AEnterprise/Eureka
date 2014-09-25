@@ -21,7 +21,7 @@ import buildcraft.api.events.RobotPlacementEvent;
 import eureka.Eureka;
 import eureka.api.EurekaKnowledge;
 import eureka.api.EurekaRegistry;
-import eureka.api.events.UnauthorizedBlockEvent;
+import eureka.api.events.BlockPlacedEvent;
 import eureka.utils.BCItems;
 import eureka.utils.Utils;
 
@@ -164,9 +164,17 @@ public class EventHandler {
 				EurekaKnowledge.makeProgress(event.player, "tank", 1);
 		}
 
-		@SubscribeEvent
-		public void unauthorizedBlock(UnauthorizedBlockEvent event){
 
+		@SubscribeEvent
+		public void blockPlacement(BlockPlacedEvent event){
+			if (event.world.isRemote)
+				return;
+			String key = EurekaRegistry.getKey(event.block);
+			if (key == "")
+				return;
+			if (!EurekaKnowledge.isFinished(event.player, key)){
+				Logger.info("UNAUTHORIZED PLACEMENT");
+			}
 		}
 
 
@@ -191,9 +199,12 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void onPlayerUsesBlock(PlayerInteractEvent event) {
-			if (event.entityPlayer.getCurrentEquippedItem() == null || event.entityPlayer.worldObj.isRemote)
+			if (event.entityPlayer.getCurrentEquippedItem() == null)
 				return;
 			String key = EurekaRegistry.getKey(event.entityPlayer.getCurrentEquippedItem().getItem());
+			if (key == ""){
+				key = EurekaRegistry.getKey(event.world.getBlock(event.x, event.y, event.z));
+			}
 			if (key == "")
 				return;
 			if (!EurekaKnowledge.isFinished(event.entityPlayer, key))

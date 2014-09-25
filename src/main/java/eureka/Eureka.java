@@ -85,7 +85,7 @@ public class Eureka {
 
 			//Automatization
 			EurekaRegistry.registerCategory("Buildcraft|Automatization", new ItemStack(BCItems.QUARRY));
-			EurekaRegistry.register(new EurekaInfo("autoWorkbench", "Buildcraft|Automatization", 1, 50, new ItemStack(BCItems.AUTOWORKBENCH)));
+			EurekaRegistry.register(new EurekaInfo("autoWorkbench", "Buildcraft|Automatization", 50, new ItemStack(BCItems.AUTOWORKBENCH)));
 			EurekaRegistry.registerDrops("autoWorkbench", new ItemStack(BCItems.WOODEN_GEAR, 4), new ItemStack(Blocks.crafting_table));
 			EurekaRegistry.bindToKey(BCItems.AUTOWORKBENCH, "autoWorkbench");
 
