@@ -1,5 +1,7 @@
 package eureka.items;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -12,6 +14,7 @@ import net.minecraft.world.World;
 import eureka.Eureka;
 import eureka.api.EurekaKnowledge;
 import eureka.api.EurekaRegistry;
+import eureka.utils.Utils;
 
 /**
  * Copyright (c) 2014, AEnterprise
@@ -43,6 +46,11 @@ public class ResearchNote extends Item {
 			return new ItemStack(Items.paper);
 		stack.stackSize--;
 		return stack;
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
+		list.add(Utils.localize("engineeringDiary." + key + ".title"));
 	}
 
 	@Override

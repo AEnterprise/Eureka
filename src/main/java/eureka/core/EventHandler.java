@@ -173,15 +173,14 @@ public class EventHandler {
 			if (key == "")
 				return;
 			if (!EurekaKnowledge.isFinished(event.player, key)){
-				Logger.info("UNAUTHORIZED PLACEMENT");
+				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
+				event.world.setBlockToAir(event.xCoord, event.yCoord, event.zCoord);
+				dropItemsFromList(event.world, event.xCoord, event.yCoord, event.zCoord, EurekaRegistry.getDrops(key));
 			}
 		}
 
 
-		private void dropItemsFromList(World world, int x, int y, int z, ItemStack[] stacks) {
-			for (ItemStack stack : stacks)
-				Utils.dropItemstack(world, x, y, z, stack.copy());
-		}
+
 
 		private String getBCKey(String name){
 			return "";
@@ -199,16 +198,27 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void onPlayerUsesBlock(PlayerInteractEvent event) {
-			if (event.entityPlayer.getCurrentEquippedItem() == null)
+			String key;
+			if (event.world.isRemote)
 				return;
-			String key = EurekaRegistry.getKey(event.entityPlayer.getCurrentEquippedItem().getItem());
-			if (key == ""){
-				key = EurekaRegistry.getKey(event.world.getBlock(event.x, event.y, event.z));
+			if (event.entityPlayer.getCurrentEquippedItem() != null) {
+				key = EurekaRegistry.getKey(event.entityPlayer.getCurrentEquippedItem().getItem());
+				if (!key.equals("") && !EurekaKnowledge.isFinished(event.entityPlayer, key)) {
+					if (event.entityPlayer.getCurrentEquippedItem().stackSize > 1)
+					event.entityPlayer.getCurrentEquippedItem().stackSize--;
+					else
+						event.entityPlayer.destroyCurrentEquippedItem();
+					dropItemsFromList(event.world, (int)event.entityPlayer.posX,(int) event.entityPlayer.posY, (int)event.entityPlayer.posZ, EurekaRegistry.getDrops(key));
+					event.setCanceled(true);
+
+				}
 			}
-			if (key == "")
+			key = EurekaRegistry.getKey(event.world.getBlock(event.x, event.y, event.z));
+			if (key.equals(""))
 				return;
-			if (!EurekaKnowledge.isFinished(event.entityPlayer, key))
+			if (!EurekaKnowledge.isFinished(event.entityPlayer, key)) {
 				event.setCanceled(true);
+			}
 		}
 
 		@SubscribeEvent
@@ -216,5 +226,9 @@ public class EventHandler {
 			EurekaKnowledge.makeProgress(event.getPlayer(), "miningWell", 1);
 			EurekaKnowledge.makeProgress(event.getPlayer(), "quarry", 1);
 		}
+	}
+	public static void dropItemsFromList(World world, int x, int y, int z, ItemStack[] stacks) {
+		for (ItemStack stack : stacks)
+			Utils.dropItemstack(world, x, y, z, stack.copy());
 	}
 }

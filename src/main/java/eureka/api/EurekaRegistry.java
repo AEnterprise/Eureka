@@ -37,7 +37,7 @@ public class EurekaRegistry {
 	public static void register(EurekaInformation information) {
 		chapters.put(information.getKey(), information);
 		keys.add(information.getKey());
-		GameRegistry.registerItem(new ResearchNote(information.getKey()).setUnlocalizedName("researchNote" + information.getKey()), "researchNote" + information.getKey());
+		GameRegistry.registerItem(new ResearchNote(information.getKey()).setUnlocalizedName("researchNote"), "researchNote" + information.getKey());
 		Logger.info("Eureka key registered: " + information.getKey());
 	}
 

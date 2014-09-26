@@ -8,9 +8,10 @@ import java.io.Writer;
 import java.nio.file.Files;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.GameData;
 
 
 import com.google.gson.Gson;
@@ -94,9 +95,9 @@ public class FileReader {
 			}
 			ItemStack stack = null;
 			if (category.displaystackType.toLowerCase().equals("block"))
-				stack = new ItemStack(GameRegistry.findBlock(category.displaystackModID, category.displaystackName));
+				stack = new ItemStack(getBlockFromRegistry(category.displaystackModID, category.displaystackName));
 			else if (category.displaystackType.toLowerCase().equals("item"))
-				stack = new ItemStack(GameRegistry.findItem(category.displaystackModID, category.displaystackName));
+				stack = new ItemStack(getItemFromRegistry(category.displaystackModID, category.displaystackName));
 			if (stack == null) {
 				Logger.error("Unable to get the displaystack from the GameRegistry for category" + category.name + "check type, modid and the name used to register it");
 			}
@@ -115,9 +116,9 @@ public class FileReader {
 			}
 			ItemStack displaystack = null;
 			if (chapter.displaystackType.toLowerCase().equals("block"))
-				displaystack = new ItemStack(GameRegistry.findBlock(chapter.displaystackModID, chapter.displaystackName));
+				displaystack = new ItemStack(getBlockFromRegistry(chapter.displaystackModID, chapter.displaystackName));
 			else if (chapter.displaystackType.toLowerCase().equals("item"))
-				displaystack = new ItemStack(GameRegistry.findItem(chapter.displaystackModID, chapter.displaystackName));
+				displaystack = new ItemStack(getItemFromRegistry(chapter.displaystackModID, chapter.displaystackName));
 			if (displaystack == null){
 				Logger.error("Error while reading key file" + file.toString() + ": error while obtaining display stack, please check type, modid and name");
 				return;
@@ -130,9 +131,9 @@ public class FileReader {
 			for (int teller = 0; teller < chapter.dropsStackType.length; teller++){
 				ItemStack tempstack = null;
 				if (chapter.dropsStackType[teller].toLowerCase().equals("block"))
-					tempstack = new ItemStack(GameRegistry.findBlock(chapter.dropsModIDs[teller], chapter.dropsStackName[teller]));
+					tempstack = new ItemStack(getBlockFromRegistry(chapter.dropsModIDs[teller], chapter.dropsStackName[teller]));
 				else if (chapter.dropsStackType[teller].toLowerCase().equals("item"))
-					tempstack = new ItemStack(GameRegistry.findItem(chapter.dropsModIDs[teller], chapter.dropsStackName[teller]));
+					tempstack = new ItemStack(getItemFromRegistry(chapter.dropsModIDs[teller], chapter.dropsStackName[teller]));
 				if (tempstack == null){
 					Logger.error("Error while reading key file" + file.toString() +  ": Unable to assemble itemstack " + teller);
 					continue;
@@ -144,16 +145,31 @@ public class FileReader {
 			EurekaRegistry.registerDrops(chapter.name, drops);
 
 			if (chapter.linkedObjectStackType.toLowerCase().equals("block")){
-				Block tempblock = GameRegistry.findBlock(chapter.linkedObjectModID, chapter.linkedObjectStackName);
+				Block tempblock = getBlockFromRegistry(chapter.linkedObjectModID, chapter.linkedObjectStackName);
 				if (tempblock == null){
 					Logger.error("Error while reading key file" + file.toString() + ": unable to locate linked block");
 					return;
 				}
 				EurekaRegistry.bindToKey(tempblock, chapter.name);
+			} else if (chapter.linkedObjectStackType.toLowerCase().equals("item")){
+				Item tempitem = getItemFromRegistry(chapter.linkedObjectModID, chapter.linkedObjectStackName);
+				if (tempitem == null){
+					Logger.error("Error while reading key file" + file.toString() + ": unable to locate linked item");
+					return;
+				}
+				EurekaRegistry.bindToKey(tempitem, chapter.name);
 			}
 
 		} catch (Throwable e){
 			e.printStackTrace();
 		}
+	}
+
+	private static Item getItemFromRegistry(String modID, String name){
+		return GameData.getItemRegistry().getObject(modID + ":" + name);
+	}
+
+	private static Block getBlockFromRegistry(String modID, String name){
+		return GameData.getBlockRegistry().getObject(modID + ":" + name);
 	}
 }
