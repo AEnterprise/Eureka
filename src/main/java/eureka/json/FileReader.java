@@ -159,7 +159,6 @@ public class FileReader {
 				}
 				EurekaRegistry.bindToKey(tempitem, chapter.name);
 			}
-
 			if (chapter.progressType.equals("crafting")) {
 				if (chapter.progressObjectType.equals("item")){
 					Item tempitem;
@@ -200,6 +199,12 @@ public class FileReader {
 					return;
 				}
 				EurekaRegistry.addPlaceBlockProgress(tempBlock, chapter.name);
+			} else if (chapter.progressType.equals("enderTeleport")){
+				EurekaRegistry.addEnderTeleportKey(chapter.name);
+			} else if (chapter.progressType.equals("killSomething")){
+				EurekaRegistry.addKillKey(chapter.name);
+			} else if (chapter.progressType.equals("die")){
+				EurekaRegistry.addDeathKey(chapter.name);
 			}
 
 		} catch (Throwable e){

@@ -1,13 +1,17 @@
 package eureka.core;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 
+import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -114,7 +118,7 @@ public class EventHandler {
 		}
 
 
-		@SubscribeEvent
+		@SubscribeEvent(priority = EventPriority.HIGHEST) //make sure it gets trigered first to prevent handeling from other mods
 		public void onPlayerUsesBlock(PlayerInteractEvent event) {
 			String key;
 			if (event.world.isRemote)
@@ -139,7 +143,7 @@ public class EventHandler {
 			}
 		}
 
-		@SubscribeEvent
+		@SubscribeEvent (priority = EventPriority.LOWEST) //trigered last to make sure it doesn't triger if the break has been canceled
 		public void blockBreakEvent(BlockEvent.BreakEvent event) {
 			for (String key: EurekaRegistry.getBreakAnyKeys())
 				EurekaKnowledge.makeProgress(event.getPlayer(), key, 1);
@@ -150,9 +154,31 @@ public class EventHandler {
 			if (!key.equals(""))
 				EurekaKnowledge.makeProgress(event.getPlayer(), key, -1);
 		}
+
+		@SubscribeEvent
+		public void onTeleport(EnderTeleportEvent event){
+			if (event.entityLiving instanceof EntityPlayer)
+				for (String key: EurekaRegistry.getEnderTeleportKeys())
+					EurekaKnowledge.makeProgress((EntityPlayer) event.entityLiving, key, 1);
+		}
+
+		@SubscribeEvent
+		public void onLivingDeath(LivingDeathEvent event) {
+			if (event.source.getSourceOfDamage() instanceof EntityPlayer){
+				for (String key: EurekaRegistry.getKillKeys())
+					EurekaKnowledge.makeProgress((EntityPlayer) event.source.getSourceOfDamage(), key, 1);
+			}
+			if (event.entityLiving instanceof EntityPlayer)
+				for (String key: EurekaRegistry.getDeathKeys())
+					EurekaKnowledge.makeProgress((EntityPlayer) event.entityLiving, key, 1);
+		}
+
+
 	}
 	public static void dropItemsFromList(World world, int x, int y, int z, ItemStack[] stacks) {
 		for (ItemStack stack : stacks) {
+			if (stack == null)
+				continue;
 			String key = EurekaRegistry.getKey(stack.getItem());
 			if (key.equals("")) {
 				if (stack.getItem() instanceof ItemBlock)

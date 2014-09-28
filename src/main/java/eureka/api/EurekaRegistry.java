@@ -34,6 +34,9 @@ public class EurekaRegistry {
 	private static HashMap<Block, String> breakBlockProgression = new HashMap<Block, String>(50);
 	private static ArrayList<String> breakAnyProgression = new ArrayList<String>(50);
 	private static HashMap<Block, String> placeBlockProgression = new HashMap<Block, String>(50);
+	private static ArrayList<String> enderTeleportKeys = new ArrayList<String>(50);
+	private static ArrayList<String> killKeys = new ArrayList<String>(50);
+	private static ArrayList<String> deathKeys = new ArrayList<String>(50);
 
 	/**
 	 * Register your keys here for the EUREKA system
@@ -117,6 +120,18 @@ public class EurekaRegistry {
 		return true;
 	}
 
+	public static void addEnderTeleportKey(String key){
+		enderTeleportKeys.add(key);
+	}
+
+	public static void addKillKey(String key){
+		killKeys.add(key);
+	}
+
+	public static void addDeathKey(String key){
+		deathKeys.add(key);
+	}
+
 	public static ItemStack[] getDrops(String key){
 		if (!drops.containsKey(key))
 			return new ItemStack[0];
@@ -159,6 +174,18 @@ public class EurekaRegistry {
 		if (!placeBlockProgression.containsKey(block))
 			return "";
 		return placeBlockProgression.get(block);
+	}
+
+	public static ArrayList<String> getEnderTeleportKeys(){
+		return (ArrayList) enderTeleportKeys.clone();
+	}
+
+	public static ArrayList<String> getKillKeys(){
+		return (ArrayList) killKeys.clone();
+	}
+
+	public static ArrayList<String> getDeathKeys(){
+		return (ArrayList) deathKeys.clone();
 	}
 
 	/**
