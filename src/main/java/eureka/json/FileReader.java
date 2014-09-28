@@ -120,11 +120,11 @@ public class FileReader {
 			else if (chapter.displaystackType.toLowerCase().equals("item"))
 				displaystack = new ItemStack(getItemFromRegistry(chapter.displaystackModID, chapter.displaystackName));
 			if (displaystack == null){
-				Logger.error("Error while reading key file" + file.toString() + ": error while obtaining display stack, please check type, modid and name");
+				keyError(file, "error while obtaining display stack, please check type, modid and name");
 				return;
 			}
 			if (chapter.dropsStackType.length + chapter.dropsAmount.length + chapter.dropsModIDs.length + chapter.dropsStackName.length != (chapter.dropsStackType.length * 4)){
-				Logger.error("Error while reading key file" + file.toString() +  ": drop array sizes don't match");
+				keyError(file, "drop array sizes don't match");
 				return;
 			}
 			ItemStack[] drops = new ItemStack[chapter.dropsStackType.length];
@@ -135,7 +135,7 @@ public class FileReader {
 				else if (chapter.dropsStackType[teller].toLowerCase().equals("item"))
 					tempstack = new ItemStack(getItemFromRegistry(chapter.dropsModIDs[teller], chapter.dropsStackName[teller]));
 				if (tempstack == null){
-					Logger.error("Error while reading key file" + file.toString() +  ": Unable to assemble itemstack " + teller);
+					keyError(file, "Unable to assemble itemstack " + teller);
 					continue;
 				}
 				tempstack.stackSize = chapter.dropsAmount[teller];
@@ -147,17 +147,39 @@ public class FileReader {
 			if (chapter.linkedObjectStackType.toLowerCase().equals("block")){
 				Block tempblock = getBlockFromRegistry(chapter.linkedObjectModID, chapter.linkedObjectStackName);
 				if (tempblock == null){
-					Logger.error("Error while reading key file" + file.toString() + ": unable to locate linked block");
+					keyError(file, " unable to locate linked block");
 					return;
 				}
 				EurekaRegistry.bindToKey(tempblock, chapter.name);
 			} else if (chapter.linkedObjectStackType.toLowerCase().equals("item")){
 				Item tempitem = getItemFromRegistry(chapter.linkedObjectModID, chapter.linkedObjectStackName);
 				if (tempitem == null){
-					Logger.error("Error while reading key file" + file.toString() + ": unable to locate linked item");
+					keyError(file, "unable to locate linked item");
 					return;
 				}
 				EurekaRegistry.bindToKey(tempitem, chapter.name);
+			}
+
+			if (chapter.progressType.equals("crafting")) {
+				if (chapter.progressObjectType.equals("item")){
+					Item tempitem;
+					tempitem = getItemFromRegistry(chapter.progressObjectModID, chapter.progressObjectStackName);
+					if (tempitem == null){
+						keyError(file, "Unable to retrieve crafting progression item");
+						return;
+					}
+					EurekaRegistry.addCrafingProgress(tempitem, chapter.name);
+				} else if (chapter.progressObjectType.equals("block")){
+					Block tempBlock;
+					tempBlock = getBlockFromRegistry(chapter.progressObjectModID, chapter.progressObjectStackName);
+					if (tempBlock == null){
+						keyError(file, "Unable to retrieve crafting progression block");
+						return;
+					}
+					EurekaRegistry.addCrafingProgress(new ItemStack(tempBlock).getItem(), chapter.name);
+				}
+			} else if (chapter.progressType.equals("craftAnything")){
+				EurekaRegistry.addAnyCraftingProgress(chapter.name);
 			}
 
 		} catch (Throwable e){
@@ -171,5 +193,9 @@ public class FileReader {
 
 	private static Block getBlockFromRegistry(String modID, String name){
 		return GameData.getBlockRegistry().getObject(modID + ":" + name);
+	}
+
+	private static void keyError (File file, String reason){
+		Logger.error("Error while reading key file " + file.toString() + ": " + reason);
 	}
 }

@@ -1,6 +1,5 @@
 package eureka.core;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
@@ -159,9 +158,11 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void onCrafted(PlayerEvent.ItemCraftedEvent event) {
-			EurekaKnowledge.makeProgress(event.player, "autoWorkbench", 1);
-			if (event.crafting.getItem() == new ItemStack(Blocks.chest).getItem())
-				EurekaKnowledge.makeProgress(event.player, "tank", 1);
+			for (String key : EurekaRegistry.getCraftKeys())
+				EurekaKnowledge.makeProgress(event.player, key, 1);
+			String key = EurekaRegistry.getCraftingProgressKey(event.crafting.getItem());
+			if (!key.isEmpty())
+				EurekaKnowledge.makeProgress(event.player, key, 1);
 		}
 
 
@@ -205,7 +206,7 @@ public class EventHandler {
 				key = EurekaRegistry.getKey(event.entityPlayer.getCurrentEquippedItem().getItem());
 				if (!key.equals("") && !EurekaKnowledge.isFinished(event.entityPlayer, key)) {
 					if (event.entityPlayer.getCurrentEquippedItem().stackSize > 1)
-					event.entityPlayer.getCurrentEquippedItem().stackSize--;
+						event.entityPlayer.getCurrentEquippedItem().stackSize--;
 					else
 						event.entityPlayer.destroyCurrentEquippedItem();
 					dropItemsFromList(event.world, (int)event.entityPlayer.posX,(int) event.entityPlayer.posY, (int)event.entityPlayer.posZ, EurekaRegistry.getDrops(key));

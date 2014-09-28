@@ -28,8 +28,9 @@ public class EurekaRegistry {
 	private static HashMap<String, ItemStack> categories = new HashMap<String, ItemStack>(50);
 	private static HashMap<String, ItemStack[]> drops = new HashMap<String, ItemStack[]>(50);
 	private static HashMap<Block, String> blocks = new HashMap<Block, String>(50);
-	private static HashMap<String, String> blockMeta = new HashMap<String, String>(50);
 	private static HashMap<Item, String> items = new HashMap<Item, String>(50);
+	private static HashMap<Item, String> craftingProgressItems = new HashMap<Item, String>(50);
+	private static ArrayList<String> craftKeys = new ArrayList<String>(50);
 
 	/**
 	 * Register your keys here for the EUREKA system
@@ -69,16 +70,6 @@ public class EurekaRegistry {
 		return true;
 	}
 
-	public static boolean bindToKey(Block block, int meta, String key){
-		if (blocks.containsKey(block)) {
-			Logger.error("Error while binding a block (" + block.getUnlocalizedName() + ") to a key (" + key + "): the block has already be bound to another key (" + blocks.get(block) + ")");
-			return false;
-		}
-		blocks.put(block, key);
-		blockMeta.put(key, Integer.toString(meta));
-		return true;
-	}
-
 	public static boolean bindToKey(Item item, String key){
 		if (items.containsKey(item)) {
 			Logger.error("Error while binding a item (" + item.getUnlocalizedName() + ") to a key (" + key + "): the item has already be bound to another key (" + items.get(item) + ")");
@@ -86,6 +77,19 @@ public class EurekaRegistry {
 		}
 		items.put(item, key);
 		return true;
+	}
+
+	public static boolean addCrafingProgress(Item item, String key) {
+		if (craftingProgressItems.containsKey(item)){
+			Logger.error("Error while registering crafting progress for item " + item + ": specified item is already used for another key (" + craftingProgressItems.get(item)  +")");
+			return false;
+		}
+		craftingProgressItems.put(item, key);
+		return true;
+	}
+
+	public static void addAnyCraftingProgress(String key){
+		craftKeys.add(key);
 	}
 
 	public static ItemStack[] getDrops(String key){
@@ -104,6 +108,16 @@ public class EurekaRegistry {
 		if (!items.containsKey(item))
 			return "";
 		return items.get(item);
+	}
+
+	public static String getCraftingProgressKey(Item item){
+		if (!craftingProgressItems.containsKey(item))
+			return "";
+		return craftingProgressItems.get(item);
+	}
+
+	public static ArrayList<String> getCraftKeys() {
+		return (ArrayList) craftKeys.clone();
 	}
 
 	/**
