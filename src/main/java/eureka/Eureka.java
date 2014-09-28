@@ -71,6 +71,7 @@ public class Eureka {
 		FMLCommonHandler.instance().bus().register(blockDetector);
 		MinecraftForge.EVENT_BUS.register(blockDetector);
 		FileReader.setMainfolder(new File(event.getModConfigurationDirectory(), "Eureka"));
+		EurekaRegistry.registerCategory("Eureka", new ItemStack(engineeringDiary));
 	}
 
 	@Mod.EventHandler

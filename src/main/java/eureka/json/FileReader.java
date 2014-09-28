@@ -180,6 +180,18 @@ public class FileReader {
 				}
 			} else if (chapter.progressType.equals("craftAnything")){
 				EurekaRegistry.addAnyCraftingProgress(chapter.name);
+			} else if (chapter.progressType.equals("breakBlock")) {
+				if (chapter.progressObjectType.equals("block")){
+					Block tempBlock;
+					tempBlock = getBlockFromRegistry(chapter.progressObjectModID, chapter.progressObjectStackName);
+					if (tempBlock == null){
+						keyError(file, "Unable to retrieve block breaking progression block");
+						return;
+					}
+					EurekaRegistry.addBlockBreakProgress(tempBlock, chapter.name);
+				}
+			} else if (chapter.progressType.equals("breakAnyBlock")){
+				EurekaRegistry.addBreakAnyProgress(chapter.name);
 			}
 
 		} catch (Throwable e){
