@@ -192,6 +192,14 @@ public class FileReader {
 				}
 			} else if (chapter.progressType.equals("breakAnyBlock")){
 				EurekaRegistry.addBreakAnyProgress(chapter.name);
+			} else if (chapter.progressType.equals("placeBlock")){
+				Block tempBlock;
+				tempBlock = getBlockFromRegistry(chapter.progressObjectModID, chapter.progressObjectStackName);
+				if (tempBlock == null){
+					keyError(file, "Unable to retrieve block breaking progression block");
+					return;
+				}
+				EurekaRegistry.addPlaceBlockProgress(tempBlock, chapter.name);
 			}
 
 		} catch (Throwable e){

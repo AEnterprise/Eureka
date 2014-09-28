@@ -33,6 +33,7 @@ public class EurekaRegistry {
 	private static ArrayList<String> craftKeys = new ArrayList<String>(50);
 	private static HashMap<Block, String> breakBlockProgression = new HashMap<Block, String>(50);
 	private static ArrayList<String> breakAnyProgression = new ArrayList<String>(50);
+	private static HashMap<Block, String> placeBlockProgression = new HashMap<Block, String>(50);
 
 	/**
 	 * Register your keys here for the EUREKA system
@@ -107,6 +108,15 @@ public class EurekaRegistry {
 		breakAnyProgression.add(key);
 	}
 
+	public static boolean addPlaceBlockProgress(Block block, String key){
+		if (placeBlockProgression.containsKey(block)){
+			Logger.error("Error while registering place block progression for block " + block + ": specified block is already used for another key (" + placeBlockProgression.get(block));
+			return false;
+		}
+		placeBlockProgression.put(block, key);
+		return true;
+	}
+
 	public static ItemStack[] getDrops(String key){
 		if (!drops.containsKey(key))
 			return new ItemStack[0];
@@ -143,6 +153,12 @@ public class EurekaRegistry {
 
 	public static ArrayList<String> getBreakAnyKeys(){
 		return (ArrayList) breakAnyProgression.clone();
+	}
+
+	public static String getBlockPlacementKey(Block block){
+		if (!placeBlockProgression.containsKey(block))
+			return "";
+		return placeBlockProgression.get(block);
 	}
 
 	/**

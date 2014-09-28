@@ -59,6 +59,8 @@ public class EurekaKnowledge {
 			NBTTagCompound tag = getTag(player);
 			if (progress < EurekaRegistry.getMaxValue(key)) {
 				progress += amount;
+				if (progress < 0)
+					progress = 0;
 				setKey(tag, key + "Progress", progress);
 			}
 			if (progress >= EurekaRegistry.getMaxValue(key)) {

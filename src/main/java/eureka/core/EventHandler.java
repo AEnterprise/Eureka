@@ -93,13 +93,15 @@ public class EventHandler {
 			if (event.world.isRemote)
 				return;
 			String key = EurekaRegistry.getKey(event.block);
-			if (key == "")
-				return;
-			if (!EurekaKnowledge.isFinished(event.player, key)){
-				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
-				event.world.setBlockToAir(event.xCoord, event.yCoord, event.zCoord);
-				dropItemsFromList(event.world, event.xCoord, event.yCoord, event.zCoord, EurekaRegistry.getDrops(key));
-			}
+			if (!key.equals(""))
+				if (!EurekaKnowledge.isFinished(event.player, key)){
+					event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
+					event.world.setBlockToAir(event.xCoord, event.yCoord, event.zCoord);
+					dropItemsFromList(event.world, event.xCoord, event.yCoord, event.zCoord, EurekaRegistry.getDrops(key));
+				}
+			key = EurekaRegistry.getBlockPlacementKey(event.block);
+			if (!key.equals(""))
+				EurekaKnowledge.makeProgress(event.player, key, 1);
 		}
 	}
 
@@ -144,6 +146,9 @@ public class EventHandler {
 			String key = EurekaRegistry.getBlockBreakKey(event.block);
 			if (!key.equals(""))
 				EurekaKnowledge.makeProgress(event.getPlayer(), key, 1);
+			key = EurekaRegistry.getBlockPlacementKey(event.block);
+			if (!key.equals(""))
+				EurekaKnowledge.makeProgress(event.getPlayer(), key, -1);
 		}
 	}
 	public static void dropItemsFromList(World world, int x, int y, int z, ItemStack[] stacks) {

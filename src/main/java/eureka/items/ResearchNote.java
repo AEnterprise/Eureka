@@ -55,6 +55,6 @@ public class ResearchNote extends Item {
 
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		iconRegister.registerIcon("eureka:ResearchNotes");
+		icon = iconRegister.registerIcon("eureka:ResearchNote");
 	}
 }
