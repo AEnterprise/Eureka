@@ -199,13 +199,16 @@ public class FileReader {
 					return;
 				}
 				EurekaRegistry.addPlaceBlockProgress(tempBlock, chapter.name);
-			} else if (chapter.progressType.equals("enderTeleport")){
+			} else if (chapter.progressType.equals("enderTeleport"))
 				EurekaRegistry.addEnderTeleportKey(chapter.name);
-			} else if (chapter.progressType.equals("killSomething")){
+			else if (chapter.progressType.equals("killSomething"))
 				EurekaRegistry.addKillKey(chapter.name);
-			} else if (chapter.progressType.equals("die")){
+			else if (chapter.progressType.equals("die"))
 				EurekaRegistry.addDeathKey(chapter.name);
-			}
+			else if (chapter.progressType.equals("placeAnyBCPipe"))
+				EurekaRegistry.addPipeprogressKey(chapter.name);
+			else if (chapter.progressType.equals("placeBCPipe") && chapter.BCPipeType != null)
+				EurekaRegistry.addPipePlacementKey(chapter.BCPipeType, chapter.name);
 
 		} catch (Throwable e){
 			e.printStackTrace();

@@ -37,6 +37,8 @@ public class EurekaRegistry {
 	private static ArrayList<String> enderTeleportKeys = new ArrayList<String>(50);
 	private static ArrayList<String> killKeys = new ArrayList<String>(50);
 	private static ArrayList<String> deathKeys = new ArrayList<String>(50);
+	private static ArrayList<String> pipeProgressKeys = new ArrayList<String>(50);
+	private static HashMap<String, ArrayList<String>> pipePlacementKeys = new HashMap<String, ArrayList<String>>(50);
 
 	/**
 	 * Register your keys here for the EUREKA system
@@ -132,6 +134,23 @@ public class EurekaRegistry {
 		deathKeys.add(key);
 	}
 
+	public static void addPipeprogressKey(String key){
+		pipeProgressKeys.add(key);
+	}
+
+	public static void addPipePlacementKey(String pipeType, String key){
+		if(!pipePlacementKeys.containsKey(pipeType)){
+			ArrayList<String> list = new ArrayList<String>(20);
+			list.add(key);
+			pipePlacementKeys.put(pipeType, list);
+		} else {
+			ArrayList<String> list = (ArrayList) pipePlacementKeys.get(pipeType).clone();
+			pipePlacementKeys.remove(pipeType);
+			list.add(key);
+			pipePlacementKeys.put(pipeType, list);
+		}
+	}
+
 	public static ItemStack[] getDrops(String key){
 		if (!drops.containsKey(key))
 			return new ItemStack[0];
@@ -186,6 +205,16 @@ public class EurekaRegistry {
 
 	public static ArrayList<String> getDeathKeys(){
 		return (ArrayList) deathKeys.clone();
+	}
+
+	public static ArrayList<String> getPipeProgressKeys() {
+		return (ArrayList) pipeProgressKeys.clone();
+	}
+
+	public static ArrayList<String> getPipePlacementKeys(String pipetype){
+		if (!pipePlacementKeys.containsKey(pipetype))
+			return new ArrayList<String>();
+		return (ArrayList) pipePlacementKeys.get(pipetype).clone();
 	}
 
 	/**

@@ -65,6 +65,11 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void BuildcraftPipePlaced(PipePlacedEvent event) {
+			String pipe = event.pipeType.replace("item.", "");
+			for (String key: EurekaRegistry.getPipeProgressKeys())
+				EurekaKnowledge.makeProgress(event.player, key, 1);
+			for (String key: EurekaRegistry.getPipePlacementKeys(pipe))
+				EurekaKnowledge.makeProgress(event.player, key, 1);
 
 		}
 

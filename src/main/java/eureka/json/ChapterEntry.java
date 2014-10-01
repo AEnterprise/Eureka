@@ -25,13 +25,14 @@ public class ChapterEntry {
 	public String progressObjectModID;
 	public String progressObjectStackName;
 	public String progressObjectType;
+	public String BCPipeType;
 	public String[] requiredResearch;
 
 	public ChapterEntry(){
 
 	}
 
-	public ChapterEntry(String name, String category, String displaystackModID, String displaystackName, String displaystackType, int maxProgress, String[] dropsModIDs, String[] dropsStackName, String[] dropsStackType, int[] dropsAmount, String linkedObjectModID, String linkedObjectStackName, String linkedObjectStackType, String progressType, String progressObjectModID, String progressObjectStackName, String progressObjectType, String[] requiredResearch) {
+	public ChapterEntry(String name, String category, String displaystackModID, String displaystackName, String displaystackType, int maxProgress, String[] dropsModIDs, String[] dropsStackName, String[] dropsStackType, int[] dropsAmount, String linkedObjectModID, String linkedObjectStackName, String linkedObjectStackType, String progressType, String progressObjectModID, String progressObjectStackName, String progressObjectType, String BCPipeType, String[] requiredResearch) {
 		this.name = name;
 		this.category = category;
 		this.displaystackModID = displaystackModID;
@@ -49,6 +50,7 @@ public class ChapterEntry {
 		this.progressObjectModID = progressObjectModID;
 		this.progressObjectStackName = progressObjectStackName;
 		this.progressObjectType = progressObjectType;
+		this.BCPipeType = BCPipeType;
 		this.requiredResearch = requiredResearch;
 	}
 }
