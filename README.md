@@ -9,6 +9,14 @@ How to implement the mod
 
 This is how to implement the eureka stuff in your own mod
 
+Registering you categories
+====
+To show your keys you need to fist make a category for where your keys will be, this is done by registering a new category in the registery
+````
+EurekaRegistry.registerCategory(<category name>, <displaystack>);
+````
+The displaystack is the itemstack show in the engineering diary to represent the category
+
 Registering your keys
 ====
 For the eureka system to succesfully track the progress of a player you need to register 'keys'. These keys are also used for the localizations of the eureka moments and the text in the book. In the registration you also have to tell the eureka system how many times progress has to be made and in what increments. You register like this:
@@ -18,12 +26,24 @@ EurekaRegistry.registerKey(<key>, <EurekaInformation>);
 
 The second argument there is a class that should extend EurekaInformation that contains all info about the specified entry (There is a class EurekaInfo you can use for a basic implementation).
 
+then you need to register the drops for the key like so:
+````
+EurekaRegistry.registerDrops(<key>, itemstack1, itemstack2, ...);
+````
+you can specify as much itemstacks to drop as you want as long as it's at least 1.
+
+and finaly you bind the item/block to the key so eureka knows to track it
+````
+EurekaRegistry.bindToKey(<item/block>, <key>);
+````
+
 The Eureka knowledge
 ====
 As the Eureka system isn't all knowing you have to tell it when a player makes progress like so:
 ```
-EurekaKnowledge.makeProgress(<player that makes progress>)
+EurekaKnowledge.makeProgress(player, key, amount)
 ```
+note that the amount can also be negative
 
 If you want to know if a player has finished the tier and got the knowledge for the next one
 ```
@@ -32,23 +52,16 @@ EurekaKnowledge.isFinished(<player to check>, <key to check>);
 
 WARNING: The eureka stuff is all saved and handled on the server side. Every time the player opens the book, the knowledge is also coppied to the client side so it all shows up in the gui. So the data on the client side will be outdated most of the time!
 
-Blocks
+
+Using the progress options provided by eureka
 ====
-For blocks you implement the [IEurekaBlock](https://github.com/AEnterprise/Eureka/blob/master/src/main/java/eureka/interfaces/IEurekaBlock.java) interface. This has a few functions:
+To have eureka take care of making progress for you you just add the key to the right progresslist. In the EurekaRegistry there is are functions to add keys to the right hashmap for that, the names should speak for themselfs but if you are not sure about what the right one to use is take a look at the eventhandeler, in there you can see what each list is used for and when it's trigered
 
-isAllowed(player): Every time the eureka system checks if the player has the required knowledge or not this function is called. Here you can just return if it's allowed in the eurekaKnowledge but you can also perform additional checks of your own if you want.
-
-getComponents(): Here you return an array of itemstacks (can be any size, even empty). If the block is not allowed to be used by the player, the block will be replaced with air and these stacks will fall on the ground
-
-getMessage(): If the block was not allowed this is the message printed out to the chat of that player
-
-example: [Buildcraft Additions Kinetic Duster](https://github.com/AEnterprise/Buildcraft-Additions/blob/master/src/main/java/buildcraftAdditions/blocks/BlockKineticDuster.java) (also has additional check when the block is placed down)
-
-Items
+Using your own methods for making progress
 ====
-The same as for a block, only this time you implement [IEurekaItem](https://github.com/AEnterprise/Eureka/blob/master/src/main/java/eureka/interfaces/IEurekaItem.java) instead of IEurekaBlock. The item will be checked every time the player clicks with the item in his head (both left and right will be checked)
+Do whatever you want to make progress and conditions to make progress, to make progress you call the function as specified above: 
+```
+EurekaKnowledge.makeProgress(player, key, amount)
+```
 
-Example: [Buildcraft Additions Kinetic Multi-Tool](https://github.com/AEnterprise/Buildcraft-Additions/blob/master/src/main/java/buildcraftAdditions/items/Tools/ItemKineticTool.java)
-
-
-
+as long as your block/item is bound to the key eureka will make sure the block can't be interacted with, placed or broken until the player has the required knowledge
