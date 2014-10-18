@@ -16,8 +16,6 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
-import buildcraft.api.events.BlockInteractionEvent;
-import buildcraft.api.events.BlockPlacedDownEvent;
 import buildcraft.api.events.PipePlacedEvent;
 
 
@@ -57,30 +55,22 @@ public class EventHandler {
 		}
 
 		@SubscribeEvent
-		public void BuildcraftBlockInteraction(BlockInteractionEvent event) {
-			String key = EurekaRegistry.getKey(event.block);
-			event.setCanceled(!EurekaKnowledge.isFinished(event.player, key));
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft block interaction detected: " + key));
-		}
-
-		@SubscribeEvent
 		public void BuildcraftPipePlaced(PipePlacedEvent event) {
-			String pipe = event.pipeType.replace("item.", "");
-			for (String key: EurekaRegistry.getPipeProgressKeys())
-				EurekaKnowledge.makeProgress(event.player, key, 1);
-			for (String key: EurekaRegistry.getPipePlacementKeys(pipe))
-				EurekaKnowledge.makeProgress(event.player, key, 1);
-
-		}
-
-		@SubscribeEvent
-		public void BuildcraftBlockPlaced(BlockPlacedDownEvent event) {
-			if (event.player.getEntityWorld().isRemote || event.block.getUnlocalizedName().equals("tile.air"))
+			String pipe = event.pipeType.replace("item.", "").toLowerCase();
+			event.player.addChatComponentMessage(new ChatComponentText(pipe));
+			String key = EurekaRegistry.getKey(pipe);
+			if (!key.equals("") && !EurekaKnowledge.isFinished(event.player, key)) {
+				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
+				event.player.worldObj.setBlockToAir(event.x, event.y, event.z);
+				dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, EurekaRegistry.getDrops(key));
 				return;
-			String key = EurekaRegistry.getKey(event.block);
+			}
+			for (String keys: EurekaRegistry.getPipeProgressKeys())
+				EurekaKnowledge.makeProgress(event.player, keys, 1);
+			for (String keys: EurekaRegistry.getPipePlacementKeys(pipe))
+				EurekaKnowledge.makeProgress(event.player, keys, 1);
 
 		}
-
 		/*@SubscribeEvent
 		public void BuildcraftRobotPlaced(RobotPlacementEvent event) {
 			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft robot placed: " + getBCKey(event.robotProgram)));
@@ -119,7 +109,8 @@ public class EventHandler {
 
 		@SubscribeEvent
 		public void BucketFill(FillBucketEvent event) {
-			EurekaKnowledge.makeProgress(event.entityPlayer, "pump", 1);
+			for (String key: EurekaRegistry.getBucketFillList())
+				EurekaKnowledge.makeProgress(event.entityPlayer, key, 1);
 		}
 
 
@@ -177,8 +168,6 @@ public class EventHandler {
 				for (String key: EurekaRegistry.getDeathKeys())
 					EurekaKnowledge.makeProgress((EntityPlayer) event.entityLiving, key, 1);
 		}
-
-
 	}
 	public static void dropItemsFromList(World world, int x, int y, int z, ItemStack[] stacks) {
 		for (ItemStack stack : stacks) {
@@ -189,10 +178,13 @@ public class EventHandler {
 				if (stack.getItem() instanceof ItemBlock)
 					key = EurekaRegistry.getKey(((ItemBlock) stack.getItem()).field_150939_a);
 			}
+			if (key.equals(""))
+				key = EurekaRegistry.getKey(stack.getItem().getUnlocalizedName().replace("item.", "").toLowerCase());
 			if (!key.equals(""))
 				for (ItemStack component: EurekaRegistry.getDrops(key))
 					Utils.dropItemstack(world, x, y, z, component.copy());
-			Utils.dropItemstack(world, x, y, z, stack.copy());
+			else
+				Utils.dropItemstack(world, x, y, z, stack.copy());
 		}
 	}
 }

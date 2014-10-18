@@ -7,11 +7,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -24,6 +26,8 @@ import eureka.client.gui.GuiHandler;
 import eureka.core.BlockDetector;
 import eureka.core.EventHandler;
 import eureka.items.ItemEngineeringDiary;
+import eureka.items.ItemGlassShard;
+import eureka.items.ItemPipePart;
 import eureka.json.FileReader;
 import eureka.network.PacketHandler;
 import eureka.proxy.BaseProxy;
@@ -77,6 +81,39 @@ public class Eureka {
 	}
 	@Mod.EventHandler
 	public void doneLoading(FMLLoadCompleteEvent event){
+		if (Loader.isModLoaded("BuildCraft|Core")){
+			generatePipeParts();
+		}
 		FileReader.readFiles();
+	}
+
+	@Mod.EventHandler
+	public void mappings(FMLMissingMappingsEvent event){
+		for (FMLMissingMappingsEvent.MissingMapping mapping: event.get())
+			if (mapping.name.contains("research"))
+				mapping.ignore();
+	}
+	public void generatePipeParts() {
+		glassShard = new ItemGlassShard();
+		GameRegistry.registerItem(glassShard, "glassShard");
+		handlePipe("Wood");
+		handlePipe("CobbleStone");
+		handlePipe("Stone");
+		handlePipe("Quartz");
+		handlePipe("Sandstone");
+		handlePipe("Gold");
+		handlePipe("Iron");
+		handlePipe("Void");
+		handlePipe("Obsidian");
+		handlePipe("Emerald");
+		handlePipe("Diamond");
+		handlePipe("Lapis");
+		handlePipe("Daizuli");
+	}
+
+	public void handlePipe(String material) {
+		pipePart = new ItemPipePart(material).setUnlocalizedName("pipePart" + material);
+		GameRegistry.registerItem(pipePart, "pipePart" + material);
+		GameRegistry.addRecipe(new ItemStack(GameRegistry.findItem("BuildCraft|Transport", "item.buildcraftPipe.pipeitems" + material.toLowerCase())), "PSP", 'P', pipePart, 'S', glassShard);
 	}
 }

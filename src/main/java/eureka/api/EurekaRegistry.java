@@ -39,6 +39,8 @@ public class EurekaRegistry {
 	private static ArrayList<String> deathKeys = new ArrayList<String>(50);
 	private static ArrayList<String> pipeProgressKeys = new ArrayList<String>(50);
 	private static HashMap<String, ArrayList<String>> pipePlacementKeys = new HashMap<String, ArrayList<String>>(50);
+	private static ArrayList<String> bucketFillList = new ArrayList<String>(50);
+	private static HashMap<String, String> pipeKeys = new HashMap<String, String>(50);
 
 	/**
 	 * Register your keys here for the EUREKA system
@@ -84,6 +86,15 @@ public class EurekaRegistry {
 			return false;
 		}
 		items.put(item, key);
+		return true;
+	}
+
+	public static boolean bindToKey(String pipe, String key){
+		if (pipeKeys.containsKey(pipe.toLowerCase())){
+			Logger.error("Error while binding a pipe (" + pipe + ") to a key (" + key + "the pipe has already been bound to another key (" + pipeKeys.get(pipe) + ")");
+			return false;
+		}
+		pipeKeys.put(pipe.toLowerCase(), key);
 		return true;
 	}
 
@@ -139,16 +150,20 @@ public class EurekaRegistry {
 	}
 
 	public static void addPipePlacementKey(String pipeType, String key){
-		if(!pipePlacementKeys.containsKey(pipeType)){
+		if(!pipePlacementKeys.containsKey(pipeType.toLowerCase())){
 			ArrayList<String> list = new ArrayList<String>(20);
 			list.add(key);
-			pipePlacementKeys.put(pipeType, list);
+			pipePlacementKeys.put(pipeType.toLowerCase(), list);
 		} else {
-			ArrayList<String> list = (ArrayList) pipePlacementKeys.get(pipeType).clone();
-			pipePlacementKeys.remove(pipeType);
+			ArrayList<String> list = (ArrayList) pipePlacementKeys.get(pipeType.toLowerCase()).clone();
+			pipePlacementKeys.remove(pipeType.toLowerCase());
 			list.add(key);
-			pipePlacementKeys.put(pipeType, list);
+			pipePlacementKeys.put(pipeType.toLowerCase(), list);
 		}
+	}
+
+	public static void addBucketFillKey(String key){
+		bucketFillList.add(key);
 	}
 
 	public static ItemStack[] getDrops(String key){
@@ -167,6 +182,12 @@ public class EurekaRegistry {
 		if (!items.containsKey(item))
 			return "";
 		return items.get(item);
+	}
+
+	public static String getKey(String pipe) {
+		if (!pipeKeys.containsKey(pipe))
+			return "";
+		return pipeKeys.get(pipe);
 	}
 
 	public static String getCraftingProgressKey(Item item){
@@ -215,6 +236,10 @@ public class EurekaRegistry {
 		if (!pipePlacementKeys.containsKey(pipetype))
 			return new ArrayList<String>();
 		return (ArrayList) pipePlacementKeys.get(pipetype).clone();
+	}
+
+	public static ArrayList<String> getBucketFillList() {
+		return (ArrayList) bucketFillList.clone();
 	}
 
 	/**

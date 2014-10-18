@@ -47,12 +47,6 @@ public class FileReader {
 			for (File file : catagoryFolder.listFiles(new FileFilter()))
 				readCategory(file);
 
-			//ChapterEntry entry = new ChapterEntry("basicDuster", "BCA", "buildcraftadditions", "basicDusterBlock", "block", 30, new String[]{"test"}, new String[]{"test2"}, new String[]{"test3", "test4"}, new int[]{2}, "buildcraftadditions", "basicDusterBlock", "block", "crafting", "ds", "testing", new String[]{});
-			//File test = new File(keyFolder, "Duster.json");
-			//Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(test)));
-			//writer.write(gson.toJson(entry));
-			//writer.close();
-
 			for (File file: keyFolder.listFiles(new FileFilter())){
 				readKey(file);
 			}
@@ -158,7 +152,9 @@ public class FileReader {
 					return;
 				}
 				EurekaRegistry.bindToKey(tempitem, chapter.name);
-			}
+			} else if (chapter.linkedObjectStackType.toLowerCase().equals("pipe"))
+				EurekaRegistry.bindToKey(chapter.linkedObjectStackName, chapter.name);
+
 			if (chapter.progressType.equals("crafting")) {
 				if (chapter.progressObjectType.equals("item")){
 					Item tempitem;
@@ -209,6 +205,8 @@ public class FileReader {
 				EurekaRegistry.addPipeprogressKey(chapter.name);
 			else if (chapter.progressType.equals("placeBCPipe") && chapter.BCPipeType != null)
 				EurekaRegistry.addPipePlacementKey(chapter.BCPipeType, chapter.name);
+			else if (chapter.progressType.equals("fillBucket"))
+				EurekaRegistry.addBucketFillKey(chapter.name);
 
 		} catch (Throwable e){
 			e.printStackTrace();

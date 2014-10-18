@@ -47,7 +47,8 @@ public class BlockDetector
 			return;
 		}
 		ArrayList<PlacePosition> remove = new ArrayList<PlacePosition>();
-		if (!placed.isEmpty())
+		if (placed.isEmpty() || placed == null || placed.get(0) == null)
+			return;
 		for(PlacePosition cu : placed)
 		{
 			if(cu.check())
