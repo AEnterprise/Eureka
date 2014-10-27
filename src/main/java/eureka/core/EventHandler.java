@@ -57,7 +57,6 @@ public class EventHandler {
 		@SubscribeEvent
 		public void BuildcraftPipePlaced(PipePlacedEvent event) {
 			String pipe = event.pipeType.replace("item.", "").toLowerCase();
-			event.player.addChatComponentMessage(new ChatComponentText(pipe));
 			String key = EurekaRegistry.getKey(pipe);
 			if (!key.equals("") && !EurekaKnowledge.isFinished(event.player, key)) {
 				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));

@@ -40,7 +40,7 @@ import eureka.proxy.BaseProxy;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 
-@Mod(modid = "eureka", name = "Eureka", version = "@VERSION@", acceptedMinecraftVersions = "1.7.10")
+@Mod(modid = "eureka", name = "Eureka", version = "@MODVERSION@", acceptedMinecraftVersions = "1.7.10")
 public class Eureka {
 	public static Item engineeringDiary;
 	public static CreativeTabs eureka = new CreativeTabs("Eureka") {
