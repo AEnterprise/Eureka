@@ -22,7 +22,6 @@ import buildcraft.api.events.PipePlacedEvent;
 import eureka.Eureka;
 import eureka.api.EurekaKnowledge;
 import eureka.api.EurekaRegistry;
-import eureka.api.events.BlockPlacedEvent;
 import eureka.utils.Utils;
 
 /**
@@ -86,21 +85,7 @@ public class EventHandler {
 		}
 
 
-		@SubscribeEvent
-		public void blockPlacement(BlockPlacedEvent event){
-			if (event.world.isRemote)
-				return;
-			String key = EurekaRegistry.getKey(event.block);
-			if (!key.equals(""))
-				if (!EurekaKnowledge.isFinished(event.player, key)){
-					event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
-					event.world.setBlockToAir(event.xCoord, event.yCoord, event.zCoord);
-					dropItemsFromList(event.world, event.xCoord, event.yCoord, event.zCoord, EurekaRegistry.getDrops(key));
-				}
-			key = EurekaRegistry.getBlockPlacementKey(event.block);
-			if (!key.equals(""))
-				EurekaKnowledge.makeProgress(event.player, key, 1);
-		}
+
 	}
 
 
@@ -136,6 +121,25 @@ public class EventHandler {
 			if (!EurekaKnowledge.isFinished(event.entityPlayer, key)) {
 				event.setCanceled(true);
 			}
+		}
+
+		@SubscribeEvent
+		public void blockPlacement(BlockEvent.PlaceEvent event){
+			if (event.world.isRemote)
+				return;
+			String key = EurekaRegistry.getKey(event.block);
+			int x = event.blockSnapshot.x;
+			int y = event.blockSnapshot.y;
+			int z = event.blockSnapshot.z;
+			if (!key.equals(""))
+				if (!EurekaKnowledge.isFinished(event.player, key)){
+					event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
+					event.world.setBlockToAir(x, y, z);
+					dropItemsFromList(event.world, x, y, z, EurekaRegistry.getDrops(key));
+				}
+			key = EurekaRegistry.getBlockPlacementKey(event.block);
+			if (!key.equals(""))
+				EurekaKnowledge.makeProgress(event.player, key, 1);
 		}
 
 		@SubscribeEvent (priority = EventPriority.LOWEST) //trigered last to make sure it doesn't triger if the break has been canceled

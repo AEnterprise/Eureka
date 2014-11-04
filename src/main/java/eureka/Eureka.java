@@ -23,7 +23,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 import eureka.api.EurekaRegistry;
 import eureka.client.gui.GuiHandler;
-import eureka.core.BlockDetector;
 import eureka.core.EventHandler;
 import eureka.items.ItemEngineeringDiary;
 import eureka.items.ItemGlassShard;
@@ -65,9 +64,6 @@ public class Eureka {
 		engineeringDiary = new ItemEngineeringDiary();
 		engineeringDiary.setCreativeTab(eureka).setUnlocalizedName("engineeringDiary");
 		GameRegistry.registerItem(engineeringDiary, "engineeringDiary");
-		BlockDetector blockDetector = new BlockDetector();
-		FMLCommonHandler.instance().bus().register(blockDetector);
-		MinecraftForge.EVENT_BUS.register(blockDetector);
 		FileReader.setMainfolder(new File(event.getModConfigurationDirectory(), "Eureka"));
 		EurekaRegistry.registerCategory("Eureka", new ItemStack(engineeringDiary));
 	}
