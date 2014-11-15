@@ -45,7 +45,7 @@ public class EventHandler {
 				for (int slot = 0; slot < event.player.inventory.getSizeInventory(); slot++) {
 					if (event.player.inventory.getStackInSlot(slot) == null) {
 						event.player.inventory.setInventorySlotContents(slot, new ItemStack(Eureka.engineeringDiary));
-						event.player.getEntityData().setBoolean("bookRecieved", true);
+						event.player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setBoolean("bookRecieved", true);
 						return;
 					}
 
