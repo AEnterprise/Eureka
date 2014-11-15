@@ -41,7 +41,7 @@ public class EventHandler {
 			EurekaKnowledge.init(event.player);
 
 			//give engineering diary
-			if (!event.player.getEntityData().hasKey("bookRecieved")) {
+			if (!event.player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("bookRecieved")) {
 				for (int slot = 0; slot < event.player.inventory.getSizeInventory(); slot++) {
 					if (event.player.inventory.getStackInSlot(slot) == null) {
 						event.player.inventory.setInventorySlotContents(slot, new ItemStack(Eureka.engineeringDiary));
