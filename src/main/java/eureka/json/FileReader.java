@@ -105,7 +105,7 @@ public class FileReader {
 		try {
 			ChapterEntry chapter = gson.fromJson(new java.io.FileReader(file), ChapterEntry.class);
 			if (chapter.name == null ||chapter.category == null || chapter.displaystackModID == null || chapter.displaystackType == null || chapter.displaystackName == null || chapter.dropsAmount == null || chapter.dropsModIDs == null || chapter.dropsStackName == null || chapter.dropsStackType == null || chapter.linkedObjectModID == null || chapter.linkedObjectStackName == null || chapter.linkedObjectStackType == null || chapter.progressType == null) {
-				Logger.error("Error while reading key file " + file.toString() + " : unable to load all required variables");
+				Logger.error("Error while reading key file " + file.toString() + " : unable to load all required reference");
 				return;
 			}
 			ItemStack displaystack = null;
