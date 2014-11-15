@@ -64,7 +64,7 @@ public class Eureka {
 
 		engineeringDiary = new ItemEngineeringDiary();
 		engineeringDiary.setCreativeTab(eureka).setUnlocalizedName("engineeringDiary");
-		GameRegistry.addRecipe(new ItemStack(engineeringDiary), Items.book, Items.iron_ingot);
+		GameRegistry.addShapelessRecipe(new ItemStack(engineeringDiary), Items.book, Items.iron_ingot);
 		GameRegistry.registerItem(engineeringDiary, "engineeringDiary");
 		FileReader.setMainfolder(new File(event.getModConfigurationDirectory(), "Eureka"));
 		EurekaRegistry.registerCategory("Eureka", new ItemStack(engineeringDiary));
