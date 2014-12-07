@@ -2,7 +2,7 @@ package eureka.items;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -23,11 +23,16 @@ import eureka.network.PacketHandler;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemEngineeringDiary extends Item {
+public class ItemEngineeringDiary extends ItemBook {
 	public static IIcon icon;
 
 	public ItemEngineeringDiary() {
 		super();
+	}
+
+	@Override
+	public int getItemEnchantability() {
+		return 0;
 	}
 
 	@SideOnly(Side.CLIENT)
