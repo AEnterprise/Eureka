@@ -47,9 +47,9 @@ public class EurekaKnowledge {
 	}
 
 	public static void makeProgress(EntityPlayer player, String key, int amount) {
-		if (player.worldObj.isRemote)
-			return;
 		try {
+			if (player.worldObj.isRemote)
+			return;
 			if (!(EurekaRegistry.getRequiredReserch(key) == null || EurekaRegistry.getRequiredReserch(key).isEmpty()))
 				for (String requiredResearchKey : EurekaRegistry.getRequiredReserch(key)) {
 					if (!isFinished(player, requiredResearchKey) && !EurekaRegistry.isInfoChapter(key))
