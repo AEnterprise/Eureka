@@ -95,7 +95,7 @@ public class Eureka {
 		glassShard = new ItemGlassShard();
 		GameRegistry.registerItem(glassShard, "glassShard");
 		handlePipe("Wood");
-		handlePipe("CobbleStone");
+		handlePipe("Cobblestone");
 		handlePipe("Stone");
 		handlePipe("Quartz");
 		handlePipe("Sandstone");
