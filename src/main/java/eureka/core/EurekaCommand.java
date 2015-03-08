@@ -42,7 +42,7 @@ public class EurekaCommand extends CommandBase {
 		}
 		if (player == null)
 			throw new WrongUsageException("Invalid playername");
-		if (EurekaAPI.API.keyRegistered(args[2])) {
+		if (!EurekaAPI.API.keyRegistered(args[2])) {
 			throw new WrongUsageException("Invalid key");
 		}
 		PlayerResearch research = PlayerResearch.get(player);
