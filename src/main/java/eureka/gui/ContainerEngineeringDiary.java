@@ -1,6 +1,7 @@
-package eureka.proxy;
+package eureka.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -8,10 +9,14 @@ import net.minecraft.entity.player.EntityPlayer;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ServerProxy implements IProxy {
+public class ContainerEngineeringDiary extends Container {
+
+	public ContainerEngineeringDiary() {
+
+	}
 
 	@Override
-	public EntityPlayer getPlayer() {
-		return null;
+	public boolean canInteractWith(EntityPlayer p_75145_1_) {
+		return true;
 	}
 }

@@ -1,6 +1,5 @@
-package eureka.proxy;
+package eureka.api;
 
-import net.minecraft.entity.player.EntityPlayer;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -8,10 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ServerProxy implements IProxy {
+public class EurekaAPI {
 
-	@Override
-	public EntityPlayer getPlayer() {
-		return null;
-	}
+	public static IEurekAPI API;
 }

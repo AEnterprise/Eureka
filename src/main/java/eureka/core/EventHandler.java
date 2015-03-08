@@ -1,193 +1,154 @@
 package eureka.core;
 
+import java.util.List;
+
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 
-import buildcraft.api.events.PipePlacedEvent;
-
-
 import eureka.Eureka;
-import eureka.api.EurekaKnowledge;
-import eureka.api.EurekaRegistry;
-import eureka.utils.Utils;
-
+import eureka.api.EnumProgressOptions;
+import eureka.api.EurekaAPI;
 /**
- * Copyright (c) 2014, AEnterprise
+ * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
- * Eureka is distributed under the terms of LGPLv3
+ * Eureka is distributed under the terms of GNU GPL v3.0
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class EventHandler {
 
-	public static class FML {
-
-		@SubscribeEvent
-		public void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-			//initialize player knowledge if needed
-			EurekaKnowledge.init(event.player);
-
-			//give engineering diary
-			if (!event.player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("bookRecieved")) {
-				for (int slot = 0; slot < event.player.inventory.getSizeInventory(); slot++) {
-					if (event.player.inventory.getStackInSlot(slot) == null) {
-						event.player.inventory.setInventorySlotContents(slot, new ItemStack(Eureka.engineeringDiary));
-						event.player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setBoolean("bookRecieved", true);
-						return;
-					}
-
-				}
-			}
-		}
-
-		@SubscribeEvent
-		public void BuildcraftPipePlaced(PipePlacedEvent event) {
-			String pipe = event.pipeType.replace("item.", "").toLowerCase();
-			String key = EurekaRegistry.getKey(pipe);
-			if (!key.equals("") && !EurekaKnowledge.isFinished(event.player, key)) {
-				event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
-				event.player.worldObj.setBlockToAir(event.x, event.y, event.z);
-				dropItemsFromList(event.player.worldObj, event.x, event.y, event.z, EurekaRegistry.getDrops(key));
-				return;
-			}
-			for (String keys: EurekaRegistry.getPipeProgressKeys())
-				EurekaKnowledge.makeProgress(event.player, keys, 1);
-			for (String keys: EurekaRegistry.getPipePlacementKeys(pipe))
-				EurekaKnowledge.makeProgress(event.player, keys, 1);
-
-		}
-		/*@SubscribeEvent
-		public void BuildcraftRobotPlaced(RobotPlacementEvent event) {
-			event.player.addChatComponentMessage(new ChatComponentText("Buildcraft robot placed: " + getBCKey(event.robotProgram)));
-
-		}*/
-
-		@SubscribeEvent
-		public void onCrafted(PlayerEvent.ItemCraftedEvent event) {
-			for (String key : EurekaRegistry.getCraftKeys())
-				EurekaKnowledge.makeProgress(event.player, key, 1);
-			String key = EurekaRegistry.getCraftingProgressKey(event.crafting.getItem());
-			if (!key.isEmpty())
-				EurekaKnowledge.makeProgress(event.player, key, 1);
-		}
-
-
-
-	}
-
-
-	public static class Forge {
-
-		@SubscribeEvent
-		public void BucketFill(FillBucketEvent event) {
-			for (String key: EurekaRegistry.getBucketFillList())
-				EurekaKnowledge.makeProgress(event.entityPlayer, key, 1);
-		}
-
-
-		@SubscribeEvent(priority = EventPriority.HIGHEST) //make sure it gets trigered first to prevent handeling from other mods
-		public void onPlayerUsesBlock(PlayerInteractEvent event) {
-			String key;
-			if (event.world.isRemote)
-				return;
-			if (event.entityPlayer.getCurrentEquippedItem() != null) {
-				key = EurekaRegistry.getKey(event.entityPlayer.getCurrentEquippedItem().getItem());
-				if (!key.equals("") && !EurekaKnowledge.isFinished(event.entityPlayer, key)) {
-					if (event.entityPlayer.getCurrentEquippedItem().stackSize > 1)
-						event.entityPlayer.getCurrentEquippedItem().stackSize--;
-					else
-						event.entityPlayer.destroyCurrentEquippedItem();
-					dropItemsFromList(event.world, (int)event.entityPlayer.posX,(int) event.entityPlayer.posY, (int)event.entityPlayer.posZ, EurekaRegistry.getDrops(key));
-					event.setCanceled(true);
-
-				}
-			}
-			key = EurekaRegistry.getKey(event.world.getBlock(event.x, event.y, event.z));
-			if (key.equals(""))
-				return;
-			if (!EurekaKnowledge.isFinished(event.entityPlayer, key)) {
-				event.setCanceled(true);
-			}
-		}
-
-		@SubscribeEvent
-		public void blockPlacement(BlockEvent.PlaceEvent event){
-			if (event.world.isRemote)
-				return;
-			String key = EurekaRegistry.getKey(event.block);
-			int x = event.blockSnapshot.x;
-			int y = event.blockSnapshot.y;
-			int z = event.blockSnapshot.z;
-			if (!key.equals(""))
-				if (!EurekaKnowledge.isFinished(event.player, key)){
-					event.player.addChatComponentMessage(new ChatComponentText(Utils.localize("eureka.missingKnowledge")));
-					event.world.setBlockToAir(x, y, z);
-					dropItemsFromList(event.world, x, y, z, EurekaRegistry.getDrops(key));
-				}
-			key = EurekaRegistry.getBlockPlacementKey(event.block);
-			if (!key.equals(""))
-				EurekaKnowledge.makeProgress(event.player, key, 1);
-		}
-
-		@SubscribeEvent (priority = EventPriority.LOWEST) //trigered last to make sure it doesn't triger if the break has been canceled
-		public void blockBreakEvent(BlockEvent.BreakEvent event) {
-			for (String key: EurekaRegistry.getBreakAnyKeys())
-				EurekaKnowledge.makeProgress(event.getPlayer(), key, 1);
-			String key = EurekaRegistry.getBlockBreakKey(event.block);
-			if (!key.equals(""))
-				EurekaKnowledge.makeProgress(event.getPlayer(), key, 1);
-			key = EurekaRegistry.getBlockPlacementKey(event.block);
-			if (!key.equals(""))
-				EurekaKnowledge.makeProgress(event.getPlayer(), key, -1);
-		}
-
-		@SubscribeEvent
-		public void onTeleport(EnderTeleportEvent event){
-			if (event.entityLiving instanceof EntityPlayer)
-				for (String key: EurekaRegistry.getEnderTeleportKeys())
-					EurekaKnowledge.makeProgress((EntityPlayer) event.entityLiving, key, 1);
-		}
-
-		@SubscribeEvent
-		public void onLivingDeath(LivingDeathEvent event) {
-			if (event.source.getSourceOfDamage() instanceof EntityPlayer){
-				for (String key: EurekaRegistry.getKillKeys())
-					EurekaKnowledge.makeProgress((EntityPlayer) event.source.getSourceOfDamage(), key, 1);
-			}
-			if (event.entityLiving instanceof EntityPlayer)
-				for (String key: EurekaRegistry.getDeathKeys())
-					EurekaKnowledge.makeProgress((EntityPlayer) event.entityLiving, key, 1);
+	@SubscribeEvent
+	public void onEntityConstruction(EntityEvent.EntityConstructing event) {
+		if (event.entity instanceof EntityPlayer && PlayerResearch.get((EntityPlayer) event.entity) == null) {
+			PlayerResearch.register((EntityPlayer) event.entity);
 		}
 	}
-	public static void dropItemsFromList(World world, int x, int y, int z, ItemStack[] stacks) {
-		for (ItemStack stack : stacks) {
-			if (stack == null)
-				continue;
-			String key = EurekaRegistry.getKey(stack.getItem());
-			if (key.equals("")) {
-				if (stack.getItem() instanceof ItemBlock)
-					key = EurekaRegistry.getKey(((ItemBlock) stack.getItem()).field_150939_a);
+
+	@SubscribeEvent
+	public void onClone(PlayerEvent.Clone event) {
+		PlayerResearch.get(event.entityPlayer).copy(PlayerResearch.get(event.original));
+	}
+
+	@SubscribeEvent
+	public void playerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
+		//give engineering diary
+		if (!event.player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("bookRecieved")) {
+			for (int slot = 0; slot < event.player.inventory.getSizeInventory(); slot++) {
+				if (event.player.inventory.getStackInSlot(slot) == null) {
+					event.player.inventory.setInventorySlotContents(slot, new ItemStack(Eureka.engineeringDiary));
+					event.player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).setBoolean("bookRecieved", true);
+					return;
+				}
 			}
-			if (key.equals(""))
-				key = EurekaRegistry.getKey(stack.getItem().getUnlocalizedName().replace("item.", "").toLowerCase());
-			if (!key.equals(""))
-				for (ItemStack component: EurekaRegistry.getDrops(key))
-					Utils.dropItemstack(world, x, y, z, component.copy());
+		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	//make sure it gets trigered first to prevent handeling from other mods
+	public void onPlayerUsesBlock(PlayerInteractEvent event) {
+		String key = "";
+		if (event.world.isRemote)
+			return;
+		EntityPlayer player = event.entityPlayer;
+		PlayerResearch research = PlayerResearch.get(player);
+		if (player.getCurrentEquippedItem() != null)
+			key = EurekaAPI.API.getKey(player.getCurrentEquippedItem());
+		if (!research.isFinished(key) && !key.equals("")) {
+			ItemStack stack = player.getCurrentEquippedItem().copy();
+			stack.stackSize = 1;
+			dropItems(event.world, event.x, event.y, event.z, EurekaAPI.API.getDrops(stack));
+			if (event.entityPlayer.getCurrentEquippedItem().stackSize > 1)
+				event.entityPlayer.getCurrentEquippedItem().stackSize--;
 			else
-				Utils.dropItemstack(world, x, y, z, stack.copy());
+				event.entityPlayer.destroyCurrentEquippedItem();
+			event.setCanceled(true);
 		}
+
+		key = EurekaAPI.API.getKey(event.world.getBlock(event.x, event.y, event.z));
+		if (key != null && !key.equals("") && !research.isFinished(key))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public void bucketFill(FillBucketEvent event) {
+		makeProgress(EnumProgressOptions.FILL_BUCKET, PlayerResearch.get(event.entityPlayer), null);
+	}
+
+	@SubscribeEvent
+	public void onTeleport(EnderTeleportEvent event) {
+		if (event.entityLiving != null && event.entityLiving instanceof EntityPlayer)
+			makeProgress(EnumProgressOptions.ENDER_TELEPORT, PlayerResearch.get((EntityPlayer) event.entityLiving), null);
+	}
+
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void blockPlacement(BlockEvent.PlaceEvent event) {
+		String key = EurekaAPI.API.getKey(event.block);
+		PlayerResearch research = PlayerResearch.get(event.player);
+		if (!research.isFinished(key) && !key.equals("")) {
+			dropItems(event.world, event.x, event.y, event.z, EurekaAPI.API.getDrops(new ItemStack(event.block)));
+			event.world.setBlock(event.x, event.y, event.z, Blocks.air);
+		}
+		makeProgress(EnumProgressOptions.PLACE_BLOCK, research, event.block);
+		makeProgress(EnumProgressOptions.PLACE_ANY_BLOCK, research, null);
+	}
+
+	@SubscribeEvent
+	public void onCrafted(cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent event) {
+		PlayerResearch research = PlayerResearch.get(event.player);
+		makeProgress(EnumProgressOptions.CRAFTING, research, event.crafting.getItem());
+		makeProgress(EnumProgressOptions.CRAFTING, research, null);
+	}
+
+	@SubscribeEvent
+	public void blockBreak(BlockEvent.BreakEvent event) {
+		PlayerResearch research = PlayerResearch.get(event.getPlayer());
+		revertProgress(EnumProgressOptions.PLACE_BLOCK, research, event.block);
+		makeProgress(EnumProgressOptions.BREAK_BLOCK, research, event.block);
+		makeProgress(EnumProgressOptions.BREAK_ANY_BLOCK, research, event.block);
+	}
+
+	private void dropItems(World world, int x, int y, int z, List<ItemStack> stacks) {
+		for (ItemStack stack : stacks) {
+			if (!world.isRemote && stack != null && stack.stackSize > 0 && stack.getItem() != null) {
+				float rx = world.rand.nextFloat() * 0.8F + 0.1F;
+				float ry = world.rand.nextFloat() * 0.8F + 0.1F;
+				float rz = world.rand.nextFloat() * 0.8F + 0.1F;
+				EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, stack.copy());
+				float factor = 0.05F;
+				entityItem.motionX = (world.rand.nextGaussian() * factor);
+				entityItem.motionY = (world.rand.nextGaussian() * factor + 0.2000000029802322D);
+				entityItem.motionZ = (world.rand.nextGaussian() * factor);
+				world.spawnEntityInWorld(entityItem);
+			}
+		}
+	}
+
+	private void makeProgress(EnumProgressOptions option, PlayerResearch research, Object arg) {
+		if (research == null)
+			return;
+		EurekaAPIImplementation imp = (EurekaAPIImplementation) EurekaAPI.API;
+		for (String key : imp.getKeysforProgress(option, arg))
+			research.makeProgress(key);
+	}
+
+	private void revertProgress(EnumProgressOptions option, PlayerResearch research, Object arg) {
+		if (research == null)
+			return;
+		EurekaAPIImplementation imp = (EurekaAPIImplementation) EurekaAPI.API;
+		for (String key : imp.getKeysforProgress(option, arg))
+			research.revertProgress(key);
 	}
 }

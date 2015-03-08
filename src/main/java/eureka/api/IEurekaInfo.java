@@ -1,6 +1,8 @@
-package eureka.proxy;
+package eureka.api;
 
-import net.minecraft.entity.player.EntityPlayer;
+import java.util.List;
+
+import net.minecraft.item.ItemStack;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -8,10 +10,15 @@ import net.minecraft.entity.player.EntityPlayer;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ServerProxy implements IProxy {
+public interface IEurekaInfo {
 
-	@Override
-	public EntityPlayer getPlayer() {
-		return null;
-	}
+	String getCategory();
+
+	int getMaxProgress();
+
+	ItemStack getDisplayStack();
+
+	String getName();
+
+	List<String> getRequiredResearch();
 }

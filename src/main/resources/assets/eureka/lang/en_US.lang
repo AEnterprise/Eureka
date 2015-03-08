@@ -3,35 +3,7 @@ item.researchNote.name=Research Note
 
 itemGroup.Eureka=Eureka
 
-Eureka=EUREKA!
-eureka.dusterTier0Finished=You start planning all your feature builds but realize you'll need a ton of resources. You also start thinking of a way to make that easier.
-eureka.dusterTier1Finished=While processing your ores, you suddenly realize there are more efficient ways to process them.
-eureka.dusterTier2-1Finished=After being able to output to inventories you decide to try to see if you can automate the processing itself instead.
-eureka.dusterTier2-2Finished=You like that you don't have to jump on the machine, but also want the auto-input/output. You decide to combine your knowledge intro a new machine. Maybe something with lasers?
-eureka.kineticToolFinished=While making yet another tool to replace your old one you think of a way to make a tool that won't break
-eureka.missingKnowledge=You have no idea how this machine works (yet). You try to use it, but due to your incompetence, it falls apart.
-eureka.missingKnowledgeKineticTool=You have no idea how this tool works (yet). You try to use it, but due to your incompetence, it falls apart.
-
-engineeringDiary.Eureka.title=Engineering Diary
-engineeringDiary.Eureka.page0=This book is a Diary of your progress with discovering items and blocks through the Eureka system. As an Engineer, testing and experimentation is required before creating a machine,
-engineeringDiary.Eureka.page1=and you’ll need to make and use simple machines in order to have the Eureka moment that leads to new creations. Have fun!
-
 engineeringDiary.requiredResearch=Required research:
 engineeringDiary.progress=Progress:
 engineeringDiary.unlocked=UNLOCKED
 engineeringDiary.noRequiredResearch=No Required Research
-
-item.pipePartWood.name=Wooden Pipe Part
-item.pipePartCobbleStone.name=Cobblestone Pipe Part
-item.pipePartStone.name=Stone Pipe Part
-item.pipePartQuartz.name=Quartz Pipe Part
-item.pipePartSandstone.name=Sandstone Pipe Part
-item.pipePartGold.name=Gold Pipe Part
-item.pipePartIron.name=Iron Pipe Part
-item.pipePartVoid.name=Void Pipe Part
-item.pipePartObsidian.name=Obsidian Pipe Part
-item.pipePartEmerald.name=Emerald Pipe Part
-item.pipePartDiamond.name=Diamond Pipe Part
-item.pipePartLapis.name=Lapis Pipe Part
-item.pipePartDaizuli.name=Daizuli Pipe Part
-item.glassShard.name=Glass Shard

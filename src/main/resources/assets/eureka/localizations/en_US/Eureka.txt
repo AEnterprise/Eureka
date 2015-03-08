@@ -1,0 +1,3 @@
+Engineering Diary
+
+This book is a Diary of your progress with discovering items and blocks through the Eureka system. As an Engineer, testing and experimentation is required before creating a machine, and you’ll need to make and use simple machines in order to have the Eureka moment that leads to new creations. Have fun!

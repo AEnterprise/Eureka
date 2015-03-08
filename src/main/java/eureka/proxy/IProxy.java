@@ -8,10 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ServerProxy implements IProxy {
+public interface IProxy {
 
-	@Override
-	public EntityPlayer getPlayer() {
-		return null;
-	}
+	EntityPlayer getPlayer();
 }
