@@ -1,6 +1,7 @@
 package eureka.api;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -25,8 +26,7 @@ public class BasicEurekaInfo implements IEurekaInfo {
 		this.maxProgress = maxProgress;
 		this.displayStack = displayStack;
 		List<String> research = new ArrayList<String>();
-		for (String r : requiredResearch)
-			research.add(r);
+		research.addAll(Arrays.asList(requiredResearch));
 		this.requiredResearch = research;
 	}
 
