@@ -6,12 +6,13 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.google.common.collect.ImmutableList;
 import eureka.api.EnumProgressOptions;
 import eureka.api.ICategory;
 import eureka.api.IDropHandler;

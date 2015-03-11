@@ -2,6 +2,8 @@ package eureka.networking;
 
 import java.util.HashMap;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.entity.player.EntityPlayer;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -12,7 +14,6 @@ import eureka.Eureka;
 import eureka.api.EurekaAPI;
 import eureka.api.IEurekaInfo;
 import eureka.core.PlayerResearch;
-import io.netty.buffer.ByteBuf;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
