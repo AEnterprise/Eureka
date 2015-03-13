@@ -75,7 +75,7 @@ public class PlayerResearch implements IExtendedEntityProperties {
 		int progress = progressList.get(key);
 		progress++;
 		if (progress >= EurekaAPI.API.getMaxProgress(key)) {
-			if (!finished.get(key))
+			if (finished != null && key != null && !finished.get(key))
 				player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("Eureka")));
 			progress = EurekaAPI.API.getMaxProgress(key);
 			finished.remove(key);
