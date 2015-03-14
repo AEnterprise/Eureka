@@ -70,32 +70,40 @@ public class PlayerResearch implements IExtendedEntityProperties {
 	}
 
 	public void makeProgress(String key) {
-		if (!progressList.containsKey(key))
-			progressList.put(key, 0);
-		int progress = progressList.get(key);
-		progress++;
-		if (progress >= EurekaAPI.API.getMaxProgress(key)) {
-			if (finished != null && key != null && !finished.get(key))
-				player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("Eureka")));
-			progress = EurekaAPI.API.getMaxProgress(key);
-			finished.remove(key);
-			finished.put(key, true);
+		try {
+			if (!progressList.containsKey(key))
+				progressList.put(key, 0);
+			int progress = progressList.get(key);
+			progress++;
+			if (progress >= EurekaAPI.API.getMaxProgress(key)) {
+				if (finished != null && key != null && !finished.get(key))
+					player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("Eureka")));
+				progress = EurekaAPI.API.getMaxProgress(key);
+				finished.remove(key);
+				finished.put(key, true);
+			}
+			progressList.remove(key);
+			progressList.put(key, progress);
+		} catch (Throwable t) {
+			//probably fake player
 		}
-		progressList.remove(key);
-		progressList.put(key, progress);
 	}
 
 	public void revertProgress(String key) {
-		if (!progressList.containsKey(key)) {
-			progressList.put(key, 0);
-			return;
+		try {
+			if (!progressList.containsKey(key)) {
+				progressList.put(key, 0);
+				return;
+			}
+			int progress = progressList.get(key);
+			progress--;
+			if (progress < 0)
+				return;
+			progressList.remove(key);
+			progressList.put(key, progress);
+		} catch (Throwable t) {
+			//probably fake player
 		}
-		int progress = progressList.get(key);
-		progress--;
-		if (progress < 0)
-			return;
-		progressList.remove(key);
-		progressList.put(key, progress);
 	}
 
 	public boolean isFinished(String key) {
