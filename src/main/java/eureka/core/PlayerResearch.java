@@ -44,7 +44,8 @@ public class PlayerResearch implements IExtendedEntityProperties {
 		NBTTagCompound tag = new NBTTagCompound();
 		for (IEurekaInfo research : EurekaAPI.API.getAllKeys()) {
 			tag.setInteger(research.getName() + "Progress", progressList.get(research.getName()));
-			tag.setBoolean(research.getName() + "Finished", finished.get(research.getName()));
+			if (finished.containsKey(research.getName()))
+				tag.setBoolean(research.getName() + "Finished", finished.get(research.getName()));
 		}
 		compound.setTag(EXT_PROP_NAME, tag);
 	}
