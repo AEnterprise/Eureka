@@ -3,35 +3,7 @@ item.researchNote.name=Записка исследований
 
 itemGroup.Eureka=Eureka
 
-Eureka=ЭВРИКА!
-eureka.dusterTier0Finished=Вы начинаете планировать Ваши будущие механизмы, но понимаете, что Вам нужна целая гора ресурсов. Вы также начинаете думать над тем, как сделать их проще.
-eureka.dusterTier1Finished=Во время обработки Ваших руд, Вы вдруг понимаете, что есть более эффективные способы для их обработки.
-eureka.dusterTier2-1Finished=После получения возможности вывода в инвентари, Вы решили попробовать, сможете ли Вы автоматизировать саму обработку.
-eureka.dusterTier2-2Finished=Вам нравится, что Вы не должны подходить к механизму, но Вы также хотите авто-ввод/вывод. Вы решили объединить свои знания в новом механизме. Может быть, что-то связанное с лазерами?
-eureka.kineticToolFinished=Когда Вы делали ещё один инструмент на замену старому, Вы также подумали как сделать такой инструмент, который не сломается.
-eureka.missingKnowledge=Вы ещё не знаете как работает этот механизм. Вы попытались использовать его, но из-за Вашего непрофессионализма, он сломался.
-eureka.missingKnowledgeKineticTool=Вы ещё не знаете как работает этот механизм. Вы попытались использовать его, но из-за Вашего непрофессионализма, он сломался.
-
-engineeringDiary.Eureka.title=Инженерный дневник
-engineeringDiary.Eureka.page0=Эта книга - дневник Вашего продвижения в открытиях предметов и блоков через систему «Эврика». Как инженер, Вы знаете что тестирование и экспериментирование обязательно перед созданием механизма,
-engineeringDiary.Eureka.page1=поэтому Вам нужно сначало сделать и использовать простые механизмы для того, чтобы сработал момент «Эврика», который приведёт к новым открытиям. Веселитесь!
-
 engineeringDiary.requiredResearch=Требуется исследование:
 engineeringDiary.progress=Прогресс:
 engineeringDiary.unlocked=РАЗБЛОКИРОВАНО
 engineeringDiary.noRequiredResearch=Исследование не требуется
-
-item.pipePartWood.name=Часть деревянной трубы
-item.pipePartCobbleStone.name=Часть булыжниковой трубы
-item.pipePartStone.name=Часть каменной трубы
-item.pipePartQuartz.name=Часть кварцевой трубы
-item.pipePartSandstone.name=Часть песчаниковой трубы
-item.pipePartGold.name=Часть золотой трубы
-item.pipePartIron.name=Часть железной трубы
-item.pipePartVoid.name=Часть пустотной трубы
-item.pipePartObsidian.name=Часть обсидиановой трубы
-item.pipePartEmerald.name=Часть изумрудной трубы
-item.pipePartDiamond.name=Часть алмазной трубы
-item.pipePartLapis.name=Часть лазуритовой трубы
-item.pipePartDaizuli.name=Часть алмазуритовой трубы
-item.glassShard.name=Стеклянный осколок
