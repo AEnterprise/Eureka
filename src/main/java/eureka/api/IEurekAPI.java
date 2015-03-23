@@ -44,4 +44,8 @@ public interface IEurekAPI {
 	boolean keyRegistered(String key);
 
 	void registerProgressOption(String key, EnumProgressOptions option, Object arg);
+
+	void completeResearch(EntityPlayer player, String key);
+
+	IEurekaInfo getInfo(String key);
 }

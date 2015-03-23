@@ -1,6 +1,7 @@
 package eureka.core;
 
 import java.util.HashMap;
+import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,22 +73,39 @@ public class PlayerResearch implements IExtendedEntityProperties {
 
 	public void makeProgress(String key) {
 		try {
+			List<String> keys = EurekaAPI.API.getInfo(key).getRequiredResearch();
+			for (String checkKey : keys)
+				if (!isFinished(checkKey))
+					return;
 			if (!progressList.containsKey(key))
 				progressList.put(key, 0);
 			int progress = progressList.get(key);
 			progress++;
 			if (progress >= EurekaAPI.API.getMaxProgress(key)) {
-				if (finished != null && key != null && !finished.get(key))
-					player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("Eureka")));
 				progress = EurekaAPI.API.getMaxProgress(key);
-				finished.remove(key);
-				finished.put(key, true);
+				if (finished != null && key != null && !finished.get(key)) {
+					player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("Eureka")));
+					finished.remove(key);
+					finished.put(key, true);
+				}
 			}
 			progressList.remove(key);
 			progressList.put(key, progress);
 		} catch (Throwable t) {
 			//probably fake player
 		}
+	}
+
+	public void completeResearch(String key) {
+		List<String> keys = EurekaAPI.API.getInfo(key).getRequiredResearch();
+		for (String checkKey : keys)
+			if (!isFinished(checkKey))
+				return;
+		player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("Eureka")));
+		finished.remove(key);
+		finished.put(key, true);
+		progressList.remove(key);
+		progressList.put(key, EurekaAPI.API.getMaxProgress(key));
 	}
 
 	public void revertProgress(String key) {

@@ -13,11 +13,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import eureka.api.EnumProgressOptions;
 import eureka.api.ICategory;
 import eureka.api.IDropHandler;
 import eureka.api.IEurekAPI;
 import eureka.api.IEurekaInfo;
+import eureka.items.ItemResearchNote;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -59,6 +62,8 @@ public class EurekaAPIImplementation implements IEurekAPI {
 			keys.put(info.getCategory(), list);
 			keylookup.put(info.getName(), info);
 		}
+		ItemResearchNote note = new ItemResearchNote(info.getName());
+		GameRegistry.registerItem(note, "researchNote" + info.getName());
 	}
 
 	@Override
@@ -171,6 +176,16 @@ public class EurekaAPIImplementation implements IEurekAPI {
 		map.put(arg, list);
 		progress.remove(option);
 		progress.put(option, map);
+	}
+
+	@Override
+	public void completeResearch(EntityPlayer player, String key) {
+		PlayerResearch.get(player).completeResearch(key);
+	}
+
+	@Override
+	public IEurekaInfo getInfo(String key) {
+		return keylookup.get(key);
 	}
 
 	public List<String> getKeysforProgress(EnumProgressOptions option, Object arg) {
