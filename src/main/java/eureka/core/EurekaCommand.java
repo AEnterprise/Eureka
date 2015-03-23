@@ -8,8 +8,10 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
 
 import eureka.api.EurekaAPI;
+import eureka.api.IEurekaInfo;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -26,13 +28,29 @@ public class EurekaCommand extends CommandBase {
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		return "/eureka lock|unlock <player> <key>";
+		return "type '/eureka help' for possible commands and syntax";
 	}
 
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) {
-		if (args.length != 3)
-			throw new WrongUsageException("Usage: " + getCommandUsage(sender));
+		if (args == null || args.length == 0) {
+			sender.addChatMessage(new ChatComponentText(getCommandUsage(sender)));
+			return;
+		}
+		if (args[0].equalsIgnoreCase("help")) {
+			sender.addChatMessage(new ChatComponentText("Eureka Command help:"));
+			sender.addChatMessage(new ChatComponentText("/eureka lock <playername> <key>  : locks the research identified by the key for the specified player"));
+			sender.addChatMessage(new ChatComponentText("/eureka unlock <playername> <key>  : unlocks the research identified by the key for the specified player"));
+			sender.addChatMessage(new ChatComponentText("/eureka keylist  : lists all registered keys and there localized titles"));
+			return;
+		}
+
+		if (args[0].equalsIgnoreCase("keylist")) {
+			for (IEurekaInfo info : EurekaAPI.API.getAllKeys()) {
+				sender.addChatMessage(new ChatComponentText(info.getName() + ": " + TextGetter.getTitle(info.getName())));
+			}
+			return;
+		}
 		EntityPlayer player = null;
 		for (EntityPlayer p : (ArrayList<EntityPlayer>) MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
 			if (p.getDisplayName().equals(args[1])) {
@@ -49,8 +67,10 @@ public class EurekaCommand extends CommandBase {
 		if (args[0].equalsIgnoreCase("lock")) {
 			research.overrideFinished(args[2], false);
 			research.overrideProgress(args[2], 0);
+			sender.addChatMessage(new ChatComponentText("Research locked"));
 		} else if (args[0].equalsIgnoreCase("unlock")) {
 			research.overrideFinished(args[2], true);
+			sender.addChatMessage(new ChatComponentText("Research unlocked"));
 		}
 	}
 
