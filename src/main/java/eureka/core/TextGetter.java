@@ -1,6 +1,8 @@
 package eureka.core;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.client.FMLClientHandler;
 
 import eureka.api.EurekaAPI;
+import eureka.json.ConfigReader;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -61,18 +64,24 @@ public class TextGetter {
 		if (texts.containsKey(key))
 			return texts.get(key);
 		else
-			texts.put(key, getText(key, FMLClientHandler.instance().getCurrentLanguage(), !EurekaAPI.API.keyRegistered(key)));
+			texts.put(key, getText(key, FMLClientHandler.instance().getCurrentLanguage(), !EurekaAPI.API.keyRegistered(key), true));
 		return texts.get(key);
 	}
 
-	private static List<String> getText(String key, String lang, boolean category) {
+	private static List<String> getText(String key, String lang, boolean category, boolean configFolder) {
 		List<String> list = new ArrayList<String>();
 		InputStream stream = null;
 		ResourceLocation location = new ResourceLocation("eureka:localizations/" + lang + "/" + key + ".txt");
 		try {
-			IResource resource = FMLClientHandler.instance().getClient().getResourceManager().getResource(location);
-			stream = resource.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
+			BufferedReader reader;
+			if (!configFolder) {
+				IResource resource = FMLClientHandler.instance().getClient().getResourceManager().getResource(location);
+				stream = resource.getInputStream();
+				reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
+			} else {
+				reader = new BufferedReader(new FileReader(new File(new File(ConfigReader.localizations, lang), key + ".txt")));
+			}
+
 			String line = reader.readLine();
 			while (line != null) {
 				list.add(line);
@@ -90,10 +99,13 @@ public class TextGetter {
 			list.remove(0);
 		} catch (Exception e) {
 			if (!lang.equals("en_US"))
-				return getText(key, "en_US", category);
+				return getText(key, "en_US", category, configFolder);
+			if (configFolder)
+				return getText(key, lang, category, false);
 		} finally {
 			try {
-				stream.close();
+				if (stream != null)
+					stream.close();
 			} catch (Exception e) {
 				//ignore it, file doesn't exist
 			}

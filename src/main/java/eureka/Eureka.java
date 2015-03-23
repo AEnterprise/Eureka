@@ -1,5 +1,7 @@
 package eureka;
 
+import java.io.File;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,6 +23,7 @@ import eureka.core.EurekaCommand;
 import eureka.core.EventHandler;
 import eureka.gui.GuiHandler;
 import eureka.items.ItemEngineeringDiary;
+import eureka.json.ConfigReader;
 import eureka.networking.PacketHandler;
 import eureka.proxy.IProxy;
 /**
@@ -59,6 +62,8 @@ public class Eureka {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		EurekaAPI.API.registerCategory(new BasicEurekaCategory("Eureka", new ItemStack(engineeringDiary)));
 		PacketHandler.init();
+		ConfigReader.mainfolder = new File(event.getModConfigurationDirectory(), "Eureka");
+		ConfigReader.read();
 	}
 
 	@Mod.EventHandler
