@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -115,6 +116,8 @@ public class ConfigReader {
 	}
 
 	private static ItemStack getStack(String name) {
+		if (Strings.isNullOrEmpty(name))
+			return null;
 		int meta = -1;
 		if (name.contains("@")) {
 			meta = Integer.getInteger(name.split("@")[1]);
