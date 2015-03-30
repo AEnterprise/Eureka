@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -111,8 +112,11 @@ public class EventHandler {
 	@SubscribeEvent
 	public void onCrafted(cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent event) {
 		PlayerResearch research = PlayerResearch.get(event.player);
-		makeProgress(EnumProgressOptions.CRAFTING, research, event.crafting.getItem());
-		makeProgress(EnumProgressOptions.CRAFTING, research, null);
+		Object obj = event.crafting.getItem();
+		if (event.crafting.getItem() instanceof ItemBlock)
+			obj = ((ItemBlock) event.crafting.getItem()).field_150939_a;
+		makeProgress(EnumProgressOptions.CRAFTING, research, obj);
+		makeProgress(EnumProgressOptions.CRAFT_ANYTHING, research, null);
 	}
 
 	@SubscribeEvent
@@ -120,7 +124,7 @@ public class EventHandler {
 		PlayerResearch research = PlayerResearch.get(event.getPlayer());
 		revertProgress(EnumProgressOptions.PLACE_BLOCK, research, event.block);
 		makeProgress(EnumProgressOptions.BREAK_BLOCK, research, event.block);
-		makeProgress(EnumProgressOptions.BREAK_ANY_BLOCK, research, event.block);
+		makeProgress(EnumProgressOptions.BREAK_ANY_BLOCK, research, null);
 	}
 
 	private void dropItems(World world, int x, int y, int z, List<ItemStack> stacks) {

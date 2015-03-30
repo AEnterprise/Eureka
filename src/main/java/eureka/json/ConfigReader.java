@@ -1,12 +1,8 @@
 package eureka.json;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FilenameFilter;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +11,13 @@ import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import eureka.api.BasicEurekaCategory;
 import eureka.api.BasicEurekaInfo;
-import eureka.api.EnumProgressOptions;
 import eureka.api.EurekaAPI;
 import eureka.core.Logger;
 /**
@@ -53,31 +49,6 @@ public class ConfigReader {
 		})) {
 			readCategory(file);
 		}
-		JSONChapter chapter = new JSONChapter();
-		chapter.category = "testing";
-		chapter.displayStack = "eureka:engineeringDiary";
-		List<String> research = new ArrayList<String>();
-		research.add("test1");
-		research.add("test2");
-		research.add("test");
-		chapter.requiredResearch = research;
-		List<String> objects = new ArrayList<String>();
-		objects.add("eureka:engineeringDiary");
-		objects.add("eureka:engineeringDiary2");
-		objects.add("eureka:engineeringDiary2");
-		chapter.blockedObjects = objects;
-		chapter.maxProgress = 100;
-		chapter.progressOption = EnumProgressOptions.CRAFT_ANYTHING;
-		try {
-			File file = new File(keyFolder, "outputTest");
-			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
-			writer.write(gson.toJson(chapter));
-			writer.close();
-		} catch (Throwable t) {
-			//ignore
-		}
-
-
 		for (File file : keyFolder.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
@@ -107,8 +78,15 @@ public class ConfigReader {
 			for (ItemStack stack : objects) {
 				EurekaAPI.API.bindToKey(stack, chapter.name);
 			}
-			if (chapter.progressOption != null)
-				EurekaAPI.API.registerProgressOption(chapter.name, chapter.progressOption, getStack(chapter.progressObject));
+			if (chapter.progressOption != null) {
+				Object obj;
+				ItemStack stack = getStack(chapter.progressObject);
+				if (stack != null && stack.getItem() instanceof ItemBlock)
+					obj = ((ItemBlock) stack.getItem()).field_150939_a;
+				else
+					obj = stack;
+				EurekaAPI.API.registerProgressOption(chapter.name, chapter.progressOption, obj);
+			}
 		} catch (Throwable t) {
 			Logger.error("Failed to read category file (" + file.getName() + ")");
 			t.printStackTrace();

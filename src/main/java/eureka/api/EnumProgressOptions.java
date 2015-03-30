@@ -8,14 +8,24 @@ package eureka.api;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public enum EnumProgressOptions {
-	CRAFTING,
-	CRAFT_ANYTHING,
-	BREAK_BLOCK,
-	BREAK_ANY_BLOCK,
-	PLACE_BLOCK,
-	PLACE_ANY_BLOCK,
-	ENDER_TELEPORT,
-	KILL_ANYTHING,
-	DIE,
-	FILL_BUCKET
+	CRAFTING(true),
+	CRAFT_ANYTHING(false),
+	BREAK_BLOCK(true),
+	BREAK_ANY_BLOCK(false),
+	PLACE_BLOCK(true),
+	PLACE_ANY_BLOCK(false),
+	ENDER_TELEPORT(false),
+	KILL_ANYTHING(false),
+	DIE(false),
+	FILL_BUCKET(false);
+
+	private final boolean hasArg;
+
+	EnumProgressOptions(boolean hasArg) {
+		this.hasArg = hasArg;
+	}
+
+	public boolean hasArg() {
+		return hasArg;
+	}
 }

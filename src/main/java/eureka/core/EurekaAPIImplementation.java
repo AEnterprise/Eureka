@@ -48,7 +48,7 @@ public class EurekaAPIImplementation implements IEurekAPI {
 
 	@Override
 	public void register(IEurekaInfo info) {
-		if (keylist.contains(info)) {
+		if (keys.keySet().contains(info.getName())) {
 			Logger.error("Duplicate registation: '" + info.getName() + "' is already used");
 		} else {
 			if (!categories.contains(category.get(info.getCategory()))) {
@@ -163,6 +163,8 @@ public class EurekaAPIImplementation implements IEurekAPI {
 		if (map == null) {
 			map = new HashMap<Object, List<String>>();
 		}
+		if (!option.hasArg())
+			arg = null;
 		if (arg == null)
 			arg = "ANY";
 		List<String> list;
@@ -190,6 +192,8 @@ public class EurekaAPIImplementation implements IEurekAPI {
 
 	public List<String> getKeysforProgress(EnumProgressOptions option, Object arg) {
 		HashMap<Object, List<String>> map = progress.get(option);
+		if (arg == null)
+			arg = "ANY";
 		if (map == null || !map.containsKey(arg))
 			return Collections.EMPTY_LIST;
 		return ImmutableList.copyOf(map.get(arg));
