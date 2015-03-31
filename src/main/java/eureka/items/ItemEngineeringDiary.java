@@ -31,7 +31,8 @@ public class ItemEngineeringDiary extends Item {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER)
 			PacketHandler.instance.sendToAllAround(new MessageResearch(player), new NetworkRegistry.TargetPoint(player.dimension, player.posX, player.posY, player.posZ, 1));
-		player.openGui(Eureka.instance, 1, world, player.serverPosX, player.serverPosY, player.serverPosZ);
+		if (!world.isRemote)
+			player.openGui(Eureka.instance, 1, world, (int) player.posX, (int) player.posY, (int) player.posZ);
 		return stack;
 	}
 }
