@@ -64,11 +64,12 @@ public class TextGetter {
 		if (texts.containsKey(key))
 			return texts.get(key);
 		else
-			texts.put(key, getText(key, FMLClientHandler.instance().getCurrentLanguage(), !EurekaAPI.API.keyRegistered(key), true));
+			getText(key, FMLClientHandler.instance().getCurrentLanguage(), !EurekaAPI.API.keyRegistered(key), true);
+		getText(key, FMLClientHandler.instance().getCurrentLanguage(), !EurekaAPI.API.keyRegistered(key), false);
 		return texts.get(key);
 	}
 
-	private static List<String> getText(String key, String lang, boolean category, boolean configFolder) {
+	private static void getText(String key, String lang, boolean category, boolean configFolder) {
 		List<String> list = new ArrayList<String>();
 		InputStream stream = null;
 		ResourceLocation location = new ResourceLocation("eureka:localizations/" + lang + "/" + key + ".txt");
@@ -98,10 +99,10 @@ public class TextGetter {
 
 			list.remove(0);
 		} catch (Exception e) {
-			if (!lang.equals("en_US"))
-				return getText(key, "en_US", category, configFolder);
-			if (configFolder)
-				return getText(key, lang, category, false);
+			if (!lang.equals("en_US")) {
+				getText(key, "en_US", category, true);
+				getText(key, "en_US", category, false);
+			}
 		} finally {
 			try {
 				if (stream != null)
@@ -110,7 +111,6 @@ public class TextGetter {
 				//ignore it, file doesn't exist
 			}
 		}
-
-		return list;
+		texts.put(key, list);
 	}
 }
