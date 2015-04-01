@@ -56,16 +56,20 @@ public class PlayerResearch implements IExtendedEntityProperties {
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound tag = compound.getCompoundTag(EXT_PROP_NAME);
+		loadOldResearch(compound);
 		for (IEurekaInfo research : EurekaAPI.API.getAllKeys()) {
 			progressList.put(research.getName(), tag.getInteger(research.getName() + "Progress"));
 			finished.put(research.getName(), tag.getBoolean(research.getName() + "Finished"));
 		}
 	}
 
-	public void loadOldResearch(NBTTagCompound tag) {
-		for (IEurekaInfo research : EurekaAPI.API.getAllKeys()) {
-			progressList.put(research.getName(), tag.getInteger(research.getName() + "Progress"));
-			finished.put(research.getName(), tag.getBoolean(research.getName() + "Finished"));
+	public void loadOldResearch(NBTTagCompound compound) {
+		if (compound.getCompoundTag("ForgeData") != null && compound.getCompoundTag("ForgeData").getCompoundTag("PlayerPersisted") != null) {
+			NBTTagCompound tag = compound.getCompoundTag("ForgeData").getCompoundTag("PlayerPersisted");
+			for (IEurekaInfo research : EurekaAPI.API.getAllKeys()) {
+				progressList.put(research.getName(), tag.getInteger(research.getName() + "Progress"));
+				finished.put(research.getName(), tag.getBoolean(research.getName() + "Finished"));
+			}
 		}
 	}
 
