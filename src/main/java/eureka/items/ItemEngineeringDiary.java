@@ -1,7 +1,7 @@
 package eureka.items;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -19,7 +19,7 @@ import eureka.networking.PacketHandler;
  * Please check the contents of the license located in
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
-public class ItemEngineeringDiary extends Item {
+public class ItemEngineeringDiary extends ItemBook {
 
 	public ItemEngineeringDiary() {
 		setCreativeTab(Eureka.eureka);
