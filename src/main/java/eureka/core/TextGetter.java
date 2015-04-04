@@ -13,6 +13,8 @@ import net.minecraft.client.resources.IResource;
 import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 
 import eureka.api.EurekaAPI;
 import eureka.json.ConfigReader;
@@ -30,6 +32,8 @@ public class TextGetter {
 	private static HashMap<String, String> progressTexts = new HashMap<String, String>();
 
 	public static String getTitle(String key) {
+		if (FMLCommonHandler.instance().getSide() == Side.SERVER)
+			return "Unable to localize on the server side";
 		if (titles.containsKey(key))
 			return titles.get(key);
 		getText(key);

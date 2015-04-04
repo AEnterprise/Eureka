@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
@@ -14,6 +15,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 import eureka.api.EurekaAPI;
 import eureka.api.IEurekaInfo;
+import eureka.networking.MessageResearchFinished;
+import eureka.networking.PacketHandler;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -90,8 +93,7 @@ public class PlayerResearch implements IExtendedEntityProperties {
 			if (progress >= EurekaAPI.API.getMaxProgress(key)) {
 				progress = EurekaAPI.API.getMaxProgress(key);
 				if (finished != null && key != null && !finished.get(key)) {
-					player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("Eureka")));
-					player.addChatComponentMessage(new ChatComponentText("Research finished: " + TextGetter.getTitle(key)));
+					PacketHandler.instance.sendTo(new MessageResearchFinished(key), (EntityPlayerMP) player);
 					finished.remove(key);
 					finished.put(key, true);
 				}
