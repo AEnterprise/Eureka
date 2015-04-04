@@ -30,7 +30,7 @@ public class BasicDropHandler implements IDropHandler {
 
 	@Override
 	public boolean handles(ItemStack stack) {
-		return stack.getItem() == item && stack.getItemDamage() == meta && stack.stackTagCompound == nbt;
+		return stack != null && stack.getItem() == item && stack.getItemDamage() == meta && stack.stackTagCompound == nbt;
 	}
 
 	@Override
