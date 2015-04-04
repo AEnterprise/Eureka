@@ -3,6 +3,7 @@ package eureka;
 import java.io.File;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -57,6 +58,7 @@ public class Eureka {
 		EurekaAPI.API = new EurekaAPIImplementation();
 		engineeringDiary = new ItemEngineeringDiary();
 		GameRegistry.registerItem(engineeringDiary, "engineeringDiary");
+		GameRegistry.addRecipe(new ItemStack(engineeringDiary), "BI", 'B', Items.book, 'I', Items.iron_ingot);
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 		FMLCommonHandler.instance().bus().register(new EventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
