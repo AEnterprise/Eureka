@@ -33,6 +33,8 @@ public class ConfigReader {
 
 	public static void read() {
 		createFolderIfNeeded(mainfolder);
+		if (!mainfolder.exists())
+			return;
 		catagoryFolder = new File(mainfolder, "Categories");
 		keyFolder = new File(mainfolder, "Keys");
 		localizations = new File(mainfolder, "Localizations");
@@ -40,6 +42,9 @@ public class ConfigReader {
 		createFolderIfNeeded(keyFolder);
 		createFolderIfNeeded(localizations);
 		createFolderIfNeeded(new File(localizations, "en_US"));
+
+		if (!catagoryFolder.exists())
+			return;
 
 		for (File file : catagoryFolder.listFiles(new FilenameFilter() {
 			@Override
@@ -49,6 +54,8 @@ public class ConfigReader {
 		})) {
 			readCategory(file);
 		}
+		if (!keyFolder.exists())
+			return;
 		for (File file : keyFolder.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
