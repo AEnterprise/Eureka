@@ -61,8 +61,11 @@ public class PlayerResearch implements IExtendedEntityProperties {
 		NBTTagCompound tag = compound.getCompoundTag(EXT_PROP_NAME);
 		loadOldResearch(compound);
 		for (IEurekaInfo research : EurekaAPI.API.getAllKeys()) {
-			progressList.put(research.getName(), tag.getInteger(research.getName() + "Progress"));
 			finished.put(research.getName(), tag.getBoolean(research.getName() + "Finished"));
+			if (isFinished(research.getName()))
+				progressList.put(research.getName(), research.getMaxProgress());
+			else
+				progressList.put(research.getName(), tag.getInteger(research.getName() + "Progress"));
 		}
 	}
 
@@ -72,6 +75,8 @@ public class PlayerResearch implements IExtendedEntityProperties {
 			for (IEurekaInfo research : EurekaAPI.API.getAllKeys()) {
 				progressList.put(research.getName(), tag.getInteger(research.getName() + "Progress"));
 				finished.put(research.getName(), tag.getBoolean(research.getName() + "Finished"));
+				tag.removeTag(research.getName() + "Progress");
+				tag.removeTag(research.getName() + "Finished");
 			}
 		}
 	}
@@ -118,6 +123,8 @@ public class PlayerResearch implements IExtendedEntityProperties {
 	}
 
 	public void revertProgress(String key) {
+		if (isFinished(key))
+			return;
 		try {
 			if (!progressList.containsKey(key)) {
 				progressList.put(key, 0);
