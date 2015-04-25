@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -46,6 +47,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 	private List<IEurekaInfo> chapters;
 	private IEurekaInfo currentChapter;
 	private PlayerResearch research;
+	private EntityPlayer player;
 	private int currentLine = 1;
 	private int[] xOffSet = {
 			70,
@@ -84,13 +86,14 @@ public class GuiEngineeringDiary extends GuiContainer {
 	};
 	private HashMap<Integer, List<String>> pageLists = new HashMap<Integer, List<String>>();
 
-	public GuiEngineeringDiary(PlayerResearch research) {
+	public GuiEngineeringDiary(EntityPlayer player) {
 		super(new ContainerEngineeringDiary());
-		this.research = research;
-		xSize = 256;
+		this.research = PlayerResearch.get(player);
+		xSize = 300;
 		ySize = 179;
 		currentCategory = categories.get(0);
 		categoryOffset = 0;
+		this.player = player;
 		maxCategoryOffset = categories.size() > 7 ? categories.size() - 7 : 0;
 		resetChapters();
 		resetWidgets();
@@ -364,5 +367,10 @@ public class GuiEngineeringDiary extends GuiContainer {
 
 	public FontRenderer getFontRendererObj() {
 		return fontRendererObj;
+	}
+
+	@Override
+	public void onGuiClosed() {
+		super.onGuiClosed();
 	}
 }
