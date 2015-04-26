@@ -47,7 +47,7 @@ public class EventHandler {
 	@SubscribeEvent
 	public void playerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
 		//give engineering diary
-		if (!event.player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("bookRecieved")) {
+		if (!event.player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).hasKey("bookRecieved") && Eureka.giveBook) {
 			for (int slot = 0; slot < event.player.inventory.getSizeInventory(); slot++) {
 				if (event.player.inventory.getStackInSlot(slot) == null) {
 					event.player.inventory.setInventorySlotContents(slot, new ItemStack(Eureka.engineeringDiary));

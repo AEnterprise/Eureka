@@ -16,6 +16,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 
 import eureka.api.BasicEurekaCategory;
 import eureka.api.EurekaAPI;
@@ -53,6 +54,8 @@ public class Eureka {
 
 	};
 
+	public static boolean giveBook;
+
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		EurekaAPI.API = new EurekaAPIImplementation();
@@ -66,6 +69,9 @@ public class Eureka {
 		PacketHandler.init();
 		ConfigReader.mainfolder = new File(event.getModConfigurationDirectory(), "Eureka");
 		ConfigReader.read();
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		giveBook = config.get("General", "giveBook", true).setDefaultValue(true).getBoolean();
+		config.save();
 	}
 
 	@Mod.EventHandler
