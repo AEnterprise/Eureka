@@ -1,6 +1,7 @@
 package eureka.gui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -30,6 +32,8 @@ import eureka.gui.Widgets.WidgetChapterUp;
 import eureka.gui.Widgets.WidgetNextPage;
 import eureka.gui.Widgets.WidgetPrevPage;
 import eureka.gui.Widgets.WidgetProgressBar;
+import eureka.networking.MessageBookSave;
+import eureka.networking.PacketHandler;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -96,9 +100,25 @@ public class GuiEngineeringDiary extends GuiContainer {
 		this.player = player;
 		maxCategoryOffset = categories.size() > 7 ? categories.size() - 7 : 0;
 		resetChapters();
-		resetWidgets();
-		page = 0;
+		int page2 = page = 0;
 		splitIntroPages(currentCategory.getName());
+		if (player.getCurrentEquippedItem().stackTagCompound == null)
+			player.getCurrentEquippedItem().stackTagCompound = new NBTTagCompound();
+		NBTTagCompound tag = player.getCurrentEquippedItem().stackTagCompound;
+		if (tag.hasKey("categoryOffset")) {
+			currentCategory = EurekaAPI.API.getCategories().get(tag.getInteger("category"));
+			resetChapters();
+			categoryOffset = tag.getInteger("categoryOffset");
+			chapterOffset = tag.getInteger("chapterOffset");
+			page2 = tag.getInteger("page");
+			if (tag.getInteger("chapter") != -1) {
+				currentChapter = EurekaAPI.API.getAllKeys().get(tag.getInteger("chapter"));
+				splitIntroPages(currentChapter.getName());
+			}
+		}
+		resetWidgets();
+
+		page = page2;
 	}
 
 	private void resetChapters() {
@@ -135,8 +155,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 						String[] a = new String[page.size()];
 						page.toArray(a);
 						List<String> pagelist = new ArrayList<String>();
-						for (String b : a)
-							pagelist.add(b);
+						pagelist.addAll(Arrays.asList(a));
 						pageLists.put(pagenum, pagelist);
 						linenum = 3;
 						pagenum++;
@@ -150,8 +169,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 					String[] a = new String[page.size()];
 					page.toArray(a);
 					List<String> pagelist = new ArrayList<String>();
-					for (String b : a)
-						pagelist.add(b);
+					pagelist.addAll(Arrays.asList(a));
 					pageLists.put(pagenum, pagelist);
 					linenum = 3;
 					pagenum++;
@@ -165,8 +183,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 					String[] a = new String[page.size()];
 					page.toArray(a);
 					List<String> pagelist = new ArrayList<String>();
-					for (String b : a)
-						pagelist.add(b);
+					pagelist.addAll(Arrays.asList(a));
 					pageLists.put(pagenum, pagelist);
 					linenum = 3;
 					pagenum++;
@@ -308,9 +325,7 @@ public class GuiEngineeringDiary extends GuiContainer {
 			List<String> finalLines = new ArrayList<String>();
 			for (String line : tooltips) {
 				String[] lines = WordUtils.wrap(line, 30).split(System.getProperty("line.separator"));
-				for (String wrappedLine : lines) {
-					finalLines.add(wrappedLine);
-				}
+				finalLines.addAll(Arrays.asList(lines));
 			}
 			drawHoveringText(finalLines, x - 5, y, fontRendererObj);
 		}
@@ -372,5 +387,26 @@ public class GuiEngineeringDiary extends GuiContainer {
 	@Override
 	public void onGuiClosed() {
 		super.onGuiClosed();
+		int category = -1;
+		List<ICategory> categories = EurekaAPI.API.getCategories();
+		for (int i = 0; i < categories.size(); i++) {
+			ICategory c = categories.get(i);
+			if (c.getName().equals(currentCategory.getName())) {
+				category = i;
+				break;
+			}
+		}
+		int chapter = -1;
+		if (currentChapter != null) {
+			List<IEurekaInfo> chapters = EurekaAPI.API.getAllKeys();
+			for (int i = 0; i < chapters.size(); i++) {
+				IEurekaInfo info = chapters.get(i);
+				if (info.getName().equals(currentChapter.getName())) {
+					chapter = i;
+					break;
+				}
+			}
+		}
+		PacketHandler.instance.sendToServer(new MessageBookSave(categoryOffset, chapterOffset, page, category, chapter));
 	}
 }

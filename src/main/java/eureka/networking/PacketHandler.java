@@ -17,5 +17,6 @@ public class PacketHandler {
 	public static void init() {
 		instance.registerMessage(MessageResearch.class, MessageResearch.class, 0, Side.CLIENT);
 		instance.registerMessage(MessageResearchFinished.class, MessageResearchFinished.class, 1, Side.CLIENT);
+		instance.registerMessage(MessageBookSave.class, MessageBookSave.class, 2, Side.SERVER);
 	}
 }

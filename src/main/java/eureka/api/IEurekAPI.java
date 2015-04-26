@@ -48,4 +48,6 @@ public interface IEurekAPI {
 	void completeResearch(EntityPlayer player, String key);
 
 	IEurekaInfo getInfo(String key);
+
+	ICategory getCategory(String key);
 }

@@ -198,4 +198,9 @@ public class EurekaAPIImplementation implements IEurekAPI {
 			return Collections.EMPTY_LIST;
 		return ImmutableList.copyOf(map.get(arg));
 	}
+
+	@Override
+	public ICategory getCategory(String key) {
+		return category.get(key);
+	}
 }
