@@ -40,6 +40,8 @@ public class PlayerResearch implements IExtendedEntityProperties {
 	}
 
 	public static PlayerResearch get(EntityPlayer player) {
+		if (player == null)
+			return null;
 		return (PlayerResearch) player.getExtendedProperties(EXT_PROP_NAME);
 	}
 
