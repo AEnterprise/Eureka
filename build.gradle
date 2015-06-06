@@ -72,3 +72,5 @@ task deobfJar(type: Jar) {
 }
 
 assemble.dependsOn deobfJar
+
+idea { module { inheritOutputDirs = true } }
