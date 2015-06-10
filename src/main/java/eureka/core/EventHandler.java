@@ -111,6 +111,9 @@ public class EventHandler {
 
 	@SubscribeEvent
 	public void onCrafted(cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent event) {
+		//there are some stupid mods out thare that don't properly fill in the event
+		if (event == null || event.player == null || event.crafting == null)
+			return;
 		PlayerResearch research = PlayerResearch.get(event.player);
 		Object obj = event.crafting.getItem();
 		if (event.crafting.getItem() instanceof ItemBlock)
