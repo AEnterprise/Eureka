@@ -1,26 +1,15 @@
 package eureka.core;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-
+import cpw.mods.fml.common.registry.GameRegistry;
+import eureka.api.*;
+import eureka.items.ItemResearchNote;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
-import eureka.api.EnumProgressOptions;
-import eureka.api.ICategory;
-import eureka.api.IDropHandler;
-import eureka.api.IEurekAPI;
-import eureka.api.IEurekaInfo;
-import eureka.items.ItemResearchNote;
+import java.util.*;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -97,22 +86,28 @@ public class EurekaAPIImplementation implements IEurekAPI {
 
 	@Override
 	public boolean hasPlayerFinishedResearch(String key, EntityPlayer player) {
-		return PlayerResearch.get(player).isFinished(key);
+		PlayerResearch research = PlayerResearch.get(player);
+		return research != null && research.isFinished(key);
 	}
 
 	@Override
 	public void makeProgress(String key, EntityPlayer player) {
-		PlayerResearch.get(player).makeProgress(key);
+		PlayerResearch research = PlayerResearch.get(player);
+		if (research != null)
+			research.makeProgress(key);
 	}
 
 	@Override
 	public void revertProgress(String key, EntityPlayer player) {
-		PlayerResearch.get(player).revertProgress(key);
+		PlayerResearch research = PlayerResearch.get(player);
+		if (research != null)
+			research.revertProgress(key);
 	}
 
 	@Override
 	public int getProgress(String key, EntityPlayer player) {
-		return PlayerResearch.get(player).getProgress(key);
+		PlayerResearch research = PlayerResearch.get(player);
+		return research == null ? 0 : research.getProgress(key);
 	}
 
 	@Override
