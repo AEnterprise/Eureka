@@ -1,0 +1,11 @@
+# Slovak language file by leSamo
+
+item.engineeringDiary.name=Denník inžiniera
+item.researchNote.name=Výskum
+
+itemGroup.Eureka=Eureka
+
+engineeringDiary.requiredResearch=Potrebný výskup:
+engineeringDiary.progress=Postup:
+engineeringDiary.unlocked=ODOMKNUTÉ
+engineeringDiary.noRequiredResearch=Žiadny potrebný výskum
